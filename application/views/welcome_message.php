@@ -3,8 +3,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 ?><!DOCTYPE html>
 <html lang="en">
 <head>
+	<link rel="stylesheet" type="text/css" href="assets/css/bootstrap.css"/>
 	<meta charset="utf-8">
-	<title>Welcome to CodeIgniter</title>
+	<title>Rekrutment PT LTI</title>
 
 	<style type="text/css">
 
@@ -16,12 +17,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 		margin: 40px;
 		font: 13px/20px normal Helvetica, Arial, sans-serif;
 		color: #4F5155;
-	}
-
-	a {
-		color: #003399;
-		background-color: transparent;
-		font-weight: normal;
 	}
 
 	h1 {
@@ -68,19 +63,48 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 <body>
 
 <div id="container">
-	<h1>Welcome to CodeIgniter!</h1>
-
+	<h1>Selamat Datang di halaman Rekrutment PT. Len Telekomunikasi Indonesia</h1>
 	<div id="body">
-		<p>The page you are looking at is being generated dynamically by CodeIgniter.</p>
+		<code>PERSYARATAN UMUM <br>
+			<ol>
+				<li>Warga Negara Indonesia (WNI) sehat jasmani dan rohani</li>
+				<li>Memiliki kreativitas, integritas tinggi secara personal</li>
+				<li>Mandiri dan memiliki semangat bekerja keras serta pantang menyerah</li>
+				<li>Memiliki kemampuan berbahasa Inggris secara lisan dan tulisan</li>
+				<li>Memiliki kemampuan sangat baik dalam penulisan, komunikasi verbal, dan penggunaan komputer (Windows, MS Office)</li>
+				<li>Indeks Prestasi Kumulatif (IPK) minimal 3.00.</li>
+				<li>Umur maksimal : 35 (tiga puluh lima) tahun.</li>
+			</ol>
+		</code>
 
-		<p>If you would like to edit this page you'll find it located at:</p>
-		<code>application/views/welcome_message.php</code>
+		<code>PERSYARATAN KHUSUS STAF BAGIAN SDM (KODE LAMARAN : SDM) <br>
+		<ol>
+			<li>Pendidikan minimal S1 jurusan Manajemen/ Teknik Industri</li>
+			<li>Pengalaman minimal 2 tahun di bidang SDM</li>
+			<li>Menguasai aplikasi umum komputer (Windows, MS Office dll)</li>
+			<li>Menguasai konsep Pengembangan SDM</li>
+			<li>Disiplin, jujur dan memiliki militansi kuat dalam bekerja</li>
+			<li>Mempunyai pemahanan atas Undang-Undang Ketenagakerjaan, Peraturan BPJS dan aturan lainnya mengenai SDM</li>
+			<li>Memiliki keahlian analisa kontrak dari segi Hukum</li>
+		</ol>
+		</code>
 
-		<p>The corresponding controller for this page is found at:</p>
-		<code>application/controllers/Welcome.php</code>
-
-		<p>If you are exploring CodeIgniter for the very first time, you should start by reading the <a href="user_guide/">User Guide</a>.</p>
+		<code>PERSYARATAN KHUSUS STAF BAGIAN AKUNTANSI (KODE LAMARAN : AKT) <br>
+			<ol>
+				<li>Pendidikan minimal D3 jurusan Ekonomi Akuntansi</li>
+				<li>Pengalaman minimal 2 tahun di bidang Akuntansi</li>
+				<li>Menguasai aplikasi umum komputer (Windows, MS Office dll)</li>
+				<li>Menguasai konsep Standar Akuntansi (SAK)</li>
+				<li>Memiliki keahlian di bidang analisis laporan keuangan perusahaan (project & manufacture based)</li>
+				<li>Mampu membuat laporan keuangan</li>
+				<li>Jujur dan memiliki militansi kuat dalam bekerja</li>
+			</ol>
+		</code>
 	</div>
+	
+	<p class="footer">
+		<a class="btn btn-primary" style="margin-top:10px;" href="pendaftaran">Apply Now</a>
+	</p>
 
 	<p class="footer">Page rendered in <strong>{elapsed_time}</strong> seconds. <?php echo  (ENVIRONMENT === 'development') ?  'CodeIgniter Version <strong>' . CI_VERSION . '</strong>' : '' ?></p>
 </div>
