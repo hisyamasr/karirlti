@@ -65,48 +65,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 <div id="container">
 	<h1>Selamat Datang di halaman Rekrutment PT. Len Telekomunikasi Indonesia</h1>
 	<div id="body">
-		<code>PERSYARATAN UMUM <br>
-			<ol>
-				<li>Warga Negara Indonesia (WNI) sehat jasmani dan rohani</li>
-				<li>Memiliki kreativitas, integritas tinggi secara personal</li>
-				<li>Mandiri dan memiliki semangat bekerja keras serta pantang menyerah</li>
-				<li>Memiliki kemampuan berbahasa Inggris secara lisan dan tulisan</li>
-				<li>Memiliki kemampuan sangat baik dalam penulisan, komunikasi verbal, dan penggunaan komputer (Windows, MS Office)</li>
-				<li>Indeks Prestasi Kumulatif (IPK) minimal 3.00.</li>
-				<li>Umur maksimal : 35 (tiga puluh lima) tahun.</li>
-			</ol>
+		<code>
+			<div class="text-center">
+				<img src="assets/images/underconstruction.jpg"/>
+			</div>
 		</code>
-
-		<code>PERSYARATAN KHUSUS STAF BAGIAN SDM (KODE LAMARAN : SDM) <br>
-		<ol>
-			<li>Pendidikan minimal S1 jurusan Manajemen/ Teknik Industri</li>
-			<li>Pengalaman minimal 2 tahun di bidang SDM</li>
-			<li>Menguasai aplikasi umum komputer (Windows, MS Office dll)</li>
-			<li>Menguasai konsep Pengembangan SDM</li>
-			<li>Disiplin, jujur dan memiliki militansi kuat dalam bekerja</li>
-			<li>Mempunyai pemahanan atas Undang-Undang Ketenagakerjaan, Peraturan BPJS dan aturan lainnya mengenai SDM</li>
-			<li>Memiliki keahlian analisa kontrak dari segi Hukum</li>
-		</ol>
-		</code>
-
-		<code>PERSYARATAN KHUSUS STAF BAGIAN AKUNTANSI (KODE LAMARAN : AKT) <br>
-			<ol>
-				<li>Pendidikan minimal D3 jurusan Ekonomi Akuntansi</li>
-				<li>Pengalaman minimal 2 tahun di bidang Akuntansi</li>
-				<li>Menguasai aplikasi umum komputer (Windows, MS Office dll)</li>
-				<li>Menguasai konsep Standar Akuntansi (SAK)</li>
-				<li>Memiliki keahlian di bidang analisis laporan keuangan perusahaan (project & manufacture based)</li>
-				<li>Mampu membuat laporan keuangan</li>
-				<li>Jujur dan memiliki militansi kuat dalam bekerja</li>
-			</ol>
-		</code>
-	</div>
-	
-	<p class="footer">
-		<a class="btn btn-primary" style="margin-top:10px;" href="pendaftaran">Apply Now</a>
-	</p>
-
-	<p class="footer">Page rendered in <strong>{elapsed_time}</strong> seconds. <?php echo  (ENVIRONMENT === 'development') ?  'CodeIgniter Version <strong>' . CI_VERSION . '</strong>' : '' ?></p>
 </div>
 
 </body>
