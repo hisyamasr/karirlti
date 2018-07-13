@@ -5,7 +5,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 <head>
 	<link rel="stylesheet" type="text/css" href="assets/css/bootstrap.css"/>
 	<meta charset="utf-8">
-	<title>Rekrutment PT LTI</title>
+	<title>Pendaftaran</title>
 
 	<style type="text/css">
 
@@ -65,11 +65,13 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 <div id="container">
 	<h1>Selamat Datang di halaman Rekrutment PT. Len Telekomunikasi Indonesia</h1>
 	<div id="body">
-		<code>
-			<div class="text-center">
-				<img src="assets/images/underconstruction.jpg"/>
-			</div>
-		</code>
+    <form>
+        <div class="col-md-12">
+            
+        </div>
+    </form>
+	</div>
+	
 </div>
 
 </body>
