@@ -42,7 +42,7 @@
 		$('#example').DataTable( {  
 			 dom: 'Bfrtip',  
 			 buttons: [  
-			   'excel'
+			 {"extends":'excel', "text":'<i class="glyphicon glyphicon-export"> Export</i>',"className": 'btn btn-primary'}
 			 ]  ,
 			 scrollX: true
 		});  

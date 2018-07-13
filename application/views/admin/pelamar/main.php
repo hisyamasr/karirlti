@@ -25,11 +25,7 @@
 					<?php if(isset($message['errorr'])): ?>
 						<div class="alert alert-danger"><?php print_r($message['errorr']); ?></div>
 					<?php endif; ?>
-					<div class="row-fluid">
-						<div class="span12" >
-							<button id="da-pelamar-create-dialog" class="btn btn-success btn-create">[+] Tambah</button>
-						</div>
-					</div>
+					
 					</br>
 					<?php 
 						//$url=;
