@@ -14,7 +14,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 	body {
 		background-color: #fff;
-		margin: 40px;
+		margin: 0px 40px 40px 40px;
 		font: 13px/20px normal Helvetica, Arial, sans-serif;
 		color: #4F5155;
 	}
@@ -58,19 +58,27 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 		border: 1px solid #D0D0D0;
 		box-shadow: 0 0 8px #D0D0D0;
 	}
+
+	a{
+		outline: none;
+	}
 	</style>
 </head>
 <body>
-
-<div id="container">
-	<h1>Selamat Datang di halaman Rekrutment PT. Len Telekomunikasi Indonesia</h1>
-	<div id="body">
-		<code>
-			<div class="text-center">
-				<img src="assets/images/underconstruction.jpg"/>
-			</div>
-		</code>
-</div>
+	<nav class="navbar navbar-light bg-light">
+		<a class="navbar-brand" href="https://www.len-telko.co.id">
+			<img src="assets/images/cropped-LTI-2.png" width="150" height="56" class="d-inline-block align-top" alt="">
+		</a>
+	</nav>
+	<div id="container">
+		<h1>Selamat Datang di halaman Rekrutment PT. Len Telekomunikasi Indonesia</h1>
+		<div id="body">
+			<code>
+				<div class="text-center">
+					<img src="assets/images/underconstruction.jpg"/>
+				</div>
+			</code>
+	</div>
 
 </body>
 </html>

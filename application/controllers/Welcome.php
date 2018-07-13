@@ -17,7 +17,9 @@ class Welcome extends CI_Controller {
 		// }
 		
 		$data['query'] = $query->result();
-		$this->load->view('welcome_message', $data);
+		// $this->load->view('admin/header');
+		// 	$this->load->view('admin/footer');
+		$this->load->view('pendaftaran', $data);
 	}
 }
 ?>
