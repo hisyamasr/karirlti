@@ -1,24 +1,10 @@
-<?php
-defined('BASEPATH') OR exit('No direct script access allowed');
-?><!DOCTYPE html>
-<html lang="en">
-<head>
-	<link rel="stylesheet" type="text/css" href="assets/css/bootstrap.css"/>
-	<meta charset="utf-8">
+	<head>
 	<title>Rekrutment PT LTI</title>
-
+	</head>
 	<style type="text/css">
 
 	::selection { background-color: #E13300; color: white; }
 	::-moz-selection { background-color: #E13300; color: white; }
-
-	body {
-		background-color: #fff;
-		margin: 0px 40px 40px 40px;
-		font: 13px/20px normal Helvetica, Arial, sans-serif;
-		color: #4F5155;
-	}
-
 	h1 {
 		color: #444;
 		background-color: transparent;
@@ -44,7 +30,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 		margin: 0 15px 0 15px;
 	}
 
-	p.footer {
+	p.footerbox {
 		text-align: right;
 		font-size: 11px;
 		border-top: 1px solid #D0D0D0;
@@ -52,23 +38,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 		padding: 0 10px 0 10px;
 		margin: 20px 0 0 0;
 	}
-
-	#container {
-		margin: 10px;
-		border: 1px solid #D0D0D0;
-		box-shadow: 0 0 8px #D0D0D0;
-	}
-	a{
-		outline: none;
-	}
 	</style>
-</head>
-<body>
-	<nav class="navbar navbar-light bg-light">
-		<a class="navbar-brand" href="https://www.len-telko.co.id">
-			<img src="assets/images/cropped-LTI-2.png" width="150" height="56" class="d-inline-block align-top" alt="">
-		</a>
-	</nav>
 	<div id="container">
 		<h1>Selamat Datang di halaman Rekrutment PT. Len Telekomunikasi Indonesia</h1>
 		<div id="body">
@@ -109,12 +79,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			</code>
 		</div>
 		
-		<p class="footer">
-			<a class="btn btn-primary" style="margin-top:10px;" href="pendaftaran">Apply Now</a>
+		<p class="footerbox">
+			<a class="btn btn-primary" style="margin-top:10px; margin-bottom:10px;" href="pendaftaran">Apply Now</a>
 		</p>
 
-		<p class="footer">Page rendered in <strong>{elapsed_time}</strong> seconds. <?php echo  (ENVIRONMENT === 'development') ?  'CodeIgniter Version <strong>' . CI_VERSION . '</strong>' : '' ?></p>
+		<!-- <p class="footerbox">Page rendered in <strong>{elapsed_time}</strong> seconds. <?php echo  (ENVIRONMENT === 'development') ?  'CodeIgniter Version <strong>' . CI_VERSION . '</strong>' : '' ?></p> -->
 	</div>
-
-</body>
-</html>

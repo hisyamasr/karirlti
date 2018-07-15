@@ -5,21 +5,23 @@ class Welcome extends CI_Controller {
 	
 	public function index()
 	{
-		//$this->load->database();
-		// $query = $this->db->query("SELECT * FROM setup_jurusan;");
-		$query = $this->db->get("setup_jurusan");
-		//var_dump($query);
-		// foreach ($query->result() as $row)
-		// {
-		// 	echo $row->nama;
-		// 	echo $row->kode_jurusan;
-		// 	echo $row->isActive;
-		// }
-		
-		$data['query'] = $query->result();
-		// $this->load->view('admin/header');
-		// 	$this->load->view('admin/footer');
-		$this->load->view('pendaftaran', $data);
+		date_default_timezone_set('Asia/Jakarta');
+
+		$getSetting = $this->Appsetting_model->get_setting();		
+		$today = new DateTime("now");
+		$openRekrut = new DateTime($getSetting->tanggal_pembukaan);
+		$closedRekrut = new DateTime($getSetting->tanggal_penutupan);
+		// var_dump($today);
+		// var_dump($today >= $openRekrut);
+		// var_dump($today <= $closedRekrut);
+
+		$this->load->view('layouts/header');
+		if($today >= $openRekrut && $today <= $closedRekrut && $getSetting->status_rekrutmen) {
+			$this->load->view('pengumuman');
+		}else{
+			$this->load->view('welcome_message');
+		}	
+		$this->load->view('layouts/footer');
 	}
 }
 ?>

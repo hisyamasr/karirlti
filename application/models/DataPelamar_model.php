@@ -26,5 +26,9 @@ class DataPelamar_model extends CI_Model{
         $query = $this->db->get_where('data_pelamar', array('id' => $id));
         return $query->row_array();
     }
-	
+    
+    public function check_noktp($noKTP){
+        $query = $this->db->get_where('data_pelamar', array('no_ktp' => $noKTP));
+        return $query->num_rows() > 0 ? true : false;
+    }
 }
