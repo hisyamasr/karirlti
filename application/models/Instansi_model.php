@@ -21,6 +21,21 @@ class Instansi_model extends CI_Model{
             return $result_array;
         }
     }
+
+    public function get_all_instansi_as_list()
+    {
+        $this->db->select('setup_universitas.*');
+        $this->db->from('setup_universitas');
+		$this->db->order_by('setup_universitas.nama', 'ASC');
+        $query = $this->db->get();
+
+        $result = $query->result();
+        if($result === false){
+            return false;
+        }else{
+            return $result;
+        }
+    }
 	
 	public function set_instansi($database_input_array)
     {

@@ -21,6 +21,22 @@ class Posisi_model extends CI_Model{
             return $result_array;
         }
     }
+
+    public function get_as_list()
+    {
+        $this->db->select('setup_posisi.*');
+        $this->db->from('setup_posisi');
+        $this->db->where('isActive', true);
+		$this->db->order_by('setup_posisi.id', 'ASC');
+        $query = $this->db->get();
+
+        $result = $query->result();
+        if($result === false){
+            return false;
+        }else{
+            return $result;
+        }
+    }
 	
 	public function set_posisi($database_input_array)
     {
