@@ -418,9 +418,10 @@
 						</div>
 						<div class="col-md-8">
 							<h5 class="card-title ml-3">Pengalaman Lainnya</h5>
+							
 							<div class="form-group col-md-12">
 								<textarea name="pekerjaan_lainnya" rows="8" class="form-control" id="PekerjaanLainnya"></textarea>
-								<span class="text-muted">Setiap pekerjaan di pisahkan dengan ";"</span>
+								<span class="form-text text-white">*Setiap pekerjaan di pisahkan dengan ";"</span>
 							</div>
 						</div>
 					</div>
@@ -429,28 +430,19 @@
 				<div class="card text-white bg-dark mb-3 ml-3 mr-3">
 					<div class="card-header">Upload Dokumen</div>
 					<div class="card-body">
-						<div class="form-group col-md-5">
+						<div class="form-group col-md-8">
 							<input class="custom-file-input" type="file" name="cv_url" id="CV" required>
 							<label class="custom-file-label" for="CV" id="CVFilename">Upload CV</label>
-							<small class="form-text text-danger" id="ErrorCV"></small>		
+							<small class="form-text text-danger" id="ErrorCV"></small>	
+							<span class="form-text text-white">
+								*CV dalam format .pdf dengan ukuran <= 2 MB serta dilengkapi dengan <b>Transkrip Nilai</b> dan <b>Ijazah</b>
+							</span>	
 						</div>
 
 						<div class="form-group col-md-5">
 							<input class="custom-file-input" type="file" name="foto" id="Foto" required>
 							<label class="custom-file-label" for="Foto" id="FotoFilename">Upload Foto</label>
 							<span id="ErrorFoto" class="text-danger font-weight-bold"></span>
-						</div>
-
-						<div class="form-group col-md-5">
-							<input class="custom-file-input" type="file" name="ijazah" id="Ijazah" required>
-							<label class="custom-file-label" for="Foto" id="Ijazah">Upload Ijazah</label>
-							<span id="ErrorIjazah" class="text-danger font-weight-bold"></span>
-						</div>
-
-						<div class="form-group col-md-5">
-							<input class="custom-file-input" type="file" name="transkrip" id="Transkrip" required>
-							<label class="custom-file-label" for="Foto" id="TranskripFilename">Upload Transkrip</label>
-							<span id="ErrorTranskrip" class="text-danger font-weight-bold"></span>
 						</div>
 
 					</div>
