@@ -94,8 +94,104 @@ CREATE TABLE `data_pelamar` (
 
 LOCK TABLES `data_pelamar` WRITE;
 /*!40000 ALTER TABLE `data_pelamar` DISABLE KEYS */;
-INSERT INTO `data_pelamar` VALUES (1,'123','321','ada ada saja','bidan','2001-10-01',50,'rahasia','Islam','12345','a@a.a','jalan domisili no.0000','sesuai domisili','aaaaaaaaaaaaaaaaaaaaaadaaaaaa','dsaaaaaaaaaaaaaadawwwwwwww','3DA',1,'di kampus','caheum ledeng','1 meter',2,'apa saja','bebas','tak berstatus','kawin','yang ngasih',NULL,NULL);
+INSERT INTO `data_pelamar` VALUES (1,'123','1234569874563216','ada ada saja','bidan','2001-10-01',50,'rahasia','Islam','12345','a@a.a','jalan domisili no.0000','sesuai domisili','aaaaaaaaaaaaaaaaaaaaaadaaaaaa','dsaaaaaaaaaaaaaadawwwwwwww','3DA',1,'di kampus','caheum ledeng','1 meter',2,'apa saja','bebas','tak berstatus','kawin','yang ngasih',NULL,NULL);
 /*!40000 ALTER TABLE `data_pelamar` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `data_pendidikan`
+--
+
+DROP TABLE IF EXISTS `data_pendidikan`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `data_pendidikan` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `universitas` varchar(100) NOT NULL,
+  `jurusan` varchar(100) NOT NULL,
+  `jenjang` varchar(2) NOT NULL,
+  `ipk` decimal(10,0) DEFAULT NULL,
+  `tahun_lulus` varchar(4) DEFAULT NULL,
+  `no_ijazah` varchar(20) DEFAULT NULL,
+  `data_pelamar_id` int(11) NOT NULL,
+  `created_date` datetime DEFAULT NULL,
+  `last_modified` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `Pendidikan_DataPelamar_idx` (`data_pelamar_id`),
+  CONSTRAINT `Pendidikan_DataPelamar` FOREIGN KEY (`data_pelamar_id`) REFERENCES `data_pelamar` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `data_pendidikan`
+--
+
+LOCK TABLES `data_pendidikan` WRITE;
+/*!40000 ALTER TABLE `data_pendidikan` DISABLE KEYS */;
+/*!40000 ALTER TABLE `data_pendidikan` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `data_pengalamankerja`
+--
+
+DROP TABLE IF EXISTS `data_pengalamankerja`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `data_pengalamankerja` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `perusahaan` varchar(150) NOT NULL,
+  `jabatan` varchar(100) NOT NULL,
+  `awal_kerja` varchar(20) DEFAULT NULL,
+  `akhir_kerja` varchar(20) DEFAULT NULL,
+  `deskripsi_pekerjaan` longtext,
+  `data_pelamar_id` int(11) NOT NULL,
+  `created_date` datetime DEFAULT NULL,
+  `last_modified` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `Pengalaman_Pelamar_idx` (`data_pelamar_id`),
+  CONSTRAINT `Pengalaman_Pelamar` FOREIGN KEY (`data_pelamar_id`) REFERENCES `data_pelamar` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `data_pengalamankerja`
+--
+
+LOCK TABLES `data_pengalamankerja` WRITE;
+/*!40000 ALTER TABLE `data_pengalamankerja` DISABLE KEYS */;
+/*!40000 ALTER TABLE `data_pengalamankerja` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `data_sertifikasi`
+--
+
+DROP TABLE IF EXISTS `data_sertifikasi`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `data_sertifikasi` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `no_sertifikat` varchar(100) NOT NULL,
+  `tanggal_sertifikat` datetime NOT NULL,
+  `lokasi` varchar(150) DEFAULT NULL,
+  `badan_penyelenggara` varchar(150) DEFAULT NULL,
+  `data_pelamar_id` int(11) NOT NULL,
+  `created_date` datetime DEFAULT NULL,
+  `last_modified` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `Sertifikasi_Pelamar_idx` (`data_pelamar_id`),
+  CONSTRAINT `Sertifikasi_Pelamar` FOREIGN KEY (`data_pelamar_id`) REFERENCES `data_pelamar` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `data_sertifikasi`
+--
+
+LOCK TABLES `data_sertifikasi` WRITE;
+/*!40000 ALTER TABLE `data_sertifikasi` DISABLE KEYS */;
+/*!40000 ALTER TABLE `data_sertifikasi` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -337,4 +433,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-07-16  8:42:55
+-- Dump completed on 2018-07-16 17:11:03

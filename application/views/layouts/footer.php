@@ -20,8 +20,10 @@
         margin-top:10px;
         height:60px;
         vertical-align: middle;
-        bottom:0;
-        position: relative;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        position: absolute;
     }
 </style>
 </html>
