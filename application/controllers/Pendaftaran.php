@@ -6,7 +6,7 @@ class Pendaftaran extends CI_Controller {
 	{
 		parent::__construct();
 		//$this->load->database();
-		//$this->load->library(array('ion_auth', 'form_validation'));
+		$this->load->library(array('Recaptcha'));
 		$this->load->helper(array('url', 'language'));
 		$this->load->helper(array('form', 'url'));
 		
@@ -28,6 +28,8 @@ class Pendaftaran extends CI_Controller {
 		$data['universitasList'] = $getUniversitas;
 		$data['jurusanList'] = $getJurusan->result();
 		$data['jenjangList'] = $getJenjang->result();
+		$data['captcha'] = $this->recaptcha->getWidget();
+		$data['script_captcha'] = $this->recaptcha->getScriptTag();
 		
 		$this->load->view('layouts/header');
 		if($today >= $openRekrut && $today <= $closedRekrut && $getSetting->status_rekrutmen) 
@@ -102,47 +104,30 @@ class Pendaftaran extends CI_Controller {
 							));		
 		$this->form_validation->set_rules('status_pengalaman', 'Status Pengalaman', 'required', array( 'required' => "Status pengalaman belum dipilih" ));
 		$this->form_validation->set_rules('info_loker', 'Info Loker', 'required', array( 'required' => "Info Lowongan kerja belum dipilih" ));
+		$this->form_validation->set_rules('g-recaptcha-response', 'Status Pengalaman', 'required', array( 'required' => "Verifikasi Captcha Gagal" ));
 
-		#endregion
-
-		#region Assign Value from Post
-			// $kodePosisi = $this->input->post('kode_posisi');
-			// $noKTP = $this->input->post('no_ktp');
-			// $nama = $this->input->post('nama');
-			// $tempatLahir = $this->input->post('tempat_lahir');
-			// $tanggalLahir = $this->input->post('tanggal_lahir');
-			// $jenisKelamin = $this->input->post('jenis_kelamin');
-			// $agama = $this->input->post('agama');
-			// $statusPerkawinan = $this->input->post('status_perkawinan');
-			// $fotoUrl = $this->input->post('foto_url');
-			// $cvUrl = $this->input->post('cv_url');
-			// $noHandphone = $this->input->post('no_handphone');
-			// $email = $this->input->post('email');
-			// $domisili = $this->input->post('domisili');
-			// $alamatAsli = $this->input->post('alamat_asli');
-			// $universitas = $this->input->post('universitas');
-			// $jurusan = $this->input->post('jurusan');
-			// $jenjang = $this->input->post('jenjang');
-			// $ipk = $this->input->post('ipk');
-			// $tahunLulus = $this->input->post('tahun_lulus');
-			// $noIjazah = $this->input->post('no_ijazah');
-			// $statusPengalaman = $this->input->post('status_pengalaman');
-			// $pengalamanTerakhir  = $this->input->post('pengalaman_terakhir');
-			// $pengalamanLainnya = $this->input->post('pengalaman_lainnya');			
-			// $infoLoker = $this->input->post('info_loker');
-		#endregion
+		#endregion		
+		$recaptcha = $this->input->post('g-recaptcha-response');
+        $response = $this->recaptcha->verifyResponse($recaptcha);
 
 		#region Action
 			if ($this->form_validation->run() == FALSE)
 			{
 				$data = [ 'status' => false, 'errorList' => validation_errors() ];
 			}else{
-				 //$insert = $this->DataPelamar_model->insert_data($this->input->post());
-				if($this->DataPelamar_model->insert_data($this->input->post())){
-					$data = [ 'status' => true, 'errorList' => "Penyimpanan data pelamar Berhasil" ];
-				}else{
-					$data = [ 'status' => false, 'errorList' => "Penyimpanan data pelamar Gagal" ];
-				}				
+
+				if (!isset($response['success']) || $response['success'] <> true)
+				{
+					$data = [ 'status' => false, 'errorList' => "Verifikasi Captcha Gagal, tunggu 5 menit untuk mengulangi." ];
+				}
+				else
+				{
+					if($this->DataPelamar_model->insert_data($this->input->post())){
+						$data = [ 'status' => true, 'errorList' => "Penyimpanan data pelamar Berhasil" ];
+					}else{
+						$data = [ 'status' => false, 'errorList' => "Penyimpanan data pelamar Gagal" ];
+					}
+				}								
 			}
 		
 		#endregion
@@ -220,6 +205,30 @@ class Pendaftaran extends CI_Controller {
 			$this->load->view('welcome_message');
 		}
 		$this->load->view('layouts/footer');
+	}
+
+	public function test_action(){		
+		$this->load->library('form_validation');
+		$this->form_validation->set_rules('g-recaptcha-response', 'Status Pengalaman', 'required', array( 'required' => "Verifikasi Captcha Gagal" ));
+
+		$recaptcha = $this->input->post('g-recaptcha-response');
+        $response = $this->recaptcha->verifyResponse($recaptcha);
+		
+		if ($this->form_validation->run() == FALSE)
+		{
+			$data = [ 'status' => false, 'errorList' => validation_errors() ];
+		}else{
+			if (!isset($response['success']) || $response['success'] <> true)
+			{
+				$data = [ 'status' => false, 'errorList' => $response ];
+			}
+			else
+			{
+				$data = [ 'status' => true, 'errorList' => $response  ];
+			}
+		}
+
+		echo json_encode($data);
 	}
 }
 ?>

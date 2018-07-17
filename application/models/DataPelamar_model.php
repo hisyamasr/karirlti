@@ -62,7 +62,7 @@ class DataPelamar_model extends CI_Model{
             'nama' => $data['nama'],
             'tempat_lahir' => $data['tempat_lahir'],
             'tanggal_lahir' => $data['tanggal_lahir'],
-            'usia' => $data['usia'],
+            'umur' => $data['usia'],
             'jenis_kelamin' => $data['jenis_kelamin'],
             'agama' => $data['agama'],
             'status_perkawinan' => $data['status_perkawinan'],

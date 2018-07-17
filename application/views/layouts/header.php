@@ -12,7 +12,7 @@
 	<script type="text/javascript" src='<?php echo base_url();?>assets/js/bootstrap.min.js'/></script>
 	<script type="text/javascript" src='<?php echo base_url();?>assets/js/bootstrap-datepicker.min.js'/></script>
 	<script type="text/javascript" src='<?php echo base_url();?>assets/js/bootstrap-datepicker.id.min.js'/></script>
-	<script src='https://www.google.com/recaptcha/api.js'></script>
+	<!-- <script src='https://www.google.com/recaptcha/api.js'></script> -->
 	<meta charset="utf-8">
 
 	<style type="text/css">

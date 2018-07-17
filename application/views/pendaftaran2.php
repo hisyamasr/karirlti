@@ -1,3 +1,7 @@
+<head>
+	<title>Form Pendaftaran</title>
+</head>
+<?= $script_captcha ?>
 <script>
 	var dataPendidikan = [];
 	function flushError(){
@@ -70,7 +74,7 @@
 	$(document).ready(function(){
 		flushError();
 		$('.datepicker').datepicker({
-			format: "dd/mm/yyyy",
+			format: "yyyy-mm-dd",
 			language: "id",
 			todayHighlight: true,
 			autoclose: true
@@ -238,7 +242,7 @@
 				success: function (result) {
 					if (result.status == true) {
 						window.location = '<?= base_url(); ?>/pendaftaran/success';
-						//console.log(result.errorList);
+						console.log(result.errorList);
 						//messageShow("success", "<li>" + result.errorList + "</li>");
 					} else if (result.status == false) {
 						messageShow("error", "<li>" + result.errorList + "</li>");
@@ -615,8 +619,8 @@
 					</div>
 				</div>
 
-				<div class="form-group col-md-12 ml-2">
-					<div class="g-recaptcha" data-sitekey="6LewmGQUAAAAAHNVZQ6PNy0a3yqJhWZgrMkENKEa"></div>
+				<div class="form-group col-md-12 ml-2" style="padding-left:40%;">
+					<?= $captcha ?>
 				</div>					
 				
 			</div>
