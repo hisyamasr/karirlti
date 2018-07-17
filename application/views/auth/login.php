@@ -24,7 +24,7 @@
   					<hr>
   					<hr class="short">
   				</div>
-				<div id="infoMessage"><?php echo $message;?></div>
+				<div id="infoMessage" class="btn btn-outline btn-warning"><?php echo $message;?></div>
 				<div class="col-3">
 					<?php echo form_open("auth/login");?>
 						  <p>

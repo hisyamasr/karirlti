@@ -13,7 +13,7 @@
 
     <!-- Bootstrap Core CSS -->
     <link href="<?php echo base_url();?>assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-
+    
     <!-- MetisMenu CSS -->
     <link href="<?php echo base_url();?>assets/vendor/metisMenu/metisMenu.min.css" rel="stylesheet">
 
@@ -28,6 +28,9 @@
     <link href="<?php echo base_url();?>assets/dist/css/sb-admin-2.css" rel="stylesheet">
     
 	<link href="<?php echo base_url();?>assets/css/jquery-ui.min.css" rel="stylesheet">
+	
+	<link href="<?php echo base_url();?>assets/css/datetimepicker/tempusdominus-bootstrap-4.css" rel="stylesheet">
+	<link href="<?php echo base_url();?>assets/css/font-awesome.min.css" rel="stylesheet">
 
     <!-- Custom Fonts -->
     <link href="<?php echo base_url();?>assets/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">

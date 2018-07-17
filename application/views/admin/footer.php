@@ -5,6 +5,7 @@
 
     <!-- Bootstrap Core JavaScript -->
     <script src="<?php echo base_url();?>assets/vendor/bootstrap/js/bootstrap.min.js"></script>
+    <script src="<?php echo base_url();?>assets/js/bootstrap-datetimepicker.min.js"></script>
 
     <!-- Metis Menu Plugin JavaScript -->
     <script src="<?php echo base_url();?>assets/vendor/metisMenu/metisMenu.min.js"></script>
@@ -20,10 +21,19 @@
 	<script src="<?php echo base_url();?>assets/js/vfs_fonts.js"></script>
 	<script src="<?php echo base_url();?>assets/js/jquery-ui.min.js"></script>
 	<script src="<?php echo base_url();?>assets/js/jquery.validate.min.js"></script>
+	
+	<!-- Custom js -->
 	<script src="<?php echo base_url();?>assets/js/custom/instansi.modal.js"></script>
 	<script src="<?php echo base_url();?>assets/js/custom/jurusan.modal.js"></script>
 	<script src="<?php echo base_url();?>assets/js/custom/posisi.modal.js"></script>
 	<script src="<?php echo base_url();?>assets/js/custom/pendidikan.modal.js"></script>
+	<script src="<?php echo base_url();?>assets/js/custom/appsetting.modal.js"></script>
+	
+	<script src="<?php echo base_url();?>assets/js/moment.min.js"></script>
+	<script src="<?php echo base_url();?>assets/js/popper.min.js"></script>
+	<script src="<?php echo base_url();?>assets/js/collapse.js"></script>
+	<script src="<?php echo base_url();?>assets/js/transition.js"></script>
+	<script src="<?php echo base_url();?>assets/js/tempusdominus-bootstrap-4.js"></script>
 
     <!-- Custom Theme JavaScript -->
     <script src="<?php echo base_url();?>assets/js/sb-admin-2.js"></script>
@@ -42,12 +52,26 @@
 		$('#example').DataTable( {  
 			 dom: 'Bfrtip',  
 			 buttons: [  
-			 {"extends":'excel', "text":'<i class="glyphicon glyphicon-export"> Export</i>',"className": 'btn btn-primary'}
+			 {
+                extend:    'excel',
+                text:      '<i class="glyphicon glyphicon-export"> Export</i>',
+				className: 'btn btn-primary',
+                titleAttr: 'Excel'
+            },
 			 ]  ,
 			 scrollX: true
 		});  
+		
+		$('#datetimepicker1').datetimepicker({
+			format:'YYYY-MM-DD HH:mm:ss'
+		});
+		
+		$('#datetimepicker2').datetimepicker({
+			format:'YYYY-MM-DD HH:mm:ss'
+		});
     });
     </script>
+
 
 </body>
 

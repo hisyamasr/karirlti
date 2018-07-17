@@ -65,7 +65,7 @@
 								<?php foreach($pelamar as $each_pendidikan): ?>
 									<tr>
 										<td><?php echo $no; ?></td>
-										<td><?php echo $each_pendidikan['foto_url']; ?></td>
+										<td><img src="<?php echo base_url(); echo 'assets/documents/foto/'.$each_pendidikan['foto_url']; ?>"</td>
 										<td><?php echo $each_pendidikan['kode_posisi']; ?></td>
 										<td><?php echo $each_pendidikan['no_registrasi']; ?></td>
 										<td><?php echo $each_pendidikan['no_ktp']; ?></td>
@@ -86,7 +86,7 @@
 										<td><?php echo $each_pendidikan['status_pengalaman']; ?></td>
 										<td><?php echo $each_pendidikan['status_perkawinan']; ?></td>
 										<td><?php echo $each_pendidikan['info_loker']; ?></td>
-										<td><?php echo $each_pendidikan['cv_url']; ?></td>
+										<td><a href="<?php echo base_url(); echo 'assets/documents/cv/'.$each_pendidikan['cv_url']; ?>" target="_blank"><?php echo $each_pendidikan['cv_url']; ?></a></td>
 									</tr>
 									<?php $no++;?>
 								<?php endforeach?>

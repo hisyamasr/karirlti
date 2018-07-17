@@ -48,7 +48,8 @@ class Auth extends CI_Controller
 			}
 			$this->load->view('admin/header');
 			$this->load->view('admin/nav');
-			$this->_render_page('auth' . DIRECTORY_SEPARATOR . 'index', $this->data);
+			$this->load->view('auth/index', $this->data);
+			//$this->_render_page('auth' . DIRECTORY_SEPARATOR . 'index', $this->data);
 			$this->load->view('admin/footer');
 		}
 	}
@@ -75,7 +76,7 @@ class Auth extends CI_Controller
 				//if the login is successful
 				//redirect them back to the home page
 				$this->session->set_flashdata('message', $this->ion_auth->messages());
-				redirect('/', 'refresh');
+				redirect('auth/', 'refresh');
 			}
 			else
 			{

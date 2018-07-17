@@ -15,7 +15,7 @@
 
             <ul class="nav navbar-top-links navbar-right">
                 <li class="dropdown">
-                    <a href="auth/logout"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
+                    <a href="<?php echo base_url();?>auth/logout"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
                     
                     <!-- /.dropdown-user -->
                 </li>
@@ -33,6 +33,9 @@
                             <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> Data Master<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
                                 <li>
+                                    <a href="<?php echo base_url(); ?>AppSetting">AppSetting</a>
+                                </li>
+								<li>
                                     <a href="<?php echo base_url(); ?>auth">User</a>
                                 </li>
                                 <li>
