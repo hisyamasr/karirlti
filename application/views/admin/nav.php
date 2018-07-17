@@ -9,7 +9,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="index.html">Rekrutmen LTI - Admin</a>
+                <img src="assets/images/cropped-LTI-2.png" width="150" height="56" class="d-inline-block align-top" alt="">
             </div>
             <!-- /.navbar-header -->
 
@@ -23,8 +23,8 @@
             </ul>
             <!-- /.navbar-top-links -->
 
-            <div class="navbar-default sidebar" role="navigation">
-                <div class="sidebar-nav navbar-collapse">
+            <div class="navbar-default sidebar" role="navigation" style="margin-top:57px;">
+                <div class="sidebar-nav navbar-collapse" >
                     <ul class="nav" id="side-menu">
                         <li>
                             <a href="<?php echo base_url(); ?>DataPelamar"><i class="fa fa-dashboard fa-fw"></i> Data Rekrutmen</a>
