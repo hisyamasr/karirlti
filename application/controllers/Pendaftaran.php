@@ -56,51 +56,52 @@ class Pendaftaran extends CI_Controller {
 		$error = array();	
 
 		#region Validation Rules
-		// $this->form_validation->set_rules('kode_posisi', 'Kode Posisi', 'required', array( 'required' => "Kode Posisi belum dipilih" ));
-		// $this->form_validation->set_rules('no_ktp', 'No KTP', 'required|min_length[16]|max_length[16]|is_unique[data_pelamar.no_ktp]|numeric',
-		// 							array(
-		// 								'required' => "No KTP belum terisi",
-		// 								'min_length' => "No KTP terdiri dari 16 digit angka",
-		// 								'max_length' => "No KTP terdiri dari 16 digit angka",
-		// 								'is_unique' => "No KTP sudah terdaftar",
-		// 								'numeric' => "No KTP harus berupa angka"
-		// 							));
-		// $this->form_validation->set_rules('nama', 'Nama', 'required', array( 'required' => "Nama belum terisi" ));						
-		// $this->form_validation->set_rules('tanggal_lahir', 'Tanggal Lahir', 'required', array( 'required' => "Tanggal Lahir belum terisi" ));
-		// $this->form_validation->set_rules('tempat_lahir', 'Tempat Lahir', 'required', array( 'required' => "Tempat Lahir belum terisi" ));
-		// $this->form_validation->set_rules('jenis_kelamin', 'Jenis Kelamin', 'required', array( 'required' => "Jenis Kelamin belum terisi" ));
-		// $this->form_validation->set_rules('agama', 'Jenis Kelamin', 'required', array( 'required' => "Agama belum dipilih" ));
-		// $this->form_validation->set_rules('status_perkawinan', 'Jenis Kelamin', 'required', array( 'required' => "Status perkawinan belum dipilih" ));
-		// $this->form_validation->set_rules('foto_url', 'Foto', 'required', array( 'required' => "Silahkah Upload foto Anda" ));
-		// $this->form_validation->set_rules('cv_url', 'CV', 'required', array( 'required' => "Silahkah Upload CV Anda" ));
-		// $this->form_validation->set_rules('info_loker', 'Info Loker', 'required', array( 'required' => "Silahkah pilih Info loker" ));
-		// $this->form_validation->set_rules('no_handphone', 'No HP', 'required|numeric',
-		// 							array(
-		// 								'required' => "No Handphone belum terisi",
-		// 								'numeric' => "No Handphone harus berupa angka"
-		// 							));
-		// $this->form_validation->set_rules('email', 'Email', 'required|valid_email',
-		// 						array(
-		// 							'required' => "Email belum terisi",
-		// 							'valid_email' => "Format email salah"
-		// 						));
-		// $this->form_validation->set_rules('domisili', 'Domisili', 'required', array( 'required' => "Domisili belum terisi" ));
-		// $this->form_validation->set_rules('alamat_asli', 'Alamat Asli', 'required', array( 'required' => "Alamat Asli belum terisi" ));
+		$this->form_validation->set_rules('kode_posisi', 'Kode Posisi', 'required', array( 'required' => "Kode Posisi belum dipilih" ));
+		$this->form_validation->set_rules('no_ktp', 'No KTP', 'required|min_length[16]|max_length[16]|is_unique[data_pelamar.no_ktp]|numeric',
+									array(
+										'required' => "No KTP belum terisi",
+										'min_length' => "No KTP terdiri dari 16 digit angka",
+										'max_length' => "No KTP terdiri dari 16 digit angka",
+										'is_unique' => "No KTP sudah terdaftar",
+										'numeric' => "No KTP harus berupa angka"
+									));
+		$this->form_validation->set_rules('nama', 'Nama', 'required', array( 'required' => "Nama belum terisi" ));						
+		$this->form_validation->set_rules('tanggal_lahir', 'Tanggal Lahir', 'required', array( 'required' => "Tanggal Lahir belum terisi" ));
+		$this->form_validation->set_rules('tempat_lahir', 'Tempat Lahir', 'required', array( 'required' => "Tempat Lahir belum terisi" ));
+		$this->form_validation->set_rules('jenis_kelamin', 'Jenis Kelamin', 'required', array( 'required' => "Jenis Kelamin belum terisi" ));
+		$this->form_validation->set_rules('agama', 'Jenis Kelamin', 'required', array( 'required' => "Agama belum dipilih" ));
+		$this->form_validation->set_rules('status_perkawinan', 'Jenis Kelamin', 'required', array( 'required' => "Status perkawinan belum dipilih" ));
+		$this->form_validation->set_rules('foto_url', 'Foto', 'required', array( 'required' => "Silahkah Upload foto Anda" ));
+		$this->form_validation->set_rules('cv_url', 'CV', 'required', array( 'required' => "Silahkah Upload CV Anda" ));
+		$this->form_validation->set_rules('no_handphone', 'No HP', 'required|numeric',
+									array(
+										'required' => "No Handphone belum terisi",
+										'numeric' => "No Handphone harus berupa angka"
+									));
+		$this->form_validation->set_rules('email', 'Email', 'required|valid_email',
+								array(
+									'required' => "Email belum terisi",
+									'valid_email' => "Format email salah"
+								));
+		$this->form_validation->set_rules('domisili', 'Domisili', 'required', array( 'required' => "Domisili belum terisi" ));
+		$this->form_validation->set_rules('alamat_asli', 'Alamat Asli', 'required', array( 'required' => "Alamat Asli belum terisi" ));
 		$this->form_validation->set_rules('universitas', 'Universitas', 'required', array( 'required' => "Universitas belum ditambahkan" ));
-		// $this->form_validation->set_rules('jurusan', 'Jurusan', 'required', array( 'required' => "Jurusan belum ditambahkan" ));
-		// $this->form_validation->set_rules('jenjang', 'Jenjang', 'required', array( 'required' => "Jenjang belum ditambahkan" ));
-		// $this->form_validation->set_rules('no_ijazah', 'No Ijazah', 'required', array( 'required' => "No Ijazah belum ditambahkan" ));
-		// $this->form_validation->set_rules('ipk', 'IPK', 'required|less_than_equal_to[4]|decimal', 
-		// 					array( 
-		// 						'required' => "IPK belum ditambahkan",
-		// 						'less_than_equal_to' => "IPK tidak boleh melebihi 4",
-		// 						'decimal' => "IPK harus berupa decimal"
-		// 				 	));
-		// $this->form_validation->set_rules('tahun_lulus', 'Tahun Lulus', 'required|max_length[4]', 
-		// 					array( 
-		// 						'required' => "Tahun lulus belum ditambahkan", 
-		// 						'max_length' => "Tahun lulus maksimal 4 digit",
-		// 					));
+		$this->form_validation->set_rules('jurusan', 'Jurusan', 'required', array( 'required' => "Jurusan belum ditambahkan" ));
+		$this->form_validation->set_rules('jenjang', 'Jenjang', 'required', array( 'required' => "Jenjang belum ditambahkan" ));
+		$this->form_validation->set_rules('no_ijazah', 'No Ijazah', 'required', array( 'required' => "No Ijazah belum ditambahkan" ));
+		$this->form_validation->set_rules('ipk', 'IPK', 'required|less_than_equal_to[4]|decimal', 
+							array( 
+								'required' => "IPK belum ditambahkan",
+								'less_than_equal_to' => "IPK tidak boleh melebihi 4",
+								'decimal' => "IPK harus berupa decimal"
+						 	));
+		$this->form_validation->set_rules('tahun_lulus', 'Tahun Lulus', 'required|max_length[4]', 
+							array( 
+								'required' => "Tahun lulus belum ditambahkan", 
+								'max_length' => "Tahun lulus maksimal 4 digit",
+							));		
+		$this->form_validation->set_rules('status_pengalaman', 'Status Pengalaman', 'required', array( 'required' => "Status pengalaman belum dipilih" ));
+		$this->form_validation->set_rules('info_loker', 'Info Loker', 'required', array( 'required' => "Info Lowongan kerja belum dipilih" ));
 
 		#endregion
 
@@ -115,20 +116,20 @@ class Pendaftaran extends CI_Controller {
 			// $statusPerkawinan = $this->input->post('status_perkawinan');
 			// $fotoUrl = $this->input->post('foto_url');
 			// $cvUrl = $this->input->post('cv_url');
-			// $infoLoker = $this->input->post('info_loker');
 			// $noHandphone = $this->input->post('no_handphone');
 			// $email = $this->input->post('email');
 			// $domisili = $this->input->post('domisili');
 			// $alamatAsli = $this->input->post('alamat_asli');
 			// $universitas = $this->input->post('universitas');
-			$test = $this->input->post('test');
 			// $jurusan = $this->input->post('jurusan');
 			// $jenjang = $this->input->post('jenjang');
 			// $ipk = $this->input->post('ipk');
 			// $tahunLulus = $this->input->post('tahun_lulus');
 			// $noIjazah = $this->input->post('no_ijazah');
-			//var_dump($universitas);
-			//print_r($this->input->post());
+			// $statusPengalaman = $this->input->post('status_pengalaman');
+			// $pengalamanTerakhir  = $this->input->post('pengalaman_terakhir');
+			// $pengalamanLainnya = $this->input->post('pengalaman_lainnya');			
+			// $infoLoker = $this->input->post('info_loker');
 		#endregion
 
 		#region Action
@@ -136,7 +137,12 @@ class Pendaftaran extends CI_Controller {
 			{
 				$data = [ 'status' => false, 'errorList' => validation_errors() ];
 			}else{
-				$data = [ 'status' => true, 'errorList' => $this->input->post('test') ];				
+				 //$insert = $this->DataPelamar_model->insert_data($this->input->post());
+				if($this->DataPelamar_model->insert_data($this->input->post())){
+					$data = [ 'status' => true, 'errorList' => "Penyimpanan data pelamar Berhasil" ];
+				}else{
+					$data = [ 'status' => false, 'errorList' => "Penyimpanan data pelamar Gagal" ];
+				}				
 			}
 		
 		#endregion
@@ -156,7 +162,7 @@ class Pendaftaran extends CI_Controller {
 
 		if ( !$this->upload->do_upload('input_foto'))
 		{
-			$data = [ 'status' => false, 'errorList' => $this->upload->display_errors() ];
+			$data = [ 'status' => false, 'errorList' => $this->upload->display_errors('','') ];
 			//$isValid = false;
 		}
 		else
@@ -173,7 +179,7 @@ class Pendaftaran extends CI_Controller {
 		#region upload cv
 		$config['upload_path']  = './assets/documents/cv';
 		$config['allowed_types']= 'pdf';
-		$config['max_size']     = 512;
+		$config['max_size']     = 2048;
 		$config['file_name']	= "CV-".$this->input->post('no_ktp');
 		$config['overwrite'] = true;
 		// $config['encrypt_name'] = true;
@@ -190,6 +196,30 @@ class Pendaftaran extends CI_Controller {
 		}
 
 		echo json_encode($data);	
+	}
+
+	public function insert_pendidikan(){
+		if($this->input->post('data') !== null){
+			$data = [ 'status' => true, 'errorList' => json_decode(stripslashes($this->input->post('data'))) ];
+			echo json_encode($data);
+		}
+		
+	}
+
+	public function success(){
+		$getSetting = $this->Appsetting_model->get_setting();		
+		$today = new DateTime("now");
+		$openRekrut = new DateTime($getSetting->tanggal_pembukaan);
+		$closedRekrut = new DateTime($getSetting->tanggal_penutupan);
+		
+		$this->load->view('layouts/header');
+		if($today >= $openRekrut && $today <= $closedRekrut && $getSetting->status_rekrutmen) 
+		{
+			$this->load->view('successful_page');
+		}else{
+			$this->load->view('welcome_message');
+		}
+		$this->load->view('layouts/footer');
 	}
 }
 ?>

@@ -1,17 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>	
-	<link rel="stylesheet" type="text/css" href="assets/css/bootstrap/bootstrap.css"/>
-	<link rel="stylesheet" type="text/css" href="assets/css/datepicker/bootstrap-datepicker3.css"/>	
-	<link rel="stylesheet" type="text/css" href="assets/css/jquery-ui.min.css"/>
-	<link rel="stylesheet" type="text/css" href="assets/css/global.css"/>
-	<link rel="stylesheet" href="assets/fontawesome-5.1/css/all.css">
-	<script type="text/javascript" src='assets/js/jquery-3.3.1.js'/></script>
-	<script type="text/javascript" src='assets/js/jquery-ui.js'/></script>
+	<link rel="stylesheet" type="text/css" href="<?php echo base_url();?>assets/css/bootstrap/bootstrap.css"/>
+	<link rel="stylesheet" type="text/css" href="<?php echo base_url();?>assets/css/datepicker/bootstrap-datepicker3.css"/>	
+	<link rel="stylesheet" type="text/css" href="<?php echo base_url();?>assets/css/jquery-ui.min.css"/>
+	<link rel="stylesheet" type="text/css" href="<?php echo base_url();?>assets/css/global.css"/>
+	<link rel="stylesheet" href="<?php echo base_url();?>assets/fontawesome-5.1/css/all.css">
+	<script type="text/javascript" src='<?php echo base_url();?>assets/js/jquery-3.3.1.js'/></script>
+	<script type="text/javascript" src='<?php echo base_url();?>assets/js/jquery-ui.js'/></script>
 	<!-- <script type="text/javascript" src='assets/js/popper.1.14.js'/></script> -->
-	<script type="text/javascript" src='assets/js/bootstrap.min.js'/></script>
-	<script type="text/javascript" src='assets/js/bootstrap-datepicker.min.js'/></script>
-	<script type="text/javascript" src='assets/js/bootstrap-datepicker.id.min.js'/></script>
+	<script type="text/javascript" src='<?php echo base_url();?>assets/js/bootstrap.min.js'/></script>
+	<script type="text/javascript" src='<?php echo base_url();?>assets/js/bootstrap-datepicker.min.js'/></script>
+	<script type="text/javascript" src='<?php echo base_url();?>assets/js/bootstrap-datepicker.id.min.js'/></script>
+	<script src='https://www.google.com/recaptcha/api.js'></script>
 	<meta charset="utf-8">
 
 	<style type="text/css">
