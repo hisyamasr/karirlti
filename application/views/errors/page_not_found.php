@@ -36,11 +36,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 	</style>
 </head>
 	<div id="container" style="margin-bottom:58px;">
-		<h1 class="text-center">Selamat Datang di halaman Rekrutmen PT. Len Telekomunikasi Indonesia</h1>
 		<div id="body">
 			<code>
 				<div class="text-center">
-					<img src="assets/images/closed_rekrutmen.png"/>
+					<img src="assets/images/page_not_found.png"/>
 				</div>
 			</code>
 		</div>

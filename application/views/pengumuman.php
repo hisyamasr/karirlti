@@ -108,7 +108,6 @@
 		</div>
 		
 		<p class="footerbox">
-		<a class="btn btn-success" style="margin-top:10px; margin-bottom:10px;" id="submitForm">Test Email</a>
 			<a class="btn btn-primary" style="margin-top:10px; margin-bottom:10px;" href="pendaftaran">Apply Now</a>
 		</p>
 

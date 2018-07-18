@@ -36,7 +36,7 @@ class Konfirmasi extends CI_Controller {
 			$data['data'] = $getData[0];
 			$this->load->view('konfirmasi', $data);
 		}else{
-			$this->load->view('welcome_message');
+			$this->load->view('errors/page_not_found');
 		}
 		$this->load->view('layouts/footer');
 	}
