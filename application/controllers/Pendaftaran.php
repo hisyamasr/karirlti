@@ -70,40 +70,40 @@ class Pendaftaran extends CI_Controller {
 		$this->form_validation->set_rules('nama', 'Nama', 'required', array( 'required' => "Nama belum terisi" ));						
 		$this->form_validation->set_rules('tanggal_lahir', 'Tanggal Lahir', 'required', array( 'required' => "Tanggal Lahir belum terisi" ));
 		$this->form_validation->set_rules('tempat_lahir', 'Tempat Lahir', 'required', array( 'required' => "Tempat Lahir belum terisi" ));
-		// $this->form_validation->set_rules('jenis_kelamin', 'Jenis Kelamin', 'required', array( 'required' => "Jenis Kelamin belum terisi" ));
-		// $this->form_validation->set_rules('agama', 'Jenis Kelamin', 'required', array( 'required' => "Agama belum dipilih" ));
-		// $this->form_validation->set_rules('status_perkawinan', 'Jenis Kelamin', 'required', array( 'required' => "Status perkawinan belum dipilih" ));
-		// $this->form_validation->set_rules('foto_url', 'Foto', 'required', array( 'required' => "Silahkah Upload foto Anda" ));
-		// $this->form_validation->set_rules('cv_url', 'CV', 'required', array( 'required' => "Silahkah Upload CV Anda" ));
-		// $this->form_validation->set_rules('no_handphone', 'No HP', 'required|numeric',
-		// 							array(
-		// 								'required' => "No Handphone belum terisi",
-		// 								'numeric' => "No Handphone harus berupa angka"
-		// 							));
+		$this->form_validation->set_rules('jenis_kelamin', 'Jenis Kelamin', 'required', array( 'required' => "Jenis Kelamin belum terisi" ));
+		$this->form_validation->set_rules('agama', 'Jenis Kelamin', 'required', array( 'required' => "Agama belum dipilih" ));
+		$this->form_validation->set_rules('status_perkawinan', 'Jenis Kelamin', 'required', array( 'required' => "Status perkawinan belum dipilih" ));
+		$this->form_validation->set_rules('foto_url', 'Foto', 'required', array( 'required' => "Silahkah Upload foto Anda" ));
+		$this->form_validation->set_rules('cv_url', 'CV', 'required', array( 'required' => "Silahkah Upload CV Anda" ));
+		$this->form_validation->set_rules('no_handphone', 'No HP', 'required|numeric',
+									array(
+										'required' => "No Handphone belum terisi",
+										'numeric' => "No Handphone harus berupa angka"
+									));
 		$this->form_validation->set_rules('email', 'Email', 'required|valid_email',
 								array(
 									'required' => "Email belum terisi",
 									'valid_email' => "Format email salah"
 								));
-		// $this->form_validation->set_rules('domisili', 'Domisili', 'required', array( 'required' => "Domisili belum terisi" ));
-		// $this->form_validation->set_rules('alamat_asli', 'Alamat Asli', 'required', array( 'required' => "Alamat Asli belum terisi" ));
-		// $this->form_validation->set_rules('universitas', 'Universitas', 'required', array( 'required' => "Universitas belum ditambahkan" ));
-		// $this->form_validation->set_rules('jurusan', 'Jurusan', 'required', array( 'required' => "Jurusan belum ditambahkan" ));
-		// $this->form_validation->set_rules('jenjang', 'Jenjang', 'required', array( 'required' => "Jenjang belum ditambahkan" ));
-		// $this->form_validation->set_rules('no_ijazah', 'No Ijazah', 'required', array( 'required' => "No Ijazah belum ditambahkan" ));
-		// $this->form_validation->set_rules('ipk', 'IPK', 'required|less_than_equal_to[4]|decimal', 
-		// 					array( 
-		// 						'required' => "IPK belum ditambahkan",
-		// 						'less_than_equal_to' => "IPK tidak boleh melebihi 4",
-		// 						'decimal' => "IPK harus berupa decimal"
-		// 				 	));
-		// $this->form_validation->set_rules('tahun_lulus', 'Tahun Lulus', 'required|max_length[4]', 
-		// 					array( 
-		// 						'required' => "Tahun lulus belum ditambahkan", 
-		// 						'max_length' => "Tahun lulus maksimal 4 digit",
-		// 					));		
-		// $this->form_validation->set_rules('status_pengalaman', 'Status Pengalaman', 'required', array( 'required' => "Status pengalaman belum dipilih" ));
-		// $this->form_validation->set_rules('info_loker', 'Info Loker', 'required', array( 'required' => "Info Lowongan kerja belum dipilih" ));
+		$this->form_validation->set_rules('domisili', 'Domisili', 'required', array( 'required' => "Domisili belum terisi" ));
+		$this->form_validation->set_rules('alamat_asli', 'Alamat Asli', 'required', array( 'required' => "Alamat Asli belum terisi" ));
+		$this->form_validation->set_rules('universitas', 'Universitas', 'required', array( 'required' => "Universitas belum ditambahkan" ));
+		$this->form_validation->set_rules('jurusan', 'Jurusan', 'required', array( 'required' => "Jurusan belum ditambahkan" ));
+		$this->form_validation->set_rules('jenjang', 'Jenjang', 'required', array( 'required' => "Jenjang belum ditambahkan" ));
+		$this->form_validation->set_rules('no_ijazah', 'No Ijazah', 'required', array( 'required' => "No Ijazah belum ditambahkan" ));
+		$this->form_validation->set_rules('ipk', 'IPK', 'required|less_than_equal_to[4]|decimal', 
+							array( 
+								'required' => "IPK belum ditambahkan",
+								'less_than_equal_to' => "IPK tidak boleh melebihi 4",
+								'decimal' => "IPK harus berupa decimal"
+						 	));
+		$this->form_validation->set_rules('tahun_lulus', 'Tahun Lulus', 'required|max_length[4]', 
+							array( 
+								'required' => "Tahun lulus belum ditambahkan", 
+								'max_length' => "Tahun lulus maksimal 4 digit",
+							));		
+		$this->form_validation->set_rules('status_pengalaman', 'Status Pengalaman', 'required', array( 'required' => "Status pengalaman belum dipilih" ));
+		$this->form_validation->set_rules('info_loker', 'Info Loker', 'required', array( 'required' => "Info Lowongan kerja belum dipilih" ));
 		$this->form_validation->set_rules('g-recaptcha-response', 'Status Pengalaman', 'required', array( 'required' => "Verifikasi Captcha Gagal" ));
 
 		#endregion		

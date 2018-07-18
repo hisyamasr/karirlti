@@ -62,60 +62,60 @@ class DataPelamar_model extends CI_Model{
             'nama' => $data['nama'],
             'tempat_lahir' => $data['tempat_lahir'],
             'tanggal_lahir' => $data['tanggal_lahir'],
-            // 'umur' => $data['usia'],
-            // 'jenis_kelamin' => $data['jenis_kelamin'],
-            // 'agama' => $data['agama'],
-            // 'status_perkawinan' => $data['status_perkawinan'],
-            // 'foto_url' => $data['foto_url'],
-            // 'cv_url' => $data['cv_url'],
-            // 'no_handphone' => $data['no_handphone'],
+            'umur' => $data['usia'],
+            'jenis_kelamin' => $data['jenis_kelamin'],
+            'agama' => $data['agama'],
+            'status_perkawinan' => $data['status_perkawinan'],
+            'foto_url' => $data['foto_url'],
+            'cv_url' => $data['cv_url'],
+            'no_handphone' => $data['no_handphone'],
             'email' => $data['email'],
-            // 'domisili' => $data['domisili'],
-            // 'alamat_asli' => $data['alamat_asli'],
-            // 'status_pengalaman'=> $data['status_pengalaman'],
-            // 'pengalaman_kerja'  => $data['pengalaman_terakhir'],
-            // 'pengalaman_lainnya' => $data['pekerjaan_lainnya'],			
-            // 'info_loker' => $data['info_loker'],
+            'domisili' => $data['domisili'],
+            'alamat_asli' => $data['alamat_asli'],
+            'status_pengalaman'=> $data['status_pengalaman'],
+            'pengalaman_kerja'  => $data['pengalaman_terakhir'],
+            'pengalaman_lainnya' => $data['pekerjaan_lainnya'],			
+            'info_loker' => $data['info_loker'],
             'created_date' => date("Y-m-d H:i:sa")
         );
 
-        // $dataPendidikan = json_decode(stripslashes($data['data_pendidikan']));
-        // $insertDataPendidikan = array();
-        // if(count($dataPendidikan) > 0){
-        //     foreach($dataPendidikan as $row){
-        //         $obj = array(
-        //             'universitas' => $row->universitas,
-        //             'jurusan' => $row->jurusan,
-        //             'jenjang' => $row->jenjang,
-        //             'no_ijazah' => $row->noIjazah,
-        //             'tahun_lulus' => $row->tahunLulus,
-        //             'ipk' => $row->ipk,
-        //             'data_pelamar_id' => $idPelamar,
-        //             'created_date' => date("Y-m-d H:i:sa")
-        //         );
-        //         array_push($insertDataPendidikan, $obj);
-        //     }
-        // }
+        $dataPendidikan = json_decode(stripslashes($data['data_pendidikan']));
+        $insertDataPendidikan = array();
+        if(count($dataPendidikan) > 0){
+            foreach($dataPendidikan as $row){
+                $obj = array(
+                    'universitas' => $row->universitas,
+                    'jurusan' => $row->jurusan,
+                    'jenjang' => $row->jenjang,
+                    'no_ijazah' => $row->noIjazah,
+                    'tahun_lulus' => $row->tahunLulus,
+                    'ipk' => $row->ipk,
+                    'data_pelamar_id' => $idPelamar,
+                    'created_date' => date("Y-m-d H:i:sa")
+                );
+                array_push($insertDataPendidikan, $obj);
+            }
+        }
 
-        // $this->db->trans_begin();
-        // $this->db->insert('data_pelamar', $dataPelamar);
+        $this->db->trans_begin();
+        $this->db->insert('data_pelamar', $dataPelamar);
 
-        // if(count($dataPendidikan) > 0){
-        //     $this->db->insert_batch('data_pendidikan', $insertDataPendidikan);
-        // }
+        if(count($dataPendidikan) > 0){
+            $this->db->insert_batch('data_pendidikan', $insertDataPendidikan);
+        }
 
-        // if ($this->db->trans_status() === FALSE)
-        // {              
-        //     $this->db->trans_rollback();
-        //     $result = (object) [ 'status' => true, 'data' => $dataPelamar ];  
-        // }
-        // else
-        // {
-        //     $this->db->trans_commit();
-        //     $result = (object) [ 'status' => false, 'data' => $dataPelamar ]; 
-        // }  
-        $this->send_email($dataPelamar);
-        $result = (object) [ 'status' => true, 'data' => $dataPelamar ];
+        if ($this->db->trans_status() === FALSE)
+        {              
+            $this->db->trans_rollback();
+            $result = (object) [ 'status' => true, 'data' => $dataPelamar ];  
+        }
+        else
+        {
+            $this->db->trans_commit();
+            $result = (object) [ 'status' => false, 'data' => $dataPelamar ]; 
+        }  
+        // $this->send_email($dataPelamar);
+        // $result = (object) [ 'status' => true, 'data' => $dataPelamar ];
         return $result;
     }
 
