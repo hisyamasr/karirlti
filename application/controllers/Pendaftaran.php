@@ -249,9 +249,6 @@ class Pendaftaran extends CI_Controller {
 	public function test_email(){
 		$this->load->library('email');
 
-		// $config['protocol'] = 'sendmail';
-		// $config['mailpath'] = '/usr/sbin/sendmail';
-		// $config['charset'] = 'iso-8859-1';
 		$config['mailtype'] = "html";
 		$dataPelamar = [
 			'no_registrasi' => "etetste",
@@ -261,8 +258,6 @@ class Pendaftaran extends CI_Controller {
 			'tanggal_lahir' => '1990-07-26',
 			'email' => 'andiyuliandi26@gmail.com'
 		];
-
-
         
         $explode = explode("-", $dataPelamar['tanggal_lahir']);
 		$encodeParam = base64_encode($dataPelamar["no_registrasi"]."-".$dataPelamar["no_ktp"]);
@@ -285,7 +280,7 @@ class Pendaftaran extends CI_Controller {
 
 		$this->email->initialize($config);
 		//$this->email->clear();
-        $this->email->from('andienciel@gmail.com', 'Rekrutmen PT. Len Telekomunikasi Indonesia (LTI)');
+        $this->email->from('rekrutmen@len-telko.co.id', 'Rekrutmen PT. Len Telekomunikasi Indonesia (LTI)');
         $this->email->to($dataPelamar['email']);
 
         $this->email->subject('[Konfirmasi] - Rekrutmen PT. Len Telekomunikasi Indonesia (LTI)');

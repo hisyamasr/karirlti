@@ -155,35 +155,35 @@ class DataPelamar_model extends CI_Model{
         if ($this->db->trans_status() === FALSE)
         {              
             $this->db->trans_rollback();
-            $result = (object) [ 'status' => true, 'data' => $dataPelamar ];  
+            $result = (object) [ 'status' => false, 'data' => $dataPelamar ];  
         }
         else
         {
             $this->db->trans_commit();
-            $result = (object) [ 'status' => false, 'data' => $dataPelamar ]; 
+            $result = (object) [ 'status' => true, 'data' => $dataPelamar ]; 
+            $this->send_email($dataPelamar);
         }  
-        // $this->send_email($dataPelamar);
+        
         // $result = (object) [ 'status' => true, 'data' => $dataPelamar ];
         return $result;
     }
 
     private function send_email($dataPelamar){
         $this->load->library('email');
-        $config['mailtype'] = "html";
 
-        $this->email->initialize($config);
-
+		$config['mailtype'] = "html";
+        
         $explode = explode("-", $dataPelamar['tanggal_lahir']);
-
+		$encodeParam = base64_encode($dataPelamar["no_registrasi"]."-".$dataPelamar["no_ktp"]);
         $message = '<html><body><div style="text-align:center;"><div><h3>Konfirmasi Rekrutmen PT. Len Telekomunikasi Indonesia</h3></div>';
         $message .='<div><p class="card-text">Data Anda sudah tersimpan dalam sistem kami. Tahap selanjutnya akan diumumkan melalui e-mail pendaftar.</p>';
         $message .='<table class="table table-solid" style="width:40%; margin-left:40%;"><tbody>';
         $message .='<tr><th scope="row" style="width:35%; text-align:left;">No Registrasi</th><td style="width:3%;">:</td><td style="width:65%;  text-align:left;">'.$dataPelamar['no_registrasi'].'</td></tr>';
-        $message .='<tr><th scope="row" style="width:35%; text-align:left;">No KTP</th><td>:</td><td >'.$dataPelamar['no_ktp'].'</td></tr>';
-        $message .='<tr><th scope="row" style="width:35%; text-align:left;">Nama</th><td>:</td><td>'.$dataPelamar['nama'].'</td></tr>';
-        $message .='<tr><th scope="row" style="width:35%; text-align:left;">Tempat, Tanggal lahir</th><td>:</td><td>'.$dataPelamar['tempat_lahir'].','.$explode[2]."/".$explode[1]."/".$explode[0].'</td></tr>';
+        $message .='<tr><th scope="row" style="width:35%; text-align:left;">No KTP</th><td>:</td><td style="text-align:left;">'.$dataPelamar['no_ktp'].'</td></tr>';
+        $message .='<tr><th scope="row" style="width:35%; text-align:left;">Nama</th><td>:</td><td style="text-align:left;">'.$dataPelamar['nama'].'</td></tr>';
+        $message .='<tr><th scope="row" style="width:35%; text-align:left;">Tempat, Tanggal lahir</th><td>:</td><td style="text-align:left;">'.$dataPelamar['tempat_lahir'].', '.$explode[2]."/".$explode[1]."/".$explode[0].'</td></tr>';
         $message .='</tbody></table></div>';		
-        $message .='<div><a href="https://karir.len-telko.co.id" 
+        $message .='<div><a href="http://karir.len-telko.co.id/konfirmasi?r='.$encodeParam.'"
                     style="display: inline-block; font-weight: 400; text-align: center; white-space: nowrap; vertical-align: middle;border: 1px solid transparent;
                         padding: 0.375rem 0.75rem;font-size: 1rem;line-height: 1.5;border-radius: 0.25rem;
                         transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
@@ -192,13 +192,18 @@ class DataPelamar_model extends CI_Model{
                 </a></div>';
         $message .='</div></div></body></html>';
 
-        $this->email->from('andienciel@gmail.com', 'Rekrutmen PT. Len Telekomunikasi Indonesia (LTI)');
+		$this->email->initialize($config);
+		//$this->email->clear();
+        $this->email->from('rekrutmen@len-telko.co.id', 'Rekrutmen PT. Len Telekomunikasi Indonesia (LTI)');
         $this->email->to($dataPelamar['email']);
 
         $this->email->subject('[Konfirmasi] - Rekrutmen PT. Len Telekomunikasi Indonesia (LTI)');
-        $this->email->message($message);
+		$this->email->message($message);
 
-        $this->email->send();
-
+		if($this->email->send()){
+			return true;
+		}else{
+			return false;
+		}
     }
 }

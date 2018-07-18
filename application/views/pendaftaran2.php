@@ -203,10 +203,7 @@
 				alert("No KTP belum diisi.!");
 				$('#CVFilename').text("Upload CV");
 				$(this).empty();
-			}
-
-			//$('#ErrorCV').text(error);
-			//$('#CVFilename').text(fileName);			
+			}		
 		});
 
 		$('#Universitas2').change(function(){
@@ -232,7 +229,7 @@
 		$('#submitForm').click(function(){
 			flushError();
 			var serializedForm = $('#formPendaftaran').serialize();
-			//console.log(dataPendidikan);.
+			
 			serializedForm += "&data_pendidikan=" + JSON.stringify(dataPendidikan);
 			$.ajax({
 				url: '<?= base_url(); ?>pendaftaran/input_data_pelamar',
@@ -243,7 +240,6 @@
 					if (result.status == true) {
 						$.redirect('<?= base_url(); ?>pendaftaran/success', {'data': result.dataPelamar});
 						//console.log(result.errorList);
-						//messageShow("success", "<li>" + result.errorList + "</li>");
 					} else if (result.status == false) {
 						messageShow("error", "<li>" + result.errorList + "</li>");
 					}
