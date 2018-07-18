@@ -1,12 +1,21 @@
+<head>
+	<title>Form Pendaftaran</title>
+</head>
+<?= $script_captcha ?>
 <script>
+	var dataPendidikan = [];
 	function flushError(){
 		$('#divListErr').hide();
 		$('#listError').empty();
 	}
 
 	function deletePendidikan(obj) {
-        $(obj).closest('tr').remove();
-    }
+		$arr = $('.deleteDataPend'),
+		index = $arr.index(obj);
+		//console.log(dataPendidikan);
+		dataPendidikan.splice(index,1);		
+		$(obj).closest('tr').remove();
+	}
 
 	function  resetFormPendidikan(){
 		$('#Universitas2').val("");
@@ -23,10 +32,49 @@
 		$('#NoIjazah').val("");
 	}
 
+	function insertPendidikan(data){
+		// var formData = new FormData();
+		// formData.append("data", JSON.stringify(data));
+		$.ajax({
+			url: '<?= base_url(); ?>pendaftaran/insert_pendidikan',
+			type: "POST",
+			dataType: "json",
+			data: { data :JSON.stringify(data)},
+			success: function (result) {
+				if (result.status == true) {
+					// window.location = '<?= base_url(); ?>';
+					console.log(result.errorList);
+					//messageShow("success", "<li>" + result.errorList + "</li>");
+				} else if (result.status == false) {
+					messageShow("error", "<li>" + result.errorList + "</li>");
+					//console.log(result.errorList);
+				}
+			},
+			error: function (xhr, ajaxOptions, thrownError) {
+				console.log(xhr);
+				messageShow("error","<li>Error</li>");
+				if (xhr.status == '401') {
+					// window.location = '<?= base_url(); ?>';
+				}
+			}
+		});
+	}
+
+	function createPengalaman(){
+		
+		var perusahaan = $('#Perusahaan').val();
+		var jabatan = $('#PosisiJabatan').val();
+		var awalKerja = $('#AwalPeriodeKerja').val();
+		var akhirKerja = $('#AkhirPeriodeKerja').val();
+		var pengalamanKerja = 'Perusahaan: ' + perusahaan + '\n<br>Posisi/Jabatan: ' + jabatan + '\n<br>' +
+							'Periode Kerja: ' + awalKerja + ' s/d ' + akhirKerja;
+		$('#PengalamanTerakhir').val(pengalamanKerja);
+	}
+
 	$(document).ready(function(){
 		flushError();
 		$('.datepicker').datepicker({
-			format: "dd/mm/yyyy",
+			format: "yyyy-mm-dd",
 			language: "id",
 			todayHighlight: true,
 			autoclose: true
@@ -39,21 +87,27 @@
 			autoclose: true
 		});
 
+		$('.datepicker_periode').datepicker({
+			format: "mm/yyyy",
+			language: "id",
+			minViewMode: 1,
+			autoclose: true
+		});
+
 		$('#NoKTP').change(function(){
-			// $.ajax({
-			// 	url: '<?php //echo base_url(); ?>pendaftaran/check_ktp',
-			// 	type: "POST",
-			// 	dataType: "json",
-			// 	data: { noKTP: $(this).val() },
-			// 	success: function (data) {
-			// 		// console.log(data.errorList);
-			// 		if (data.status == false) {
-			// 			messageShow("error", "<li>" + data.errorList + "</li>");
-			// 		}else{
-			// 			flushError();
-			// 		}
-			// 	}
-			// })
+			$.ajax({
+				url: '<?= base_url(); ?>pendaftaran/check_ktp',
+				type: "POST",
+				dataType: "json",
+				data: { noKTP: $(this).val() },
+				success: function (data) {
+					if (data.status == false) {
+						messageShow("error", "<li>" + data.errorList + "</li>");
+					}else{
+						flushError();
+					}
+				}
+			})
 		});
 
 		$('#TanggalLahir').change(function(){
@@ -62,6 +116,7 @@
 			var tglLahir = new Date(explode[0], explode[1], explode[2]);
 			var selisih = today.getFullYear() - tglLahir.getFullYear();
 			$('#Usia').text("Usia Anda adalah : " + Math.floor(selisih) + " Tahun");
+			$('#UsiaPelamar').val(Math.floor(selisih));
 		});
 
 		$('#Foto').change(function(){
@@ -175,28 +230,23 @@
 		});
 
 		$('#submitForm').click(function(){
-			var serializedForm = $('#formPendaftaran').serializeArray();
-			console.log(serializedForm);
-			var formData = new FormData();
-			$.each(serializedForm, function(key, input){
-				formData.append(input.name, input.value);
-			});
+			flushError();
+			var serializedForm = $('#formPendaftaran').serialize();
+			//console.log(dataPendidikan);.
+			serializedForm += "&data_pendidikan=" + JSON.stringify(dataPendidikan);
 			$.ajax({
 				url: '<?= base_url(); ?>pendaftaran/input_data_pelamar',
 				type: "POST",
-				dataType: "JSON",
-				data: formData,
-				cache: false,
-				contentType: false,
-				processData: false,
+				dataType: "json",
+				data: serializedForm,
 				success: function (result) {
 					if (result.status == true) {
-						// window.location = '<?= base_url(); ?>';
-						console.log(result.errorList);
+						//window.location = '<?= base_url(); ?>/pendaftaran/success';
+						$.redirect('<?= base_url(); ?>pendaftaran/success', {'data': result.dataPelamar});
+						//console.log(result.errorList);
 						//messageShow("success", "<li>" + result.errorList + "</li>");
 					} else if (result.status == false) {
 						messageShow("error", "<li>" + result.errorList + "</li>");
-						//console.log(result.errorList);
 					}
 				},
 				error: function (xhr, ajaxOptions, thrownError) {
@@ -219,27 +269,53 @@
 			
 			//if(univ != "" && jurusan != "" && jenjang != "" && ipk != "" && tahunLulus != "" && noIjazah != "")
 			//{
+				dataPendidikan.push({
+					"universitas":univ,
+					"jurusan":jurusan,
+					"jenjang":jenjang,
+					"ipk":ipk,
+					"tahunLulus":tahunLulus,
+					"noIjazah":noIjazah
+				});
+
+				var index = $('#isiPendidikan').length + 1;
 				$('#isiPendidikan').append(
-					'<tr>'+
+					'<tr class="rowDataPendidikan">'+
 						'<td>'+ univ +'<input type="hidden" name="universitas" value="'+ univ +'"></td>' +
 						'<td>'+ jurusan +'<input type="hidden" name="jurusan" value="'+ jurusan +'"></td>' +
 						'<td>'+ jenjang +'<input type="hidden" name="jenjang" value="'+ jenjang +'"></td>' +
 						'<td>'+ ipk +'<input type="hidden" name="ipk" value="'+ ipk +'"></td>' +
 						'<td>'+ tahunLulus +'<input type="hidden" name="tahun_lulus" value="'+ tahunLulus +'"></td>' +
 						'<td>'+ noIjazah +'<input type="hidden" name="no_ijazah" value="'+ noIjazah +'"></td>' +
-						'<td class="text-center"><a type="button" class="fa fa-trash-alt fa-lg text-danger" onClick="deletePendidikan(this)"></a></td>' +
+						'<td class="text-center"><a type="button" class="fa fa-trash-alt fa-lg text-danger deleteDataPend" onClick="deletePendidikan(this)"></a></td>' +
 					'</tr>'
 				);
-
+				
 				resetFormPendidikan();
 			// }else{
 			// 	alert("Silahkan lengkapi data pendidikan Anda.!")
 			// }
 		});
-	});
+
+		$('input[name=status_pengalaman]').change(function(){
+			if($(this).val() == "Berpengalaman"){
+				$('#IsiPengalaman').show();
+			}else{
+				$('#IsiPengalaman').hide();
+				$('#PengalamanTerakhir').val("");
+				$('#Perusahaan').val("");
+				$('#PosisiJabatan').val("");
+				$('#AwalPeriodeKerja').val("");
+				$('#AkhirPeriodeKerja').val("");
+				$('#PekerjaanLainnya').val("");
+		
+			}
+		});
+		
+	});	
 </script>
 	<div id="container">
-	<form method="post" id="formPendaftaran" class="needs-validation" enctype="multipart/form-data">
+	<form method="post" id="formPendaftaran" class="needs-validation">
 		<div class="card bg-light ">
 			<h5 class="card-header">
 				Form Rekrutmen PT. Len Telekomunikasi Indonesia
@@ -260,7 +336,7 @@
 					</select>
 				</div>
 				
-				<!-- <div class="card text-white bg-dark mb-3 ml-3 mr-3" >
+				<div class="card text-white bg-dark mb-3 ml-3 mr-3" >
 					<div class="card-header">Personal</div>
 					<div class="card-body row">
 						<div class="col-md-6">
@@ -282,8 +358,9 @@
 
 							<div class="form-group col-md-5">
 								<label for="TanggalLahir">Tanggal Lahir</label>
-								<input class="form-control" type="date" name="tanggal_lahir" id="TanggalLahir">
+								<input class="form-control datepicker" type="text" name="tanggal_lahir" id="TanggalLahir">
 								<span id="Usia" class="text-muted"></span>
+								<input type="hidden" name="usia" id="UsiaPelamar">
 							</div>
 						</div>
 
@@ -324,9 +401,9 @@
 							</div>
 						</div>
 					</div>
-				</div> -->
+				</div>
 
-				<!-- <div class="card text-white bg-dark mb-3 ml-3 mr-3">
+				<div class="card text-white bg-dark mb-3 ml-3 mr-3">
 					<div class="card-header">Informasi Kontak</div>
 					<div class="card-body row">
 						<div class="col-md-3">
@@ -352,7 +429,7 @@
 							</div>
 						</div>						
 					</div>
-				</div> -->
+				</div>
 
 				<div class="card text-white bg-dark mb-3 ml-3 mr-3">
 					<div class="card-header">Informasi Pendidikan</div>
@@ -444,32 +521,64 @@
 									<th scope="col" class="text-center" style="width:5%">Action</th>
 								</tr>						
 							</thead>
-							<tbody id="isiPendidikan">
-								<!-- <tr>
-									<td>tes</td>
-									<td>test1</td>
-									<td>test</td>
-									<td>test</td>
-									<td>testes</td>
-									<td>est</td>
-									<td class="text-center">
-										<a type="button" class="fa fa-trash-alt fa-lg text-danger"></a>
-									</td>
-								</tr>
-								<tr>
-									<td>tes</td>
-									<td>test1</td>
-									<td>test</td>
-									<td>test</td>
-									<td>testes</td>
-									<td>est</td>
-								</tr> -->
-							</tbody>
+							<tbody id="isiPendidikan"></tbody>
 						</table>
 					</div>
 				</div>
 
-				<!-- <div class="card text-white bg-dark mb-3 ml-3 mr-3">
+				<div class="card text-white bg-dark mb-3 ml-3 mr-3">
+					<div class="card-header">Riwayat Pekerjaan</div>
+					<div class="form-group col-md-5 ml-3">
+						<label for="StatusPengalaman">Pengalaman Kerja</label><br>
+						<div class="custom-control custom-radio custom-control-inline">
+							<input type="radio" id="StatusPengalaman1" name="status_pengalaman" class="custom-control-input" value="Fresh Graduate" required>
+							<label class="custom-control-label" for="StatusPengalaman1">Fresh Graduate</label>
+						</div>
+						<div class="custom-control custom-radio custom-control-inline">
+							<input type="radio" id="StatusPengalaman2" name="status_pengalaman" class="custom-control-input" value="Berpengalaman" required>
+							<label class="custom-control-label" for="StatusPengalaman2">Berpengalaman</label>
+						</div>
+					</div>
+					<div class="card-body row" id="IsiPengalaman" style="display:none;">
+						<div class="col-md-4">
+							<h5 class="card-title ml-3">Pengalaman terakhir</h5>
+							<div class="form-group col-md-12">
+								<label for="Perusahaan">Perusahaan</label>
+								<input class="form-control" type="text" id="Perusahaan" onChange="createPengalaman()">
+							</div>
+
+							<div class="form-group col-md-12">
+								<label for="PosisiJabatan">Posisi atau Jabatan</label>
+								<input class="form-control" type="text" id="PosisiJabatan" onChange="createPengalaman()">
+							</div>
+
+							<div class="form-group col-md-12">								
+								<div class="row">
+									<div class="col">
+										<label for="Periode">Awal Periode Kerja</label>
+										<input class="form-control datepicker_periode" type="text" id="AwalPeriodeKerja" onChange="createPengalaman()">
+									</div>
+									<div class="col">
+										<label for="Periode">Akhir Periode Kerja</label>
+										<input class="form-control datepicker_periode" type="text" id="AkhirPeriodeKerja" onChange="createPengalaman()">
+									</div>
+								
+								</div>
+							</div>
+							<input type="hidden" name="pengalaman_terakhir" id="PengalamanTerakhir"> 
+						</div>
+						<div class="col-md-8">
+							<h5 class="card-title ml-3">Pengalaman Lainnya</h5>
+							
+							<div class="form-group col-md-12">
+								<textarea name="pekerjaan_lainnya" rows="8" class="form-control" id="PekerjaanLainnya"></textarea>
+								<span class="form-text text-white">*Setiap pekerjaan di pisahkan dengan ";"</span>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<div class="card text-white bg-dark mb-3 ml-3 mr-3">
 					<div class="card-header">Upload Dokumen</div>
 					<div class="card-body">
 						<div class="form-group col-md-8">	
@@ -477,7 +586,7 @@
 							<label class="custom-file-label" for="CV" id="CVFilename">Upload CV</label>							
 							<span class="form-text text-danger font-weight-bold" id="ErrorCV"></span>							
 							<span class="form-text text-white">
-								*CV dalam format .pdf dengan ukuran <= 2 MB serta dilengkapi dengan <b>Transkrip Nilai</b> dan <b>Ijazah</b>
+								*CV dalam format <b>.pdf</b> dengan ukuran <b><= 2 MB</b> serta dilengkapi dengan <b>Transkrip Nilai</b> dan <b>Ijazah</b>
 							</span>	
 							<input type="hidden" name="cv_url" id="CVUrl"/>
 						</div>
@@ -486,13 +595,16 @@
 							<input class="custom-file-input" type="file" id="Foto">
 							<label class="custom-file-label" for="Foto" id="FotoFilename">Upload Foto</label>
 							<span id="ErrorFoto" class="text-danger font-weight-bold"></span>
+							<span class="form-text text-white">
+								*Foto dalam format <b>.jpg</b> atau <b>.png</b> dengan ukuran <b><= 1 MB</b>
+							</span>	
 						</div>
 						<img id="ImageUploaded" height="130" width="90" src="" alt=""/>
 						<input type="hidden" name="foto_url" id="FotoUrl"/>
 					</div>
-				</div> -->
+				</div>
 				
-				<!-- <div class="form-group col-md-12 ml-2">
+				<div class="form-group col-md-12 ml-2">
 					<label for="InfoLoker" >Info Loker</label> <br>
 					<div class="custom-control custom-radio custom-control-inline">
 						<input type="radio" id="customRadioInline1" name="info_loker" class="custom-control-input" value="Website LTI">
@@ -506,9 +618,12 @@
 						<input type="radio" id="customRadioInline3" name="info_loker" class="custom-control-input" value="Teman">
 						<label class="custom-control-label" for="customRadioInline3">Teman</label>
 					</div>
-				</div> -->
-				<input type="hidden" name="test" value="test1">
-				<input type="hidden" name="test" value="test2">
+				</div>
+
+				<div class="form-group col-md-12 ml-2" style="padding-left:40%;">
+					<?= $captcha ?>
+				</div>					
+				
 			</div>
 			<div class="card-footer text-muted text-right">
 				<button type="button" class="btn btn-primary" id="submitForm">Simpan</button>

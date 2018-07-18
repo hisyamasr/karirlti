@@ -1,8 +1,8 @@
--- MySQL dump 10.13  Distrib 5.7.12, for Win64 (x86_64)
+-- MySQL dump 10.13  Distrib 5.7.17, for Win64 (x86_64)
 --
 -- Host: localhost    Database: lentelko_karir
 -- ------------------------------------------------------
--- Server version	5.5.5-10.1.9-MariaDB
+-- Server version	5.7.16-log
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -51,7 +51,7 @@ DROP TABLE IF EXISTS `data_pelamar`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `data_pelamar` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL,
   `no_registrasi` varchar(15) DEFAULT NULL,
   `no_ktp` varchar(16) NOT NULL,
   `nama` varchar(100) NOT NULL,
@@ -76,7 +76,7 @@ CREATE TABLE `data_pelamar` (
   `last_modified` datetime DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `no_registrasi_UNIQUE` (`no_registrasi`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -85,7 +85,6 @@ CREATE TABLE `data_pelamar` (
 
 LOCK TABLES `data_pelamar` WRITE;
 /*!40000 ALTER TABLE `data_pelamar` DISABLE KEYS */;
-INSERT INTO `data_pelamar` VALUES (1,'123','1234569874563216','ada ada saja','bidan','2001-10-01',50,'rahasia','Islam','12345','a@a.a','jalan domisili no.0000','sesuai domisili','aaaaaaaaaaaaaaaaaaaaaadaaaaaa','dsaaaaaaaaaaaaaadawwwwwwww','3DA','apa saja','bebas','tak berstatus','kawin','yang ngasih',NULL,NULL);
 /*!40000 ALTER TABLE `data_pelamar` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -108,9 +107,9 @@ CREATE TABLE `data_pendidikan` (
   `created_date` datetime DEFAULT NULL,
   `last_modified` datetime DEFAULT NULL,
   PRIMARY KEY (`id`),
-  KEY `Pendidikan_DataPelamar_idx` (`data_pelamar_id`),
-  CONSTRAINT `Pendidikan_DataPelamar` FOREIGN KEY (`data_pelamar_id`) REFERENCES `data_pelamar` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  KEY `Pendidikan_Pelamar_idx` (`data_pelamar_id`),
+  CONSTRAINT `Pendidikan_Pelamar` FOREIGN KEY (`data_pelamar_id`) REFERENCES `data_pelamar` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -139,9 +138,7 @@ CREATE TABLE `data_pengalamankerja` (
   `data_pelamar_id` int(11) NOT NULL,
   `created_date` datetime DEFAULT NULL,
   `last_modified` datetime DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `Pengalaman_Pelamar_idx` (`data_pelamar_id`),
-  CONSTRAINT `Pengalaman_Pelamar` FOREIGN KEY (`data_pelamar_id`) REFERENCES `data_pelamar` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -170,9 +167,7 @@ CREATE TABLE `data_sertifikasi` (
   `data_pelamar_id` int(11) NOT NULL,
   `created_date` datetime DEFAULT NULL,
   `last_modified` datetime DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `Sertifikasi_Pelamar_idx` (`data_pelamar_id`),
-  CONSTRAINT `Sertifikasi_Pelamar` FOREIGN KEY (`data_pelamar_id`) REFERENCES `data_pelamar` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -381,7 +376,7 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES (1,'127.0.0.1','administrator','$2a$07$SeBknntpZror9uyftVopmu61qg0ms8Qv1yV6FG.kQOSM.9QhmTo36','','admin@admin.com','',NULL,NULL,NULL,1268889823,1531475131,1,'Admin','istrator','ADMIN','0');
+INSERT INTO `users` VALUES (1,'127.0.0.1','administrator','$2a$07$SeBknntpZror9uyftVopmu61qg0ms8Qv1yV6FG.kQOSM.9QhmTo36','','admin@admin.com','',NULL,NULL,NULL,1268889823,1531813814,1,'Admin','istrator','ADMIN','0');
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -424,4 +419,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-07-17  0:10:04
+-- Dump completed on 2018-07-17 17:27:55
