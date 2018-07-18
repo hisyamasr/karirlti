@@ -106,12 +106,15 @@ class DataPelamar_model extends CI_Model{
         if ($this->db->trans_status() === FALSE)
         {              
             $this->db->trans_rollback();
-            return false;  
+            $result = (object) [ 'status' => true, 'data' => $dataPelamar ];  
         }
         else
         {
             $this->db->trans_commit();
-            return true;
-        }        
+            $result = (object) [ 'status' => false, 'data' => $dataPelamar ]; 
+        }  
+
+        //$result = (object) [ 'status' => true, 'data' => $dataPelamar ];
+        return $result;
     }
 }

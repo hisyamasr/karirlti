@@ -122,8 +122,16 @@ class Pendaftaran extends CI_Controller {
 				}
 				else
 				{
-					if($this->DataPelamar_model->insert_data($this->input->post())){
-						$data = [ 'status' => true, 'errorList' => "Penyimpanan data pelamar Berhasil" ];
+					$result = $this->DataPelamar_model->insert_data($this->input->post());
+					if($result->status){
+						$dataPelamar = array(
+							'NoReg' => $result->data['no_registrasi'],
+							'NoKTP' => $result->data['no_ktp'],
+							'Nama' => $result->data['nama'],
+							'TempatLahir' => $result->data['tempat_lahir'],
+							'TanggalLahir' => $result->data['tanggal_lahir']
+						);
+						$data = [ 'status' => true, 'errorList' => "Penyimpanan data pelamar Berhasil", 'dataPelamar' => $dataPelamar ];
 					}else{
 						$data = [ 'status' => false, 'errorList' => "Penyimpanan data pelamar Gagal" ];
 					}
@@ -200,7 +208,7 @@ class Pendaftaran extends CI_Controller {
 		$this->load->view('layouts/header');
 		if($today >= $openRekrut && $today <= $closedRekrut && $getSetting->status_rekrutmen) 
 		{
-			$this->load->view('successful_page');
+			$this->load->view('successful_page', $this->input->post());
 		}else{
 			$this->load->view('welcome_message');
 		}

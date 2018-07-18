@@ -241,8 +241,9 @@
 				data: serializedForm,
 				success: function (result) {
 					if (result.status == true) {
-						window.location = '<?= base_url(); ?>/pendaftaran/success';
-						console.log(result.errorList);
+						//window.location = '<?= base_url(); ?>/pendaftaran/success';
+						$.redirect('<?= base_url(); ?>pendaftaran/success', {'data': result.dataPelamar});
+						//console.log(result.errorList);
 						//messageShow("success", "<li>" + result.errorList + "</li>");
 					} else if (result.status == false) {
 						messageShow("error", "<li>" + result.errorList + "</li>");
