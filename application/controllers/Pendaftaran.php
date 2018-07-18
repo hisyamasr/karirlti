@@ -265,16 +265,16 @@ class Pendaftaran extends CI_Controller {
 
         
         $explode = explode("-", $dataPelamar['tanggal_lahir']);
-
+		$encodeParam = base64_encode($dataPelamar["no_registrasi"]."-".$dataPelamar["no_ktp"]);
         $message = '<html><body><div style="text-align:center;"><div><h3>Konfirmasi Rekrutmen PT. Len Telekomunikasi Indonesia</h3></div>';
         $message .='<div><p class="card-text">Data Anda sudah tersimpan dalam sistem kami. Tahap selanjutnya akan diumumkan melalui e-mail pendaftar.</p>';
         $message .='<table class="table table-solid" style="width:40%; margin-left:40%;"><tbody>';
         $message .='<tr><th scope="row" style="width:35%; text-align:left;">No Registrasi</th><td style="width:3%;">:</td><td style="width:65%;  text-align:left;">'.$dataPelamar['no_registrasi'].'</td></tr>';
-        $message .='<tr><th scope="row" style="width:35%; text-align:left;">No KTP</th><td>:</td><td >'.$dataPelamar['no_ktp'].'</td></tr>';
-        $message .='<tr><th scope="row" style="width:35%; text-align:left;">Nama</th><td>:</td><td>'.$dataPelamar['nama'].'</td></tr>';
-        $message .='<tr><th scope="row" style="width:35%; text-align:left;">Tempat, Tanggal lahir</th><td>:</td><td>'.$dataPelamar['tempat_lahir'].','.$explode[2]."/".$explode[1]."/".$explode[0].'</td></tr>';
+        $message .='<tr><th scope="row" style="width:35%; text-align:left;">No KTP</th><td>:</td><td style="text-align:left;">'.$dataPelamar['no_ktp'].'</td></tr>';
+        $message .='<tr><th scope="row" style="width:35%; text-align:left;">Nama</th><td>:</td><td style="text-align:left;">'.$dataPelamar['nama'].'</td></tr>';
+        $message .='<tr><th scope="row" style="width:35%; text-align:left;">Tempat, Tanggal lahir</th><td>:</td><td style="text-align:left;">'.$dataPelamar['tempat_lahir'].', '.$explode[2]."/".$explode[1]."/".$explode[0].'</td></tr>';
         $message .='</tbody></table></div>';		
-        $message .='<div><a href="https://karir.len-telko.co.id" 
+        $message .='<div><a href="http://karir.len-telko.co.id/konfirmasi?r='.$encodeParam.'"
                     style="display: inline-block; font-weight: 400; text-align: center; white-space: nowrap; vertical-align: middle;border: 1px solid transparent;
                         padding: 0.375rem 0.75rem;font-size: 1rem;line-height: 1.5;border-radius: 0.25rem;
                         transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
