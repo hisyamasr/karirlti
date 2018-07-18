@@ -33,7 +33,15 @@ class Auth extends CI_Controller
 		else if (!$this->ion_auth->is_admin()) // remove this elseif if you want to enable this for non-admins
 		{
 			// redirect them to the home page because they must be an administrator to view this
-			return show_error('You must be an administrator to view this page.');
+			$data['message'] = (validation_errors()) ? validation_errors() : $this->session->flashdata('message');
+
+			//list the users
+			$data['appsetting'] = $this->Appsetting_model->get_all_appsetting();
+			
+			$this->load->view('admin/header');
+			$this->load->view('admin/nav');
+			$this->load->view('admin/appsetting/main', $data);
+			$this->load->view('admin/footer');
 		}
 		else
 		{
@@ -46,8 +54,8 @@ class Auth extends CI_Controller
 			{
 				$this->data['users'][$k]->groups = $this->ion_auth->get_users_groups($user->id)->result();
 			}
-			$this->load->view('admin/header');
-			$this->load->view('admin/nav');
+			$this->load->view('admin/header', 'refresh');
+			$this->load->view('admin/nav_admin');
 			$this->load->view('auth/index', $this->data);
 			//$this->_render_page('auth' . DIRECTORY_SEPARATOR . 'index', $this->data);
 			$this->load->view('admin/footer');
@@ -420,7 +428,7 @@ class Auth extends CI_Controller
 			$this->data['csrf'] = $this->_get_csrf_nonce();
 			$this->data['user'] = $this->ion_auth->user($id)->row();
 			$this->load->view('admin/header');
-			$this->load->view('admin/nav');
+			$this->load->view('admin/nav_admin');
 			$this->_render_page('auth' . DIRECTORY_SEPARATOR . 'deactivate_user', $this->data);
 			$this->load->view('admin/footer');
 		}
@@ -555,7 +563,7 @@ class Auth extends CI_Controller
 				'value' => $this->form_validation->set_value('password_confirm'),
 			);
 			$this->load->view('admin/header');
-			$this->load->view('admin/nav');
+			$this->load->view('admin/nav_admin');
 			$this->_render_page('auth' . DIRECTORY_SEPARATOR . 'create_user', $this->data);
 			$this->load->view('admin/footer');
 		}
@@ -708,7 +716,7 @@ class Auth extends CI_Controller
 			'type' => 'password'
 		);
 		$this->load->view('admin/header');
-		$this->load->view('admin/nav');
+		$this->load->view('admin/nav_admin');
 		$this->_render_page('auth' . DIRECTORY_SEPARATOR . 'edit_user', $this->data);
 		$this->load->view('admin/footer');
 	}
@@ -758,7 +766,7 @@ class Auth extends CI_Controller
 				'value' => $this->form_validation->set_value('description'),
 			);
 			$this->load->view('admin/header');
-			$this->load->view('admin/nav');
+			$this->load->view('admin/nav_admin');
 			$this->_render_page('auth' . DIRECTORY_SEPARATOR . 'create_group', $this->data);
 			$this->load->view('admin/footer');
 		}
@@ -829,7 +837,7 @@ class Auth extends CI_Controller
 			'value' => $this->form_validation->set_value('group_description', $group->description),
 		);
 		$this->load->view('admin/header');
-		$this->load->view('admin/nav');
+		$this->load->view('admin/nav_admin');
 		$this->_render_page('auth' . DIRECTORY_SEPARATOR . 'edit_group', $this->data);
 		$this->load->view('admin/footer');
 	}

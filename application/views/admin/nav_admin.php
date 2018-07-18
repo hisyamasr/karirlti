@@ -27,29 +27,9 @@
                 <div class="sidebar-nav navbar-collapse" >
                     <ul class="nav" id="side-menu">
                         <li>
-                            <a href="<?php echo base_url(); ?>DataPelamar"><i class="fa fa-dashboard fa-fw"></i> Data Rekrutmen</a>
+                            <a href="<?php echo base_url(); ?>auth">User</a>
                         </li>
-                        <li>
-                            <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> Data Master<span class="fa arrow"></span></a>
-                            <ul class="nav nav-second-level">
-                                <li>
-                                    <a href="<?php echo base_url(); ?>AppSetting">AppSetting</a>
-                                </li>
-								<li>
-                                    <a href="<?php echo base_url(); ?>SetupInstansi">Instansi</a>
-                                </li>
-								<li>
-                                    <a href="<?php echo base_url(); ?>SetupJurusan">Jurusan</a>
-                                </li>
-								<li>
-                                    <a href="<?php echo base_url(); ?>SetupPendidikan">Pendidikan</a>
-                                </li>
-								<li>
-                                    <a href="<?php echo base_url(); ?>SetupPosisi">Posisi</a>
-                                </li>
-                            </ul>
-                            <!-- /.nav-second-level -->
-                        </li>
+                        
                         
                     </ul>
                 </div>
