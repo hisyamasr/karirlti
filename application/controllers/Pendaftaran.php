@@ -290,19 +290,14 @@ class Pendaftaran extends CI_Controller {
 
         $this->email->subject('[Konfirmasi] - Rekrutmen PT. Len Telekomunikasi Indonesia (LTI)');
 		$this->email->message($message);
-		
-		$this->email->send(FALSE);
 
-		// Will only print the email headers, excluding the message subject and body
-		//;
+		if($this->email->send()){
+			$data = [ 'status' => true, 'errorList' => $dataPelamar ];
+		}else{
+			$data = [ 'status' => false, 'errorList' => $dataPelamar ];
+		}
 
-		// if($this->email->send()){
-		// 	$data = [ 'status' => true, 'errorList' => $dataPelamar ];
-		// }else{
-		// 	$data = [ 'status' => $dataPelamar['email'], 'errorList' => $dataPelamar ];
-		// }
-
-		 echo json_encode($this->email->print_debugger(array('headers')));
+		 echo json_encode($data);
 	}
 }
 ?>
