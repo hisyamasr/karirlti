@@ -97,6 +97,35 @@ class DataPelamar_model extends CI_Model{
         return $noreg;
     }
 
+    public function get_data_by_ktp($noReg, $noKTP){
+        $filter = array('no_registrasi' => $noReg, 'no_ktp' => $noKTP, 'konfirmasi' => 0);
+
+        $this->db->select('*');
+        $this->db->from('data_pelamar');
+        $this->db->where($filter);
+        $query = $this->db->get();
+
+        if($query->num_rows() > 0){
+            $result = $query->result();
+        }else{
+            $result = null;
+        }
+        
+        return $result;
+    }
+
+    public function update_konfirmasi($noReg, $noKTP){
+        date_default_timezone_set('Asia/Jakarta');
+        $filter = array('no_registrasi' => $noReg, 'no_ktp' => $noKTP);
+
+        $this->db->where($filter);
+        $updated = array(
+            'konfirmasi' => 1,
+            'last_modified' => date("Y-m-d H:i:sa")
+        );
+        return $this->db->update('data_pelamar', $updated);
+    }
+
     public function insert_data($data){
         date_default_timezone_set('Asia/Jakarta');
 
@@ -170,11 +199,12 @@ class DataPelamar_model extends CI_Model{
 
     private function send_email($dataPelamar){
         $this->load->library('email');
+        $this->load->library('encryption');
 
 		$config['mailtype'] = "html";
         
         $explode = explode("-", $dataPelamar['tanggal_lahir']);
-		$encodeParam = base64_encode($dataPelamar["no_registrasi"]."-".$dataPelamar["no_ktp"]);
+		$encodeParam = urlencode($this->encryption->encrypt($dataPelamar["no_registrasi"].";".$dataPelamar["no_ktp"]));
         $message = '<html><body><div style="text-align:center;"><div><h3>Konfirmasi Rekrutmen PT. Len Telekomunikasi Indonesia</h3></div>';
         $message .='<div><p class="card-text">Data Anda sudah tersimpan dalam sistem kami. Tahap selanjutnya akan diumumkan melalui e-mail pendaftar.</p>';
         $message .='<table class="table table-solid" style="width:40%; margin-left:40%;"><tbody>';

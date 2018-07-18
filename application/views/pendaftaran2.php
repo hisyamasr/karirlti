@@ -32,34 +32,6 @@
 		$('#NoIjazah').val("");
 	}
 
-	function insertPendidikan(data){
-		// var formData = new FormData();
-		// formData.append("data", JSON.stringify(data));
-		$.ajax({
-			url: '<?= base_url(); ?>pendaftaran/insert_pendidikan',
-			type: "POST",
-			dataType: "json",
-			data: { data :JSON.stringify(data)},
-			success: function (result) {
-				if (result.status == true) {
-					// window.location = '<?= base_url(); ?>';
-					console.log(result.errorList);
-					//messageShow("success", "<li>" + result.errorList + "</li>");
-				} else if (result.status == false) {
-					messageShow("error", "<li>" + result.errorList + "</li>");
-					//console.log(result.errorList);
-				}
-			},
-			error: function (xhr, ajaxOptions, thrownError) {
-				console.log(xhr);
-				messageShow("error","<li>Error</li>");
-				if (xhr.status == '401') {
-					// window.location = '<?= base_url(); ?>';
-				}
-			}
-		});
-	}
-
 	function createPengalaman(){
 		
 		var perusahaan = $('#Perusahaan').val();
@@ -262,8 +234,8 @@
 			var tahunLulus = $('#TahunLulus').val();
 			var noIjazah = $('#NoIjazah').val();
 			
-			//if(univ != "" && jurusan != "" && jenjang != "" && ipk != "" && tahunLulus != "" && noIjazah != "")
-			//{
+			if(univ != "" && jurusan != "" && jenjang != "" && ipk != "" && tahunLulus != "" && noIjazah != "")
+			{
 				dataPendidikan.push({
 					"universitas":univ,
 					"jurusan":jurusan,
@@ -287,9 +259,9 @@
 				);
 				
 				resetFormPendidikan();
-			// }else{
-			// 	alert("Silahkan lengkapi data pendidikan Anda.!")
-			// }
+			}else{
+				alert("Silahkan lengkapi data pendidikan Anda.!")
+			}
 		});
 
 		$('input[name=status_pengalaman]').change(function(){

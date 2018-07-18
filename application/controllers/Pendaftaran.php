@@ -248,19 +248,20 @@ class Pendaftaran extends CI_Controller {
 
 	public function test_email(){
 		$this->load->library('email');
+        $this->load->library('encryption');
 
 		$config['mailtype'] = "html";
 		$dataPelamar = [
-			'no_registrasi' => "etetste",
-			'no_ktp' => "1234523543545",
-			'nama' => "Andi",
+			'no_registrasi' => "000001-SDM",
+			'no_ktp' => "1234569874563216",
+			'nama' => "Andi Yuliandi",
 			'tempat_lahir' => 'Bandung',
 			'tanggal_lahir' => '1990-07-26',
 			'email' => 'andiyuliandi26@gmail.com'
 		];
         
         $explode = explode("-", $dataPelamar['tanggal_lahir']);
-		$encodeParam = base64_encode($dataPelamar["no_registrasi"]."-".$dataPelamar["no_ktp"]);
+		$encodeParam = urlencode($this->encryption->encrypt($dataPelamar["no_registrasi"].";".$dataPelamar["no_ktp"]));
         $message = '<html><body><div style="text-align:center;"><div><h3>Konfirmasi Rekrutmen PT. Len Telekomunikasi Indonesia</h3></div>';
         $message .='<div><p class="card-text">Data Anda sudah tersimpan dalam sistem kami. Tahap selanjutnya akan diumumkan melalui e-mail pendaftar.</p>';
         $message .='<table class="table table-solid" style="width:40%; margin-left:40%;"><tbody>';
