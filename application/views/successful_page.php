@@ -24,18 +24,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 	}
 	</style>
 </head>
-	<!-- <div id="container" style="margin-bottom:58px;">
-		<h1>Rekrutment PT. Len Telekomunikasi Indonesia</h1>
-		<div id="body">
-			<div class="text-center">
-				<h3>Submit data lamaran berhasil, terima kasih telah mengisi data dengan sebenar-benarnya.</h3>
-			</div>
-		</div>
-	</div> -->
-
 	<div class="card text-center ml-5 mr-5">
 		<div class="card-header">
-			<h3>Rekrutment PT. Len Telekomunikasi Indonesia</h3>
+			<h3>Rekrutmen PT. Len Telekomunikasi Indonesia</h3>
 		</div>
 		<div class="card-body">
 			<i class="card-title fa fa-check-circle text-success" style="font-size:100px;"></i>
@@ -59,9 +50,12 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 						<td class="text-left" ><?= $data['Nama'] ?></td>
 					</tr>
 					<tr>
+					<?php
+						$explode = explode("-", $data['TanggalLahir']);
+					?>
 						<th scope="row" class="text-left">Tempat, Tanggal lahir</th>
 						<td>:</td>
-						<td class="text-left" ><?= $data['TempatLahir'] ?>, <?= $data['TanggalLahir'] ?></td>
+						<td class="text-left" ><?= $data['TempatLahir'] ?>, <?= $explode[2]."/".$explode[1]."/".$explode[0] ?></td>
 					</tr>
 				</tbody>
 			</table>

@@ -62,59 +62,95 @@ class DataPelamar_model extends CI_Model{
             'nama' => $data['nama'],
             'tempat_lahir' => $data['tempat_lahir'],
             'tanggal_lahir' => $data['tanggal_lahir'],
-            'umur' => $data['usia'],
-            'jenis_kelamin' => $data['jenis_kelamin'],
-            'agama' => $data['agama'],
-            'status_perkawinan' => $data['status_perkawinan'],
-            'foto_url' => $data['foto_url'],
-            'cv_url' => $data['cv_url'],
-            'no_handphone' => $data['no_handphone'],
+            // 'umur' => $data['usia'],
+            // 'jenis_kelamin' => $data['jenis_kelamin'],
+            // 'agama' => $data['agama'],
+            // 'status_perkawinan' => $data['status_perkawinan'],
+            // 'foto_url' => $data['foto_url'],
+            // 'cv_url' => $data['cv_url'],
+            // 'no_handphone' => $data['no_handphone'],
             'email' => $data['email'],
-            'domisili' => $data['domisili'],
-            'alamat_asli' => $data['alamat_asli'],
-            'status_pengalaman'=> $data['status_pengalaman'],
-            'pengalaman_kerja'  => $data['pengalaman_terakhir'],
-            'pengalaman_lainnya' => $data['pekerjaan_lainnya'],			
-            'info_loker' => $data['info_loker'],
+            // 'domisili' => $data['domisili'],
+            // 'alamat_asli' => $data['alamat_asli'],
+            // 'status_pengalaman'=> $data['status_pengalaman'],
+            // 'pengalaman_kerja'  => $data['pengalaman_terakhir'],
+            // 'pengalaman_lainnya' => $data['pekerjaan_lainnya'],			
+            // 'info_loker' => $data['info_loker'],
             'created_date' => date("Y-m-d H:i:sa")
         );
-        $dataPendidikan = json_decode(stripslashes($data['data_pendidikan']));
-        $insertDataPendidikan = array();
-        if(count($dataPendidikan) > 0){
-            foreach($dataPendidikan as $row){
-                $obj = array(
-                    'universitas' => $row->universitas,
-                    'jurusan' => $row->jurusan,
-                    'jenjang' => $row->jenjang,
-                    'no_ijazah' => $row->noIjazah,
-                    'tahun_lulus' => $row->tahunLulus,
-                    'ipk' => $row->ipk,
-                    'data_pelamar_id' => $idPelamar,
-                    'created_date' => date("Y-m-d H:i:sa")
-                );
-                array_push($insertDataPendidikan, $obj);
-            }
-        }
 
-        $this->db->trans_begin();
-        $this->db->insert('data_pelamar', $dataPelamar);
+        // $dataPendidikan = json_decode(stripslashes($data['data_pendidikan']));
+        // $insertDataPendidikan = array();
+        // if(count($dataPendidikan) > 0){
+        //     foreach($dataPendidikan as $row){
+        //         $obj = array(
+        //             'universitas' => $row->universitas,
+        //             'jurusan' => $row->jurusan,
+        //             'jenjang' => $row->jenjang,
+        //             'no_ijazah' => $row->noIjazah,
+        //             'tahun_lulus' => $row->tahunLulus,
+        //             'ipk' => $row->ipk,
+        //             'data_pelamar_id' => $idPelamar,
+        //             'created_date' => date("Y-m-d H:i:sa")
+        //         );
+        //         array_push($insertDataPendidikan, $obj);
+        //     }
+        // }
 
-        if(count($dataPendidikan) > 0){
-            $this->db->insert_batch('data_pendidikan', $insertDataPendidikan);
-        }
+        // $this->db->trans_begin();
+        // $this->db->insert('data_pelamar', $dataPelamar);
 
-        if ($this->db->trans_status() === FALSE)
-        {              
-            $this->db->trans_rollback();
-            $result = (object) [ 'status' => true, 'data' => $dataPelamar ];  
-        }
-        else
-        {
-            $this->db->trans_commit();
-            $result = (object) [ 'status' => false, 'data' => $dataPelamar ]; 
-        }  
+        // if(count($dataPendidikan) > 0){
+        //     $this->db->insert_batch('data_pendidikan', $insertDataPendidikan);
+        // }
 
-        //$result = (object) [ 'status' => true, 'data' => $dataPelamar ];
+        // if ($this->db->trans_status() === FALSE)
+        // {              
+        //     $this->db->trans_rollback();
+        //     $result = (object) [ 'status' => true, 'data' => $dataPelamar ];  
+        // }
+        // else
+        // {
+        //     $this->db->trans_commit();
+        //     $result = (object) [ 'status' => false, 'data' => $dataPelamar ]; 
+        // }  
+        $this->send_email($dataPelamar);
+        $result = (object) [ 'status' => true, 'data' => $dataPelamar ];
         return $result;
+    }
+
+    private function send_email($dataPelamar){
+        $this->load->library('email');
+        $config['mailtype'] = "html";
+
+        $this->email->initialize($config);
+
+        $explode = explode("-", $dataPelamar['tanggal_lahir']);
+
+        $message = '<html><body><div style="text-align:center;"><div><h3>Konfirmasi Rekrutmen PT. Len Telekomunikasi Indonesia</h3></div>';
+        $message .='<div><p class="card-text">Data Anda sudah tersimpan dalam sistem kami. Tahap selanjutnya akan diumumkan melalui e-mail pendaftar.</p>';
+        $message .='<table class="table table-solid" style="width:40%; margin-left:40%;"><tbody>';
+        $message .='<tr><th scope="row" style="width:35%; text-align:left;">No Registrasi</th><td style="width:3%;">:</td><td style="width:65%;  text-align:left;">'.$dataPelamar['no_registrasi'].'</td></tr>';
+        $message .='<tr><th scope="row" style="width:35%; text-align:left;">No KTP</th><td>:</td><td >'.$dataPelamar['no_ktp'].'</td></tr>';
+        $message .='<tr><th scope="row" style="width:35%; text-align:left;">Nama</th><td>:</td><td>'.$dataPelamar['nama'].'</td></tr>';
+        $message .='<tr><th scope="row" style="width:35%; text-align:left;">Tempat, Tanggal lahir</th><td>:</td><td>'.$dataPelamar['tempat_lahir'].','.$explode[2]."/".$explode[1]."/".$explode[0].'</td></tr>';
+        $message .='</tbody></table></div>';		
+        $message .='<div><a href="https://karir.len-telko.co.id" 
+                    style="display: inline-block; font-weight: 400; text-align: center; white-space: nowrap; vertical-align: middle;border: 1px solid transparent;
+                        padding: 0.375rem 0.75rem;font-size: 1rem;line-height: 1.5;border-radius: 0.25rem;
+                        transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+                        color: #fff; background-color: #007bff;border-color: #007bff; text-decoration:none; margin-top:10px;">
+                Konfirmasi
+                </a></div>';
+        $message .='</div></div></body></html>';
+
+        $this->email->from('andienciel@gmail.com', 'Rekrutmen PT. Len Telekomunikasi Indonesia (LTI)');
+        $this->email->to($dataPelamar['email']);
+
+        $this->email->subject('[Konfirmasi] - Rekrutmen PT. Len Telekomunikasi Indonesia (LTI)');
+        $this->email->message($message);
+
+        $this->email->send();
+
     }
 }

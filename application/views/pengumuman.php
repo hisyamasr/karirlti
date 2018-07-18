@@ -39,8 +39,36 @@
 		margin: 20px 0 0 0;
 	}
 	</style>
+	<script>
+		$(document).ready(function(){
+			$('#submitForm').click(function(){
+				$.ajax({
+					url: '<?= base_url(); ?>pendaftaran/test_email',
+					type: "POST",
+					dataType: "json",
+					success: function (result) {
+						if (result.status == true) {
+							//window.location = '<?= base_url(); ?>/pendaftaran/success';
+							//$.redirect('<?= base_url(); ?>pendaftaran/success', {'data': result.dataPelamar});
+							console.log(result.errorList);
+							//messageShow("success", "<li>" + result.errorList + "</li>");
+						} else if (result.status == false) {
+							messageShow("error", "<li>" + result.errorList + "</li>");
+						}
+					},
+					error: function (xhr, ajaxOptions, thrownError) {
+						console.log(xhr);
+						messageShow("error","<li>Error</li>");
+						if (xhr.status == '401') {
+							// window.location = '<?= base_url(); ?>';
+						}
+					}
+				});
+			});
+		});
+	</script>
 	<div id="container">
-		<h1>Selamat Datang di halaman Rekrutment PT. Len Telekomunikasi Indonesia</h1>
+		<h1>Selamat Datang di halaman Rekrutmen PT. Len Telekomunikasi Indonesia</h1>
 		<div id="body">
 			<code>PERSYARATAN UMUM <br>
 				<ol>
@@ -80,6 +108,7 @@
 		</div>
 		
 		<p class="footerbox">
+		<a class="btn btn-success" style="margin-top:10px; margin-bottom:10px;" id="submitForm">Test Email</a>
 			<a class="btn btn-primary" style="margin-top:10px; margin-bottom:10px;" href="pendaftaran">Apply Now</a>
 		</p>
 
