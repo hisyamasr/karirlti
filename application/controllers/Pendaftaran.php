@@ -53,93 +53,100 @@ class Pendaftaran extends CI_Controller {
 	}
 	
 	public function input_data_pelamar(){
-		$this->load->library('form_validation');
-		$isValid =  true;	
-		$error = array();	
+		try{
 
-		#region Validation Rules
-		$this->form_validation->set_rules('kode_posisi', 'Kode Posisi', 'required', array( 'required' => "Kode Posisi belum dipilih" ));
-		$this->form_validation->set_rules('no_ktp', 'No KTP', 'required|min_length[16]|max_length[16]|is_unique[data_pelamar.no_ktp]|numeric',
-									array(
-										'required' => "No KTP belum terisi",
-										'min_length' => "No KTP terdiri dari 16 digit angka",
-										'max_length' => "No KTP terdiri dari 16 digit angka",
-										'is_unique' => "No KTP sudah terdaftar",
-										'numeric' => "No KTP harus berupa angka"
-									));
-		$this->form_validation->set_rules('nama', 'Nama', 'required', array( 'required' => "Nama belum terisi" ));						
-		$this->form_validation->set_rules('tanggal_lahir', 'Tanggal Lahir', 'required', array( 'required' => "Tanggal Lahir belum terisi" ));
-		$this->form_validation->set_rules('tempat_lahir', 'Tempat Lahir', 'required', array( 'required' => "Tempat Lahir belum terisi" ));
-		$this->form_validation->set_rules('jenis_kelamin', 'Jenis Kelamin', 'required', array( 'required' => "Jenis Kelamin belum terisi" ));
-		$this->form_validation->set_rules('agama', 'Jenis Kelamin', 'required', array( 'required' => "Agama belum dipilih" ));
-		$this->form_validation->set_rules('status_perkawinan', 'Jenis Kelamin', 'required', array( 'required' => "Status perkawinan belum dipilih" ));
-		$this->form_validation->set_rules('foto_url', 'Foto', 'required', array( 'required' => "Silahkah Upload foto Anda" ));
-		$this->form_validation->set_rules('cv_url', 'CV', 'required', array( 'required' => "Silahkah Upload CV Anda" ));
-		$this->form_validation->set_rules('no_handphone', 'No HP', 'required|numeric',
-									array(
-										'required' => "No Handphone belum terisi",
-										'numeric' => "No Handphone harus berupa angka"
-									));
-		$this->form_validation->set_rules('email', 'Email', 'required|valid_email',
-								array(
-									'required' => "Email belum terisi",
-									'valid_email' => "Format email salah"
-								));
-		$this->form_validation->set_rules('domisili', 'Domisili', 'required', array( 'required' => "Domisili belum terisi" ));
-		$this->form_validation->set_rules('alamat_asli', 'Alamat Asli', 'required', array( 'required' => "Alamat Asli belum terisi" ));
-		$this->form_validation->set_rules('universitas', 'Universitas', 'required', array( 'required' => "Universitas belum ditambahkan" ));
-		$this->form_validation->set_rules('jurusan', 'Jurusan', 'required', array( 'required' => "Jurusan belum ditambahkan" ));
-		$this->form_validation->set_rules('jenjang', 'Jenjang', 'required', array( 'required' => "Jenjang belum ditambahkan" ));
-		$this->form_validation->set_rules('no_ijazah', 'No Ijazah', 'required', array( 'required' => "No Ijazah belum ditambahkan" ));
-		$this->form_validation->set_rules('ipk', 'IPK', 'required|less_than_equal_to[4]|decimal', 
-							array( 
-								'required' => "IPK belum ditambahkan",
-								'less_than_equal_to' => "IPK tidak boleh melebihi 4",
-								'decimal' => "IPK harus berupa decimal"
-						 	));
-		$this->form_validation->set_rules('tahun_lulus', 'Tahun Lulus', 'required|max_length[4]', 
-							array( 
-								'required' => "Tahun lulus belum ditambahkan", 
-								'max_length' => "Tahun lulus maksimal 4 digit",
-							));		
-		$this->form_validation->set_rules('status_pengalaman', 'Status Pengalaman', 'required', array( 'required' => "Status pengalaman belum dipilih" ));
-		$this->form_validation->set_rules('info_loker', 'Info Loker', 'required', array( 'required' => "Info Lowongan kerja belum dipilih" ));
-		$this->form_validation->set_rules('g-recaptcha-response', 'Status Pengalaman', 'required', array( 'required' => "Verifikasi Captcha Gagal" ));
-
-		#endregion		
-		$recaptcha = $this->input->post('g-recaptcha-response');
-        $response = $this->recaptcha->verifyResponse($recaptcha);
-
-		#region Action
-			if ($this->form_validation->run() == FALSE)
-			{
-				$data = [ 'status' => false, 'errorList' => validation_errors() ];
-			}else{
-
-				if (!isset($response['success']) || $response['success'] <> true)
-				{
-					$data = [ 'status' => false, 'errorList' => "Verifikasi Captcha Gagal, tunggu 5 menit untuk mengulangi." ];
-				}
-				else
-				{
-					$result = $this->DataPelamar_model->insert_data($this->input->post());
-					if($result->status){
-						$dataPelamar = array(
-							'NoReg' => $result->data['no_registrasi'],
-							'NoKTP' => $result->data['no_ktp'],
-							'Nama' => $result->data['nama'],
-							'TempatLahir' => $result->data['tempat_lahir'],
-							'TanggalLahir' => $result->data['tanggal_lahir']
-						);
-						$data = [ 'status' => true, 'errorList' => "Penyimpanan data pelamar Berhasil", 'dataPelamar' => $dataPelamar ];
-					}else{
-						$data = [ 'status' => false, 'errorList' => "Penyimpanan data pelamar Gagal" ];
-					}
-				}								
-			}
 		
-		#endregion
-		echo json_encode($data);
+			$this->load->library('form_validation');
+			$isValid =  true;	
+			$error = array();	
+
+			#region Validation Rules
+			$this->form_validation->set_rules('kode_posisi', 'Kode Posisi', 'required', array( 'required' => "Kode Posisi belum dipilih" ));
+			$this->form_validation->set_rules('no_ktp', 'No KTP', 'required|min_length[16]|max_length[16]|is_unique[data_pelamar.no_ktp]|numeric',
+										array(
+											'required' => "No KTP belum terisi",
+											'min_length' => "No KTP terdiri dari 16 digit angka",
+											'max_length' => "No KTP terdiri dari 16 digit angka",
+											'is_unique' => "No KTP sudah terdaftar",
+											'numeric' => "No KTP harus berupa angka"
+										));
+			$this->form_validation->set_rules('nama', 'Nama', 'required', array( 'required' => "Nama belum terisi" ));						
+			$this->form_validation->set_rules('tanggal_lahir', 'Tanggal Lahir', 'required', array( 'required' => "Tanggal Lahir belum terisi" ));
+			$this->form_validation->set_rules('tempat_lahir', 'Tempat Lahir', 'required', array( 'required' => "Tempat Lahir belum terisi" ));
+			$this->form_validation->set_rules('jenis_kelamin', 'Jenis Kelamin', 'required', array( 'required' => "Jenis Kelamin belum terisi" ));
+			$this->form_validation->set_rules('agama', 'Jenis Kelamin', 'required', array( 'required' => "Agama belum dipilih" ));
+			$this->form_validation->set_rules('status_perkawinan', 'Jenis Kelamin', 'required', array( 'required' => "Status perkawinan belum dipilih" ));
+			$this->form_validation->set_rules('foto_url', 'Foto', 'required', array( 'required' => "Silahkah Upload foto Anda" ));
+			$this->form_validation->set_rules('cv_url', 'CV', 'required', array( 'required' => "Silahkah Upload CV Anda" ));
+			$this->form_validation->set_rules('no_handphone', 'No HP', 'required|numeric',
+										array(
+											'required' => "No Handphone belum terisi",
+											'numeric' => "No Handphone harus berupa angka"
+										));
+			$this->form_validation->set_rules('email', 'Email', 'required|valid_email',
+									array(
+										'required' => "Email belum terisi",
+										'valid_email' => "Format email salah"
+									));
+			$this->form_validation->set_rules('domisili', 'Domisili', 'required', array( 'required' => "Domisili belum terisi" ));
+			$this->form_validation->set_rules('alamat_asli', 'Alamat Asli', 'required', array( 'required' => "Alamat Asli belum terisi" ));
+			$this->form_validation->set_rules('universitas', 'Universitas', 'required', array( 'required' => "Universitas belum ditambahkan" ));
+			$this->form_validation->set_rules('jurusan', 'Jurusan', 'required', array( 'required' => "Jurusan belum ditambahkan" ));
+			$this->form_validation->set_rules('jenjang', 'Jenjang', 'required', array( 'required' => "Jenjang belum ditambahkan" ));
+			$this->form_validation->set_rules('no_ijazah', 'No Ijazah', 'required', array( 'required' => "No Ijazah belum ditambahkan" ));
+			$this->form_validation->set_rules('ipk', 'IPK', 'required|less_than_equal_to[4]|decimal', 
+								array( 
+									'required' => "IPK belum ditambahkan",
+									'less_than_equal_to' => "IPK tidak boleh melebihi 4",
+									'decimal' => "IPK harus berupa decimal"
+								));
+			$this->form_validation->set_rules('tahun_lulus', 'Tahun Lulus', 'required|max_length[4]', 
+								array( 
+									'required' => "Tahun lulus belum ditambahkan", 
+									'max_length' => "Tahun lulus maksimal 4 digit",
+								));		
+			$this->form_validation->set_rules('status_pengalaman', 'Status Pengalaman', 'required', array( 'required' => "Status pengalaman belum dipilih" ));
+			$this->form_validation->set_rules('info_loker', 'Info Loker', 'required', array( 'required' => "Info Lowongan kerja belum dipilih" ));
+			$this->form_validation->set_rules('g-recaptcha-response', 'Status Pengalaman', 'required', array( 'required' => "Verifikasi Captcha Gagal" ));
+
+			#endregion		
+			$recaptcha = $this->input->post('g-recaptcha-response');
+			$response = $this->recaptcha->verifyResponse($recaptcha);
+
+			#region Action
+				if ($this->form_validation->run() == FALSE)
+				{
+					$data = [ 'status' => false, 'errorList' => validation_errors() ];
+				}else{
+
+					if (!isset($response['success']) || $response['success'] <> true)
+					{
+						$data = [ 'status' => false, 'errorList' => "Verifikasi Captcha Gagal, tunggu 5 menit untuk mengulangi." ];
+					}
+					else
+					{
+						$result = $this->DataPelamar_model->insert_data($this->input->post());
+						if($result->status){
+							$dataPelamar = array(
+								'NoReg' => $result->data['no_registrasi'],
+								'NoKTP' => $result->data['no_ktp'],
+								'Nama' => $result->data['nama'],
+								'TempatLahir' => $result->data['tempat_lahir'],
+								'TanggalLahir' => $result->data['tanggal_lahir']
+							);
+							$data = [ 'status' => true, 'errorList' => "Penyimpanan data pelamar Berhasil", 'dataPelamar' => $dataPelamar ];
+						}else{
+							$data = [ 'status' => false, 'errorList' => "Penyimpanan data pelamar Gagal" ];
+						}
+					}								
+				}
+			
+			#endregion
+			echo json_encode($data);
+		}catch(Exception $e){
+			$data = [ 'status' => false, 'errorList' => $e->getMessage() ];
+			echo json_encode($data);
+		}
 	}
 
 	public function upload_foto(){
@@ -241,10 +248,22 @@ class Pendaftaran extends CI_Controller {
 
 	public function test_email(){
 		$this->load->library('email');
-        $config['mailtype'] = "html";
 
-        $this->email->initialize($config);
+		// $config['protocol'] = 'sendmail';
+		// $config['mailpath'] = '/usr/sbin/sendmail';
+		// $config['charset'] = 'iso-8859-1';
+		$config['mailtype'] = "html";
+		$dataPelamar = [
+			'no_registrasi' => "etetste",
+			'no_ktp' => "1234523543545",
+			'nama' => "Andi",
+			'tempat_lahir' => 'Bandung',
+			'tanggal_lahir' => '1990-07-26',
+			'email' => 'andiyuliandi26@gmail.com'
+		];
 
+
+        
         $explode = explode("-", $dataPelamar['tanggal_lahir']);
 
         $message = '<html><body><div style="text-align:center;"><div><h3>Konfirmasi Rekrutmen PT. Len Telekomunikasi Indonesia</h3></div>';
@@ -264,18 +283,26 @@ class Pendaftaran extends CI_Controller {
                 </a></div>';
         $message .='</div></div></body></html>';
 
+		$this->email->initialize($config);
+		//$this->email->clear();
         $this->email->from('andienciel@gmail.com', 'Rekrutmen PT. Len Telekomunikasi Indonesia (LTI)');
         $this->email->to($dataPelamar['email']);
 
         $this->email->subject('[Konfirmasi] - Rekrutmen PT. Len Telekomunikasi Indonesia (LTI)');
-        $this->email->message($message);
+		$this->email->message($message);
+		
+		$this->email->send(FALSE);
 
-		if($this->email->send()){
-			$data = [ 'status' => true, 'errorList' => $dataPelamar ];
-		}else{
-			$data = [ 'status' => false, 'errorList' => $dataPelamar ];
-		}
-		echo json_encode($data);
+		// Will only print the email headers, excluding the message subject and body
+		//;
+
+		// if($this->email->send()){
+		// 	$data = [ 'status' => true, 'errorList' => $dataPelamar ];
+		// }else{
+		// 	$data = [ 'status' => $dataPelamar['email'], 'errorList' => $dataPelamar ];
+		// }
+
+		 echo json_encode($this->email->print_debugger(array('headers')));
 	}
 }
 ?>
