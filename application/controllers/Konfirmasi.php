@@ -22,7 +22,7 @@ class Konfirmasi extends CI_Controller {
 
 		if($this->input->get('r') !== null){
 			$getParam = $this->input->get('r');
-			$getDecrypted = $this->encryption->decrypt(urldecode($getParam));
+			$getDecrypted = $this->encryption->decrypt($getParam);
 			//echo $getDecrypted;
 			//var_dump(urldecode($getParam));
 			$explode = explode(";", $getDecrypted);
@@ -39,11 +39,6 @@ class Konfirmasi extends CI_Controller {
 			$this->load->view('welcome_message');
 		}
 		$this->load->view('layouts/footer');
-
-		
-		$test = urlencode($this->encryption->encrypt('000001-SDM;1234569874563216'));
-		//echo $test;
-		 //$this->encryption->decrypt("347eeaf8564b846f557934f9454233a5c1bda1db186ee5d4740323912356f9f77f09320bbb6c4c259e50762ededc3f820afe4b170baf4edb097795e4b1a19b87uLMNM7iOm/UDGrdRx3M5M+fS1EjKnXFTABPMCqO4nHC/n+XtPPAYODnWH1SKx075");
 	}
 }
 ?>

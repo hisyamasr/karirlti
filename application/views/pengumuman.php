@@ -112,5 +112,4 @@
 			<a class="btn btn-primary" style="margin-top:10px; margin-bottom:10px;" href="pendaftaran">Apply Now</a>
 		</p>
 
-		<!-- <p class="footerbox">Page rendered in <strong>{elapsed_time}</strong> seconds. <?php echo  (ENVIRONMENT === 'development') ?  'CodeIgniter Version <strong>' . CI_VERSION . '</strong>' : '' ?></p> -->
 	</div>
