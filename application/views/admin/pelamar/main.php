@@ -80,7 +80,7 @@
 								<?php foreach($pelamar as $each_pelamar): ?>
 									<tr>
 										<td><?php echo $no; ?></td>
-										<td><img src="<?php echo base_url(); echo 'assets/documents/foto/'.$each_pelamar['foto_url']; ?>"</td>
+										<td><img src="<?php echo base_url(); echo 'assets/documents/foto/'.$each_pelamar['foto_url']; ?>"></td>
 										<td><?php echo $each_pelamar['kode_posisi']; ?></td>
 										<td><?php echo $each_pelamar['no_registrasi']; ?></td>
 										<td><?php echo $each_pelamar['no_ktp']; ?></td>
