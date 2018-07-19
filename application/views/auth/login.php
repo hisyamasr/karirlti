@@ -24,7 +24,7 @@
   					<hr>
   					<hr class="short">
   				</div>
-				<div id="infoMessage"><?php echo $message;?></div>
+				<div id="infoMessage" class="btn btn-outline btn-warning"><?php echo $message;?></div>
 				<div class="col-3">
 					<?php echo form_open("auth/login");?>
 						  <p>
@@ -39,8 +39,6 @@
 							<?php echo form_checkbox('remember', '1', FALSE, 'id="remember" style="margin:4px -59px 0;"' );?>Remember Me <br>
 						  </p>
 							<p></p>
-<p><a href="forgot_password"><?php echo lang('login_forgot_password');?></a></p>
-					
 				</div>
 				
   			</div>

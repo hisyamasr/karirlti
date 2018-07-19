@@ -3,6 +3,26 @@
 		$('#divListErr').hide();
 		$('#listError').empty();
 	}
+
+	function deletePendidikan(obj) {
+        $(obj).closest('tr').remove();
+    }
+
+	function  resetFormPendidikan(){
+		$('#Universitas2').val("");
+		$('#Universitas').val("");
+		$('#Universitas').attr("type", "hidden");
+
+		$('#Jurusan2').val("");
+		$('#Jurusan').val("");
+		$('#Jurusan').attr("type", "hidden");
+
+		$('#Jenjang').val("");
+		$('#IPK').val("");
+		$('#TahunLulus').val("");
+		$('#NoIjazah').val("");
+	}
+
 	$(document).ready(function(){
 		flushError();
 		$('.datepicker').datepicker({
@@ -101,6 +121,29 @@
 				$('#Jurusan').val($(this).val());
 			}
 		});
+
+		$('#btnTambahPendidikan').click(function(){
+			var univ = $('#Universitas').val();
+			var jurusan = $('#Jurusan').val();
+			var jenjang = $('#Jenjang').val();
+			var ipk = $('#IPK').val();
+			var tahunLulus = $('#TahunLulus').val();
+			var noIjazah = $('#NoIjazah').val();
+
+			$('#isiPendidikan').append(
+				'<tr>'+
+					'<td>'+univ+'</td>' +
+					'<td>'+jurusan+'</td>' +
+					'<td>'+jenjang+'</td>' +
+					'<td>'+ipk+'</td>' +
+					'<td>'+tahunLulus+'</td>' +
+					'<td>'+noIjazah+'</td>' +
+					'<td class="text-center"><a type="button" class="fa fa-trash-alt fa-lg text-danger" onClick="deletePendidikan(this)"></a></td>' +
+				'</tr>'
+			);
+
+			resetFormPendidikan();
+		});
 	});
 </script>
 	<div id="container">
@@ -186,12 +229,6 @@
 									<option value="Cerai Hidup">Cerai Hidup</option>
 									<option value="Cerai Mati">Cerai Mati</option>
 								</select>
-							</div>
-
-							<div class="form-group col-md-11 ml-3 mt-4">
-								<input class="custom-file-input" type="file" name="foto" id="Foto" required>
-								<label class="custom-file-label" for="Foto" id="FotoFilename">Cari Foto</label>
-								<span id="ErrorFoto" class="text-danger font-weight-bold"></span>
 							</div>
 						</div>
 					</div>
@@ -281,16 +318,61 @@
 
 							<div class="form-group col-md-1">
 								<label for="IPK">IPK</label>
-								<input class="form-control" type="text" name="ipk" id="IPK" required>
+								<input class="form-control" type="text" name="ipk" id="IPK">
 							</div>
 
 							<div class="form-group col-md-2">
 								<label for="TahunLulus">Tahun Lulus</label>
 								<input class="form-control datepicker_tahun col-md-5" type="text" name="tahun_lulus" id="TahunLulus">
 							</div>
+
+							<div class="form-group col-md-3">
+								<label for="NoIjazah">No Ijazah</label>
+								<input class="form-control col-md-12" type="text" name="tahun_lulus" id="NoIjazah">
+							</div>
+							<div class="form-group col-md-2">
+								<label for="btnTambahPendidikan"> &nbsp; </label>
+								<button class="btn btn-success mt-4" type="button" id="btnTambahPendidikan"><i class="fa fa-plus-square"></i> Tambah</button>
+							</div>
 						</div>
 
 						
+					</div>
+					<div class="card-footer">
+						<table class="table table-striped table-bordered table-hover">
+							<thead class="thead-light">
+								<tr>
+									<th scope="col" class="text-center" style="width:30%">Universitas</th>
+									<th scope="col" class="text-center" style="width:25%">Jurusan</th>
+									<th scope="col" class="text-center" style="width:10%">Jenjang</th>
+									<th scope="col" class="text-center" style="width:8%">IPK</th>
+									<th scope="col" class="text-center" style="width:10%">Tahun Lulus</th>
+									<th scope="col" class="text-center" style="width:10%">No Ijazah</th>
+									<th scope="col" class="text-center" style="width:5%">Action</th>
+								</tr>						
+							</thead>
+							<tbody id="isiPendidikan">
+								<!-- <tr>
+									<td>tes</td>
+									<td>test1</td>
+									<td>test</td>
+									<td>test</td>
+									<td>testes</td>
+									<td>est</td>
+									<td class="text-center">
+										<a type="button" class="fa fa-trash-alt fa-lg text-danger"></a>
+									</td>
+								</tr>
+								<tr>
+									<td>tes</td>
+									<td>test1</td>
+									<td>test</td>
+									<td>test</td>
+									<td>testes</td>
+									<td>est</td>
+								</tr> -->
+							</tbody>
+						</table>
 					</div>
 				</div>
 							
@@ -336,13 +418,36 @@
 						</div>
 						<div class="col-md-8">
 							<h5 class="card-title ml-3">Pengalaman Lainnya</h5>
+							
 							<div class="form-group col-md-12">
 								<textarea name="pekerjaan_lainnya" rows="8" class="form-control" id="PekerjaanLainnya"></textarea>
+								<span class="form-text text-white">*Setiap pekerjaan di pisahkan dengan ";"</span>
 							</div>
 						</div>
 					</div>
+				</div>					
+				
+				<div class="card text-white bg-dark mb-3 ml-3 mr-3">
+					<div class="card-header">Upload Dokumen</div>
+					<div class="card-body">
+						<div class="form-group col-md-8">
+							<input class="custom-file-input" type="file" name="cv_url" id="CV" required>
+							<label class="custom-file-label" for="CV" id="CVFilename">Upload CV</label>
+							<small class="form-text text-danger" id="ErrorCV"></small>	
+							<span class="form-text text-white">
+								*CV dalam format .pdf dengan ukuran <= 2 MB serta dilengkapi dengan <b>Transkrip Nilai</b> dan <b>Ijazah</b>
+							</span>	
+						</div>
+
+						<div class="form-group col-md-5">
+							<input class="custom-file-input" type="file" name="foto" id="Foto" required>
+							<label class="custom-file-label" for="Foto" id="FotoFilename">Upload Foto</label>
+							<span id="ErrorFoto" class="text-danger font-weight-bold"></span>
+						</div>
+
+					</div>
 				</div>
-							
+				
 				<div class="form-group col-md-12 ml-2">
 					<label for="InfoLoker" >Info Loker</label> <br>
 					<div class="custom-control custom-radio custom-control-inline">
@@ -358,15 +463,6 @@
 						<label class="custom-control-label" for="customRadioInline3">Teman</label>
 					</div>
 				</div>
-	
-				<div class="row ml-4 mt-4">
-					<div class="form-group col-md-5">
-						<input class="custom-file-input" type="file" name="cv_url" id="CV" required>
-						<label class="custom-file-label" for="CV" id="CVFilename">Upload CV</label>
-						<small class="form-text text-danger" id="ErrorCV"></small>
-					</div>			
-				</div>
-				
 			</div>
 			<div class="card-footer text-muted text-right">
 				<button type="submit" class="btn btn-primary">Simpan</button>

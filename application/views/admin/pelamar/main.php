@@ -1,3 +1,18 @@
+<?php
+	function generatePengalaman($pid){
+		$getPengalaman = "SELECT * from data_pengalamankerja where data_pelamar_id = '".$pid."'";
+		$query = mysqli_query($getPengalaman);
+		$no = 1;
+		while($get = mysqli_fetch_array($query)){
+			if($get[1] != null){
+			$return .= $no.". ".$get[1]." \n\r Perusahaan : ".$get[2].",\n\r Jabatan : ".$get[3]."\n\r Awal Kerja : ".$get[4].",\n\r Akhir Kerja : ".$get[5].",\n\r Deskripsi : ".$get[7]."<br style='mso-data-placement:same-cell;'>";
+			$no++;
+			}
+		}
+		
+		return $return;
+	}
+?>
 <div id="page-wrapper">
 	<div class="row">
         <div class="col-lg-12">
@@ -49,44 +64,75 @@
 									<th>Email</th>
 									<th>Domisili</th>
 									<th>Alamat Asli</th>
-									<th>Universitas</th>
-									<th>Jurusan</th>
-									<th>Jenjang</th>
+									<th>Status Perkawinan</th>
+									<th>Pendidikan</th>
 									<th>Pengalaman Kerja Terakhir</th>
+									<th>Sertifikasi</th>
 									<th>Pengalaman Lainnya</th>
 									<th>Status Pengalaman</th>
-									<th>Status Perkawinan</th>
+									
 									<th>Info Loker</th>
 									<th>CV</th>
 								</tr>
 							</thead>
 							<tbody>
 								<?php $no = 1;?>
-								<?php foreach($pelamar as $each_pendidikan): ?>
+								<?php foreach($pelamar as $each_pelamar): ?>
 									<tr>
 										<td><?php echo $no; ?></td>
-										<td><?php echo $each_pendidikan['foto_url']; ?></td>
-										<td><?php echo $each_pendidikan['kode_posisi']; ?></td>
-										<td><?php echo $each_pendidikan['no_registrasi']; ?></td>
-										<td><?php echo $each_pendidikan['no_ktp']; ?></td>
-										<td><?php echo $each_pendidikan['nama']; ?></td>
-										<td><?php echo $each_pendidikan['tempat_lahir']; ?>, <?php echo $each_pendidikan['tanggal_lahir'];?></td>
-										<td><?php echo $each_pendidikan['umur']; ?></td>
-										<td><?php echo $each_pendidikan['jenis_kelamin']; ?></td>
-										<td><?php echo $each_pendidikan['agama']; ?></td>
-										<td><?php echo $each_pendidikan['no_handphone']; ?></td>
-										<td><?php echo $each_pendidikan['email']; ?></td>
-										<td><?php echo $each_pendidikan['domisili']; ?></td>
-										<td><?php echo $each_pendidikan['alamat_asli']; ?></td>
-										<td><?php echo $each_pendidikan['universitas']; ?></td>
-										<td><?php echo $each_pendidikan['jurusan']; ?></td>
-										<td><?php echo $each_pendidikan['jenjang']; ?></td>
-										<td><?php echo $each_pendidikan['pengalaman_kerja']; ?></td>
-										<td><?php echo $each_pendidikan['pengalaman_lainnya']; ?></td>
-										<td><?php echo $each_pendidikan['status_pengalaman']; ?></td>
-										<td><?php echo $each_pendidikan['status_perkawinan']; ?></td>
-										<td><?php echo $each_pendidikan['info_loker']; ?></td>
-										<td><?php echo $each_pendidikan['cv_url']; ?></td>
+										<td><img src="<?php echo base_url(); echo 'assets/documents/foto/'.$each_pelamar['foto_url']; ?>"</td>
+										<td><?php echo $each_pelamar['kode_posisi']; ?></td>
+										<td><?php echo $each_pelamar['no_registrasi']; ?></td>
+										<td><?php echo $each_pelamar['no_ktp']; ?></td>
+										<td><?php echo $each_pelamar['nama']; ?></td>
+										<td><?php echo $each_pelamar['tempat_lahir']; ?>, <?php echo $each_pelamar['tanggal_lahir'];?></td>
+										<td><?php echo $each_pelamar['umur']; ?></td>
+										<td><?php echo $each_pelamar['jenis_kelamin']; ?></td>
+										<td><?php echo $each_pelamar['agama']; ?></td>
+										<td><?php echo $each_pelamar['no_handphone']; ?></td>
+										<td><?php echo $each_pelamar['email']; ?></td>
+										<td><?php echo $each_pelamar['domisili']; ?></td>
+										<td><?php echo $each_pelamar['alamat_asli']; ?></td>
+										<td><?php echo $each_pelamar['status_perkawinan']; ?></td>
+										<td>
+										<?php $i = 1;?>
+										<?php foreach($pendidikan as $each_pendidikan): ?>
+											<b>No.</b><?php echo $i; ?></br>
+											<b>Universitas :</b><?php echo $each_pendidikan['universitas']; ?></br>
+											<b>Jurusan :</b><?php echo $each_pendidikan['jurusan']; ?></br>
+											<b>Jenjang :</b><?php echo $each_pendidikan['jenjang']; ?></br>
+											<b>IPK :</b><?php echo $each_pendidikan['ipk']; ?></br>
+											<b>Tahun Lulus :</b><?php echo $each_pendidikan['tahun_lulus']; ?></br>
+											<b>No. Ijazah :</b><?php echo $each_pendidikan['no_ijazah']; ?></br></br>
+										<?php $i++;?>	
+										<?php endforeach?>
+										</td>
+										<td>
+										<?php $j = 1;?>
+										<?php foreach($pengalaman as $each_pengalaman): ?>
+											<b>No.</b><?php echo $j; ?></br>
+											<b>Perusahaan :</b><?php echo $each_pengalaman['perusahaan']; ?></br>
+											<b>Jabatan :</b><?php echo $each_pengalaman['jabatan']; ?></br>
+											<b>Periode :</b><?php echo $each_pengalaman['awal_kerja']; ?> - <?php echo $each_pengalaman['akhir_kerja']; ?></br>
+											<b>Deskripsi :</b><?php echo $each_pengalaman['deskripsi_pekerjaan']; ?></br></br>
+										<?php $j++;?>	
+										<?php endforeach?>
+										</td>
+										<td>
+										<?php $k = 1;?>
+										<?php foreach($sertifikasi as $each_sertifikasi): ?>
+											<b>No.</b><?php echo $k; ?></br>
+											<b>No. Sertifikat :</b><?php echo $each_sertifikasi['no_sertifikat']; ?></br>
+											<b>Tanggal Sertifikat :</b><?php echo $each_sertifikasi['tanggal_sertifikat']; ?></br>
+											<b>Lokasi :</b><?php echo $each_sertifikasi['lokasi'];?></br>
+											<b>Badan Penyelenggara :</b><?php echo $each_sertifikasi['badan_penyelenggara']; ?></br></br>
+										<?php $k++;?>	
+										<?php endforeach?>
+										</td>
+										<td><?php echo $each_pelamar['pengalaman_lainnya']; ?></td>
+										<td><?php echo $each_pelamar['status_pengalaman']; ?></td>
+										<td><?php echo $each_pelamar['info_loker']; ?></td>
+										<td><a href="<?php echo base_url(); echo 'assets/documents/cv/'.$each_pelamar['cv_url']; ?>" target="_blank"><?php echo $each_pelamar['cv_url']; ?></a></td>
 									</tr>
 									<?php $no++;?>
 								<?php endforeach?>

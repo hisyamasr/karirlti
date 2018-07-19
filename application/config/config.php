@@ -24,6 +24,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 |
 */
 $config['base_url'] = 'http://karir.len-telko.co.id';
+// $config['base_url'] = 'http://karir.lenlti.co.id';
 
 /*
 |--------------------------------------------------------------------------
@@ -324,7 +325,7 @@ $config['cache_query_string'] = FALSE;
 | https://codeigniter.com/user_guide/libraries/encryption.html
 |
 */
-$config['encryption_key'] = '';
+$config['encryption_key'] = hex2bin('126b983a11362bad5341c483d1350449');
 
 /*
 |--------------------------------------------------------------------------
@@ -521,3 +522,9 @@ $config['rewrite_short_tags'] = FALSE;
 | Array:		array('10.0.1.200', '192.168.5.0/24')
 */
 $config['proxy_ips'] = '';
+
+/*
+|-----------------------------------------------------------------------
+| Email
+|-----------------------------------------------------------------------
+*/

@@ -22,11 +22,11 @@ class DataPelamar extends CI_Controller
 			// redirect them to the login page
 			redirect('auth/login', 'refresh');
 		}
-		else if (!$this->ion_auth->is_admin()) // remove this elseif if you want to enable this for non-admins
+		/* else if (!$this->ion_auth->is_admin()) // remove this elseif if you want to enable this for non-admins
 		{
 			// redirect them to the home page because they must be an administrator to view this
 			return show_error('You must be an administrator to view this page.');
-		}
+		} */
 		else
 		{
 			// set the flash data error message if there is one
@@ -34,6 +34,11 @@ class DataPelamar extends CI_Controller
 
 			//list the users
 			$data['pelamar'] = $this->DataPelamar_model->get_all_pelamar();
+			foreach($data['pelamar'] as $pel){
+				$data['pengalaman'] = $this->DataPelamar_model->get_all_pengalaman($pel['id']);
+				$data['pendidikan'] = $this->DataPelamar_model->get_all_pendidikan($pel['id']);
+				$data['sertifikasi'] = $this->DataPelamar_model->get_all_sertifikasi($pel['id']);
+			}
 			
 			$this->load->view('admin/header');
 			$this->load->view('admin/nav');
