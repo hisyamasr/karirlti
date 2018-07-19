@@ -200,6 +200,7 @@
 
 		$('#submitForm').click(function(){
 			flushError();
+			$('#spinner-overlay').show();
 			var serializedForm = $('#formPendaftaran').serialize();
 			
 			serializedForm += "&data_pendidikan=" + JSON.stringify(dataPendidikan);
@@ -213,12 +214,14 @@
 						$.redirect('<?= base_url(); ?>pendaftaran/success', {'data': result.dataPelamar});
 						//console.log(result.errorList);
 					} else if (result.status == false) {
+						$('#spinner-overlay').hide();
 						messageShow("error", "<li>" + result.errorList + "</li>");
 					}
 				},
 				error: function (xhr, ajaxOptions, thrownError) {
 					console.log(xhr);
-					messageShow("error","<li>Error</li>");
+					$('#spinner-overlay').hide();
+					messageShow("error","<li>Mohon maaf terjadi Kesalahan pada Sistem.</li>");
 					if (xhr.status == '401') {
 						// window.location = '<?= base_url(); ?>';
 					}
