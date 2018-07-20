@@ -46,7 +46,7 @@ class DataPelamar_model extends CI_Model{
 		$this->db->order_by('data_pendidikan.id', 'ASC');
         $query = $this->db->get();
 
-        $result_array = $query->result_array();
+        $result_array = $query->result();
         if($result_array === false){
             return false;
         }else{

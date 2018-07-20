@@ -31,15 +31,16 @@ class DataPelamar extends CI_Controller
 		{
 			// set the flash data error message if there is one
 			$data['message'] = $message;
-
+			$datpendidikan = array();
 			//list the users
 			$data['pelamar'] = $this->DataPelamar_model->get_all_pelamar();
 			foreach($data['pelamar'] as $pel){
-				$data['pengalaman'] = $this->DataPelamar_model->get_all_pengalaman($pel['id']);
-				$data['pendidikan'] = $this->DataPelamar_model->get_all_pendidikan($pel['id']);
-				$data['sertifikasi'] = $this->DataPelamar_model->get_all_sertifikasi($pel['id']);
+				//$data['pengalaman'] = $this->DataPelamar_model->get_all_pengalaman($pel['id']);
+				$pendidikan= $this->DataPelamar_model->get_all_pendidikan($pel['id']);
+				//$data['sertifikasi'] = $this->DataPelamar_model->get_all_sertifikasi($pel['id']);
+				array_push($datpendidikan, $pendidikan);
 			}
-			
+			$data['pendidikan'] = $datpendidikan;
 			$this->load->view('admin/header');
 			$this->load->view('admin/nav');
 			$this->load->view('admin/pelamar/main', $data);

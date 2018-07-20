@@ -1,18 +1,3 @@
-<?php
-	function generatePengalaman($pid){
-		$getPengalaman = "SELECT * from data_pengalamankerja where data_pelamar_id = '".$pid."'";
-		$query = mysqli_query($getPengalaman);
-		$no = 1;
-		while($get = mysqli_fetch_array($query)){
-			if($get[1] != null){
-			$return .= $no.". ".$get[1]." \n\r Perusahaan : ".$get[2].",\n\r Jabatan : ".$get[3]."\n\r Awal Kerja : ".$get[4].",\n\r Akhir Kerja : ".$get[5].",\n\r Deskripsi : ".$get[7]."<br style='mso-data-placement:same-cell;'>";
-			$no++;
-			}
-		}
-		
-		return $return;
-	}
-?>
 <div id="page-wrapper">
 	<div class="row">
         <div class="col-lg-12">
@@ -67,7 +52,6 @@
 									<th>Status Perkawinan</th>
 									<th>Pendidikan</th>
 									<th>Pengalaman Kerja Terakhir</th>
-									<th>Sertifikasi</th>
 									<th>Pengalaman Lainnya</th>
 									<th>Status Pengalaman</th>
 									
@@ -96,30 +80,22 @@
 										<td><?php echo $each_pelamar['status_perkawinan']; ?></td>
 										<td>
 										<?php $i = 1;?>
-										<?php foreach($pendidikan as $each_pendidikan): ?>
+										<?php //var_dump($pendidikan);?>
+										<?php foreach($pendidikan as $each_pendidikan => $value): ?>
 											<b>No.</b><?php echo $i; ?></br>
-											<b>Universitas :</b><?php echo $each_pendidikan['universitas']; ?></br>
-											<b>Jurusan :</b><?php echo $each_pendidikan['jurusan']; ?></br>
+											<b>Universitas :</b><?php echo $value->universitas; ?></br>
+											<b>Jurusan :</b><?php echo $value['jurusan']; ?></br>
 											<b>Jenjang :</b><?php echo $each_pendidikan['jenjang']; ?></br>
 											<b>IPK :</b><?php echo $each_pendidikan['ipk']; ?></br>
 											<b>Tahun Lulus :</b><?php echo $each_pendidikan['tahun_lulus']; ?></br>
 											<b>No. Ijazah :</b><?php echo $each_pendidikan['no_ijazah']; ?></br></br>
+											<?php var_dump($$each_pendidikan = $value);?>
 										<?php $i++;?>	
+										
 										<?php endforeach?>
 										</td>
 										<td>
 										<?php echo $each_pelamar['pengalaman_kerja']; ?>
-										</td>
-										<td>
-										<?php $k = 1;?>
-										<?php foreach($sertifikasi as $each_sertifikasi): ?>
-											<b>No.</b><?php echo $k; ?></br>
-											<b>No. Sertifikat :</b><?php echo $each_sertifikasi['no_sertifikat']; ?></br>
-											<b>Tanggal Sertifikat :</b><?php echo $each_sertifikasi['tanggal_sertifikat']; ?></br>
-											<b>Lokasi :</b><?php echo $each_sertifikasi['lokasi'];?></br>
-											<b>Badan Penyelenggara :</b><?php echo $each_sertifikasi['badan_penyelenggara']; ?></br></br>
-										<?php $k++;?>	
-										<?php endforeach?>
 										</td>
 										<td><?php echo $each_pelamar['pengalaman_lainnya']; ?></td>
 										<td><?php echo $each_pelamar['status_pengalaman']; ?></td>
