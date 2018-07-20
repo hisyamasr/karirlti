@@ -34,8 +34,7 @@ class Pendaftaran extends CI_Controller {
 		$this->load->view('layouts/header');
 		if($today >= $openRekrut && $today <= $closedRekrut && $getSetting->status_rekrutmen) 
 		{
-			// $this->load->view('pendaftaran', $data);
-			$this->load->view('pendaftaran2', $data);
+			$this->load->view('pendaftaran', $data);
 		}else{
 			$this->load->view('welcome_message');
 		}
@@ -250,14 +249,22 @@ class Pendaftaran extends CI_Controller {
 		$this->load->library('email');
         $this->load->library('encryption');
 
+		$config['protocol'] = "smtp";
 		$config['mailtype'] = "html";
+		$config['smtp_host'] = 'mail.dishubkabbdg.web.id';
+		$config['smtp_user'] = 'admin@dishubkabbdg.web.id';
+		$config['smtp_pass'] = 'Dishub2018';
+		$config['smtp_port'] = '587';
+		//$config['smtp_crypto'] = 'ssl';
+		$config['dsn'] = true;
+
 		$dataPelamar = [
-			'no_registrasi' => "000001-SDM",
-			'no_ktp' => "1234569874563216",
+			'no_registrasi' => "000002-AKT",
+			'no_ktp' => "1234569874563238",
 			'nama' => "Andi Yuliandi",
 			'tempat_lahir' => 'Bandung',
 			'tanggal_lahir' => '1990-07-26',
-			'email' => 'andiyuliandi26@gmail.com'
+			'email' => 'andienciel@gmail.com'
 		];
         
         $explode = explode("-", $dataPelamar['tanggal_lahir']);
@@ -281,19 +288,29 @@ class Pendaftaran extends CI_Controller {
 
 		$this->email->initialize($config);
 		//$this->email->clear();
-        $this->email->from('rekrutmen@len-telko.co.id', 'Rekrutmen PT. Len Telekomunikasi Indonesia (LTI)');
+        $this->email->from('admin@dishubkabbdg.web.id', 'Rekrutmen PT. Len Telekomunikasi Indonesia (LTI)');
         $this->email->to($dataPelamar['email']);
 
         $this->email->subject('[Konfirmasi] - Rekrutmen PT. Len Telekomunikasi Indonesia (LTI)');
 		$this->email->message($message);
 
-		if($this->email->send()){
-			$data = [ 'status' => true, 'errorList' => $dataPelamar ];
-		}else{
-			$data = [ 'status' => false, 'errorList' => $dataPelamar ];
-		}
+		// if($this->email->send()){
+		// 	$data = [ 'status' => true, 'errorList' => $dataPelamar ];
+		// }else{
+		// 	$data = [ 'status' => false, 'errorList' => $dataPelamar ];
+		// }
 
-		 echo json_encode($data);
+		//  echo json_encode($data);
+
+		$this->email->send(FALSE);
+		echo $this->email->print_debugger();
+	}
+
+	public function test_captcha(){
+		$recaptcha = $this->input->post('g-recaptcha-response');
+		$response = $this->recaptcha->verifyResponse($recaptcha);
+		
+		echo json_encode($data = [ 'status' => $response['success'], 'errorList' => $response ]);
 	}
 }
 ?>

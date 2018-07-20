@@ -6,6 +6,7 @@
 	<link rel="stylesheet" type="text/css" href="<?php echo base_url();?>assets/css/jquery-ui.min.css"/>
 	<link rel="stylesheet" type="text/css" href="<?php echo base_url();?>assets/css/global.css"/>
 	<link rel="stylesheet" href="<?php echo base_url();?>assets/fontawesome-5.1/css/all.css">
+	<!-- <link rel="stylesheet" href="<?php echo base_url();?>assets/fontawesome-5.1/css/solid.css"> -->
 	<script type="text/javascript" src='<?php echo base_url();?>assets/js/jquery-3.3.1.js'/></script>
 	<script type="text/javascript" src='<?php echo base_url();?>assets/js/jquery-ui.js'/></script>
 	<script type="text/javascript" src='<?php echo base_url();?>assets/js/jquery-redirect.js'/></script>
@@ -13,6 +14,7 @@
 	<script type="text/javascript" src='<?php echo base_url();?>assets/js/bootstrap.min.js'/></script>
 	<script type="text/javascript" src='<?php echo base_url();?>assets/js/bootstrap-datepicker.min.js'/></script>
 	<script type="text/javascript" src='<?php echo base_url();?>assets/js/bootstrap-datepicker.id.min.js'/></script>
+	<script type="text/javascript" src='<?php echo base_url();?>assets/fontawesome-5.1/js/all.js'/></script>
 	<meta charset="utf-8">
 
 	<style type="text/css">
@@ -55,9 +57,27 @@
 		#listError > li > p {
 			margin-bottom: 0px;
 		}
+
+		#spinner-overlay{
+			position: absolute;
+			top: 0px;
+			left: 0;
+			bottom: 56px;
+			right: 0;
+			background: rgba(0, 0, 0, 0.15);
+			z-index: 1;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			/* display:none; */
+		}
 	</style>
 	<script>
-		function messageShow(stat, msg) {
+		$(document).ready(function(){
+			$('#spinner-overlay').hide();
+		});
+
+		function messageShow(stat, msg) {			
 			$("#divListErr").hide();
 			$("#listError").empty();
 			$("#listError").append(msg);
@@ -99,3 +119,7 @@
 		</div>
 		<div class="col-md-10" style="padding-left:3em"><span id="isiWarning"></span></div>
 	</div>
+	<div id="spinner-overlay">
+		<i class="fas fa-spinner fa-spin" style="font-size:150px; color:blue;"></i>
+	</div>
+	
