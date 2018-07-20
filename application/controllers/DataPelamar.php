@@ -34,12 +34,16 @@ class DataPelamar extends CI_Controller
 			$datpendidikan = array();
 			//list the users
 			$data['pelamar'] = $this->DataPelamar_model->get_all_pelamar();
+			$no = 1;
 			foreach($data['pelamar'] as $pel){
 				//$data['pengalaman'] = $this->DataPelamar_model->get_all_pengalaman($pel['id']);
 				$pendidikan= $this->DataPelamar_model->get_all_pendidikan($pel['id']);
+				
 				//$data['sertifikasi'] = $this->DataPelamar_model->get_all_sertifikasi($pel['id']);
-				array_push($datpendidikan, $pendidikan);
+				array_push($datpendidikan, [ $no, $pendidikan]);
+				$no++;
 			}
+
 			$data['pendidikan'] = $datpendidikan;
 			$this->load->view('admin/header');
 			$this->load->view('admin/nav');

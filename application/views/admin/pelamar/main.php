@@ -60,7 +60,7 @@
 								</tr>
 							</thead>
 							<tbody>
-								<?php $no = 1;?>
+								<?php $no = 1; $index = 0;?>
 								<?php foreach($pelamar as $each_pelamar): ?>
 									<tr>
 										<td><?php echo $no; ?></td>
@@ -80,16 +80,20 @@
 										<td><?php echo $each_pelamar['status_perkawinan']; ?></td>
 										<td>
 										<?php $i = 1;?>
-										<?php //var_dump($pendidikan);?>
-										<?php foreach($pendidikan as $each_pendidikan => $value): ?>
+										<?php //var_dump($pendidikan[$no]); ?>
+										<?php
+
+										?>
+										<?php foreach($pendidikan[$index][1] as $each_pendidikan): ?>
+										<?php //var_dump($each_pendidikan); ?>
 											<b>No.</b><?php echo $i; ?></br>
-											<b>Universitas :</b><?php echo $value->universitas; ?></br>
-											<b>Jurusan :</b><?php echo $value['jurusan']; ?></br>
-											<b>Jenjang :</b><?php echo $each_pendidikan['jenjang']; ?></br>
-											<b>IPK :</b><?php echo $each_pendidikan['ipk']; ?></br>
-											<b>Tahun Lulus :</b><?php echo $each_pendidikan['tahun_lulus']; ?></br>
-											<b>No. Ijazah :</b><?php echo $each_pendidikan['no_ijazah']; ?></br></br>
-											<?php var_dump($$each_pendidikan = $value);?>
+											<b>Universitas :</b><?= $each_pendidikan->universitas; ?></br>
+											<b>Jurusan :</b><?= $each_pendidikan->jurusan; ?></br>
+											<b>Jenjang :</b><?= $each_pendidikan->jenjang; ?></br>
+											<b>IPK :</b><?= $each_pendidikan->ipk; ?></br>
+											<b>Tahun Lulus :</b><?= $each_pendidikan->tahun_lulus; ?></br>
+											<b>No. Ijazah :</b><?= $each_pendidikan->no_ijazah; ?></br></br>
+										
 										<?php $i++;?>	
 										
 										<?php endforeach?>
@@ -102,7 +106,7 @@
 										<td><?php echo $each_pelamar['info_loker']; ?></td>
 										<td><a href="<?php echo base_url(); echo 'assets/documents/cv/'.$each_pelamar['cv_url']; ?>" target="_blank"><?php echo $each_pelamar['cv_url']; ?></a></td>
 									</tr>
-									<?php $no++;?>
+									<?php $no++; $index++;?>
 								<?php endforeach?>
 								
 							</tbody>

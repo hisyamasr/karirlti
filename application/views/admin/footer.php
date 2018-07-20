@@ -61,7 +61,8 @@
             },
 			 ]  ,
 			 scrollX: true,
-			 iDisplayLength: 50
+			 iDisplayLength: 50,
+			responsive: true
 		});  
 		
 		$('#datetimepicker1').datetimepicker({
