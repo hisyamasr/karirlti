@@ -80,7 +80,7 @@
 								<?php foreach($pelamar as $each_pelamar): ?>
 									<tr>
 										<td><?php echo $no; ?></td>
-										<td><img src="<?php echo base_url(); echo 'assets/documents/foto/'.$each_pelamar['foto_url']; ?>"></td>
+										<td><img src="<?php echo base_url(); echo 'assets/documents/foto/'.$each_pelamar['foto_url']; ?>" height="120" width="100"></td>
 										<td><?php echo $each_pelamar['kode_posisi']; ?></td>
 										<td><?php echo $each_pelamar['no_registrasi']; ?></td>
 										<td><?php echo $each_pelamar['no_ktp']; ?></td>
@@ -108,15 +108,7 @@
 										<?php endforeach?>
 										</td>
 										<td>
-										<?php $j = 1;?>
-										<?php foreach($pengalaman as $each_pengalaman): ?>
-											<b>No.</b><?php echo $j; ?></br>
-											<b>Perusahaan :</b><?php echo $each_pengalaman['perusahaan']; ?></br>
-											<b>Jabatan :</b><?php echo $each_pengalaman['jabatan']; ?></br>
-											<b>Periode :</b><?php echo $each_pengalaman['awal_kerja']; ?> - <?php echo $each_pengalaman['akhir_kerja']; ?></br>
-											<b>Deskripsi :</b><?php echo $each_pengalaman['deskripsi_pekerjaan']; ?></br></br>
-										<?php $j++;?>	
-										<?php endforeach?>
+										<?php echo $each_pelamar['pengalaman_kerja']; ?>
 										</td>
 										<td>
 										<?php $k = 1;?>
