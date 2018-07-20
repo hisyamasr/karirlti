@@ -1,12 +1,21 @@
+<head>
+	<title>Form Pendaftaran</title>
+</head>
+<?= $script_captcha ?>
 <script>
+	var dataPendidikan = [];
 	function flushError(){
 		$('#divListErr').hide();
 		$('#listError').empty();
 	}
 
 	function deletePendidikan(obj) {
-        $(obj).closest('tr').remove();
-    }
+		$arr = $('.deleteDataPend'),
+		index = $arr.index(obj);
+		//console.log(dataPendidikan);
+		dataPendidikan.splice(index,1);		
+		$(obj).closest('tr').remove();
+	}
 
 	function  resetFormPendidikan(){
 		$('#Universitas2').val("");
@@ -23,10 +32,21 @@
 		$('#NoIjazah').val("");
 	}
 
+	function createPengalaman(){
+		
+		var perusahaan = $('#Perusahaan').val();
+		var jabatan = $('#PosisiJabatan').val();
+		var awalKerja = $('#AwalPeriodeKerja').val();
+		var akhirKerja = $('#AkhirPeriodeKerja').val();
+		var pengalamanKerja = 'Perusahaan: ' + perusahaan + '\n<br>Posisi/Jabatan: ' + jabatan + '\n<br>' +
+							'Periode Kerja: ' + awalKerja + ' s/d ' + akhirKerja;
+		$('#PengalamanTerakhir').val(pengalamanKerja);
+	}
+
 	$(document).ready(function(){
 		flushError();
 		$('.datepicker').datepicker({
-			format: "dd/mm/yyyy",
+			format: "yyyy-mm-dd",
 			language: "id",
 			todayHighlight: true,
 			autoclose: true
@@ -39,6 +59,13 @@
 			autoclose: true
 		});
 
+		$('.datepicker_periode').datepicker({
+			format: "mm/yyyy",
+			language: "id",
+			minViewMode: 1,
+			autoclose: true
+		});
+
 		$('#NoKTP').change(function(){
 			$.ajax({
 				url: '<?= base_url(); ?>pendaftaran/check_ktp',
@@ -46,7 +73,6 @@
 				dataType: "json",
 				data: { noKTP: $(this).val() },
 				success: function (data) {
-					// console.log(data.errorList);
 					if (data.status == false) {
 						messageShow("error", "<li>" + data.errorList + "</li>");
 					}else{
@@ -62,44 +88,94 @@
 			var tglLahir = new Date(explode[0], explode[1], explode[2]);
 			var selisih = today.getFullYear() - tglLahir.getFullYear();
 			$('#Usia').text("Usia Anda adalah : " + Math.floor(selisih) + " Tahun");
+			$('#UsiaPelamar').val(Math.floor(selisih));
 		});
 
 		$('#Foto').change(function(){
 			var getFile = $(this).get(0).files[0];
-			// console.log($(this).get(0).files[0]);
-			var error = "";
-			var fileName = getFile.name;
-			if(getFile.type != "image/jpeg" && getFile.type != "image/png" ){
-				error = "Format foto harus JPG atau PNG";
-				fileName = "Cari Foto";
-				$('#Foto').empty();
-			}else if(getFile.size > 1000000){
-				error = "Ukuran File harus >= 1 MB";
-				fileName = "Cari Foto";
-				$('#Foto').empty();
+			$('#ErrorFoto').empty();
+			if($('#NoKTP').val() != ""){					
+				var formData = new FormData();
+				formData.append("input_foto", getFile);
+				formData.append("no_ktp", $('#NoKTP').val());
+				$.ajax({
+					url: '<?= base_url(); ?>pendaftaran/upload_foto',
+					type: "POST",
+					enctype: 'multipart/form-data',
+					dataType: "json",
+					data: formData,
+					contentType: false,
+					processData: false,
+					success: function (result) {
+						if (result.status == true) {
+							//console.log(result.errorList);
+							$('#ImageUploaded').attr("src","assets/documents/foto/"+result.errorList.file_name);
+							$('#FotoUrl').val(result.errorList.file_name);
+							$('#FotoFilename').text(result.errorList.client_name);
+						} else if (result.status == false) {
+							$('#ErrorFoto').text(result.errorList);
+							$('#FotoFilename').text("Upload Foto");
+							$(this).empty();
+							$('#FotoUrl').val("");
+						}
+					},
+					error: function (xhr, ajaxOptions, thrownError) {
+						console.log(xhr);
+						messageShow("error","<li>Error</li>");
+						if (xhr.status == '401') {
+							// window.location = '<?= base_url(); ?>';
+						}
+					}
+				});
+			}else{
+				alert("No KTP belum diisi.!");
+				$('#FotoFilename').text("Upload Foto");
+				$(this).empty();
 			}
-
-			$('#ErrorFoto').text(error);
-			$('#FotoFilename').text(fileName);
 		});
 
 		$('#CV').change(function(){
 			var getFile = $(this).get(0).files[0];
-			// console.log($(this).get(0).files[0]);
 			var error = "";
-			var fileName = getFile.name;
-			if(getFile.type != "application/pdf"){
-				error = "Format CV harus .pdf";
-				fileName = "Upload CV";
+			$('#ErrorCV').empty();
+			if($('#NoKTP').val() != ""){					
+				var formData = new FormData();
+				formData.append("input_cv", getFile);
+				formData.append("no_ktp", $('#NoKTP').val());
+				$.ajax({
+					url: '<?= base_url(); ?>pendaftaran/upload_cv',
+					type: "POST",
+					enctype: 'multipart/form-data',
+					dataType: "json",
+					data: formData,
+					contentType: false,
+					processData: false,
+					success: function (result) {
+						if (result.status == true) {
+							//console.log(result.errorList);
+							$('#CVUrl').val(result.errorList.file_name);
+							$('#CVFilename').text(result.errorList.client_name);
+						} else if (result.status == false) {
+							console.log(result.errorList);
+							$('#ErrorCV').text(result.errorList);
+							$('#CVFilename').text("Upload CV");
+							$(this).empty();
+							$('#CVUrl').val("");
+						}
+					},
+					error: function (xhr, ajaxOptions, thrownError) {
+						///console.log(xhr);
+						messageShow("error","<li>Error</li>");
+						if (xhr.status == '401') {
+							window.location = '<?= base_url(); ?>';
+						}
+					}
+				});
+			}else{
+				alert("No KTP belum diisi.!");
+				$('#CVFilename').text("Upload CV");
 				$(this).empty();
-			}else if(getFile.size > 2000000){
-				error = "Ukuran File harus >= 2 MB";
-				fileName = "Upload CV";
-				$(this).empty();
-			}
-
-			$('#ErrorCV').text(error);
-			$('#CVFilename').text(fileName);			
+			}		
 		});
 
 		$('#Universitas2').change(function(){
@@ -122,6 +198,39 @@
 			}
 		});
 
+		$('#submitForm').click(function(){
+			flushError();
+			$('#spinner-overlay').show();
+			var serializedForm = $('#formPendaftaran').serialize();
+			
+			serializedForm += "&data_pendidikan=" + JSON.stringify(dataPendidikan);
+			$.ajax({
+				url: '<?= base_url(); ?>pendaftaran/input_data_pelamar',
+				type: "POST",
+				dataType: "json",
+				data: serializedForm,
+				success: function (result) {
+					if (result.status == true) {
+						$.redirect('<?= base_url(); ?>pendaftaran/success', {'data': result.dataPelamar});
+						//console.log(result.errorList);
+					} else if (result.status == false) {
+						$('#spinner-overlay').hide();
+						grecaptcha.reset();
+						messageShow("error", "<li>" + result.errorList + "</li>");
+					}
+				},
+				error: function (xhr, ajaxOptions, thrownError) {
+					//console.log(xhr);
+					$('#spinner-overlay').hide();
+					grecaptcha.reset();
+					messageShow("error","<li>Mohon maaf terjadi Kesalahan pada Sistem.</li>");
+					if (xhr.status == '401') {
+						// window.location = '<?= base_url(); ?>';
+					}
+				}
+			});
+		});
+
 		$('#btnTambahPendidikan').click(function(){
 			var univ = $('#Universitas').val();
 			var jurusan = $('#Jurusan').val();
@@ -129,31 +238,62 @@
 			var ipk = $('#IPK').val();
 			var tahunLulus = $('#TahunLulus').val();
 			var noIjazah = $('#NoIjazah').val();
+			
+			if(univ != "" && jurusan != "" && jenjang != "" && ipk != "" && tahunLulus != "" && noIjazah != "")
+			{
+				dataPendidikan.push({
+					"universitas":univ,
+					"jurusan":jurusan,
+					"jenjang":jenjang,
+					"ipk":ipk,
+					"tahunLulus":tahunLulus,
+					"noIjazah":noIjazah
+				});
 
-			$('#isiPendidikan').append(
-				'<tr>'+
-					'<td>'+univ+'</td>' +
-					'<td>'+jurusan+'</td>' +
-					'<td>'+jenjang+'</td>' +
-					'<td>'+ipk+'</td>' +
-					'<td>'+tahunLulus+'</td>' +
-					'<td>'+noIjazah+'</td>' +
-					'<td class="text-center"><a type="button" class="fa fa-trash-alt fa-lg text-danger" onClick="deletePendidikan(this)"></a></td>' +
-				'</tr>'
-			);
-
-			resetFormPendidikan();
+				var index = $('#isiPendidikan').length + 1;
+				$('#isiPendidikan').append(
+					'<tr class="rowDataPendidikan">'+
+						'<td>'+ univ +'<input type="hidden" name="universitas" value="'+ univ +'"></td>' +
+						'<td>'+ jurusan +'<input type="hidden" name="jurusan" value="'+ jurusan +'"></td>' +
+						'<td>'+ jenjang +'<input type="hidden" name="jenjang" value="'+ jenjang +'"></td>' +
+						'<td>'+ ipk +'<input type="hidden" name="ipk" value="'+ ipk +'"></td>' +
+						'<td>'+ tahunLulus +'<input type="hidden" name="tahun_lulus" value="'+ tahunLulus +'"></td>' +
+						'<td>'+ noIjazah +'<input type="hidden" name="no_ijazah" value="'+ noIjazah +'"></td>' +
+						'<td class="text-center"><a type="button" class="fa fa-trash-alt fa-lg text-danger deleteDataPend" onClick="deletePendidikan(this)"></a></td>' +
+					'</tr>'
+				);
+				
+				resetFormPendidikan();
+			}else{
+				alert("Silahkan lengkapi data pendidikan Anda.!")
+			}
 		});
-	});
+
+		$('input[name=status_pengalaman]').change(function(){
+			if($(this).val() == "Berpengalaman"){
+				$('#IsiPengalaman').show();
+			}else{
+				$('#IsiPengalaman').hide();
+				$('#PengalamanTerakhir').val("");
+				$('#Perusahaan').val("");
+				$('#PosisiJabatan').val("");
+				$('#AwalPeriodeKerja').val("");
+				$('#AkhirPeriodeKerja').val("");
+				$('#PekerjaanLainnya').val("");
+		
+			}
+		});
+		
+	});	
 </script>
 	<div id="container">
-	<form method="post" id="formPendaftaran" class="needs-validation" >
+	<form method="post" id="formPendaftaran" class="needs-validation">
 		<div class="card bg-light ">
 			<h5 class="card-header">
 				Form Rekrutmen PT. Len Telekomunikasi Indonesia
 			</h5>
 			<div class="card-body">
-			<div class="alert alert-danger" role="alert" id="divListErr">
+			<div class="alert alert-danger ml-3 mr-3" role="alert" id="divListErr">
 				<uL class="list-unstyled" id="listError" style="margin-bottom:0;"></ul>
 			</div>
 				<div class="form-group col-md-2">
@@ -174,24 +314,25 @@
 						<div class="col-md-6">
 							<div class="form-group col-md-5">
 								<label for="NoKTP">No KTP</label>
-								<input class="form-control" type="text" name="noktp" id="NoKTP" required 
-								pattern=".{0}|.{16,16}" title="No KTP harus 16 angka">
+								<input class="form-control" type="text" name="no_ktp" id="NoKTP" required pattern=".{0}|.{16,16}" title="No KTP harus 16 angka">
+								
 							</div>
 
 							<div class="form-group col-md-8">
 								<label for="Nama">Nama</label>
-								<input class="form-control" type="text" name="nama" id="Nama" required>
+								<input class="form-control" type="text" name="nama" id="Nama">
 							</div>
 
 							<div class="form-group col-md-6">
 								<label for="TempatLahir">Tempat Lahir</label>
-								<input class="form-control" type="text" name="tempat_lahir" id="TempatLahir" required>
+								<input class="form-control" type="text" name="tempat_lahir" id="TempatLahir">
 							</div>
 
 							<div class="form-group col-md-5">
 								<label for="TanggalLahir">Tanggal Lahir</label>
-								<input class="form-control" type="date" name="tanggal_lahir" id="TanggalLahir" required date-date-format="DD/MM/YYYY">
+								<input class="form-control datepicker" type="text" name="tanggal_lahir" id="TanggalLahir">
 								<span id="Usia" class="text-muted"></span>
+								<input type="hidden" name="usia" id="UsiaPelamar">
 							</div>
 						</div>
 
@@ -199,11 +340,11 @@
 						<div class="form-group col-md-6">
 							<label for="JenisKelamin">Jenis Kelamin</label><br>
 							<div class="custom-control custom-radio custom-control-inline">
-								<input type="radio" id="JenisKelamin1" name="jenis_kelamin" class="custom-control-input" value="Laki-Laki" required>
+								<input type="radio" id="JenisKelamin1" name="jenis_kelamin" class="custom-control-input" value="Laki-Laki">
 								<label class="custom-control-label" for="JenisKelamin1">Laki-Laki</label>
 							</div>
 							<div class="custom-control custom-radio custom-control-inline">
-								<input type="radio" id="JenisKelamin2" name="jenis_kelamin" class="custom-control-input" value="Perempuan" required>
+								<input type="radio" id="JenisKelamin2" name="jenis_kelamin" class="custom-control-input" value="Perempuan">
 								<label class="custom-control-label" for="JenisKelamin2">Perempuan</label>
 							</div>
 						</div>
@@ -233,35 +374,35 @@
 						</div>
 					</div>
 				</div>
-	
+
 				<div class="card text-white bg-dark mb-3 ml-3 mr-3">
 					<div class="card-header">Informasi Kontak</div>
 					<div class="card-body row">
 						<div class="col-md-3">
 							<div class="form-group col-md-12">
 								<label for="NoHandphone">No Handphone</label>
-								<input class="form-control" type="text" name="no_handphone" id="NoHandphone" required>
+								<input class="form-control" type="text" name="no_handphone" id="NoHandphone">
 							</div>
 							
 							<div class="form-group col-md-12">
 								<label for="Email">Alamat Email</label>
-								<input class="form-control" type="email" name="email" id="Email" required>
+								<input class="form-control" type="email" name="email" id="Email">
 							</div>
 						</div>
 						<div class="col-md-9">
 							<div class="form-group col-md-12">
 								<label for="Domisili">Domisili</label>
-								<textarea class="form-control" name="tanggal_lahir" id="Domisili" rows="3" required></textarea>
+								<textarea class="form-control" name="domisili" id="Domisili" rows="3"></textarea>
 							</div>
 
 							<div class="form-group col-md-12">
 								<label for="AlamatAsli">Alamat Asli</label>
-								<textarea class="form-control" name="alamat_asli" id="AlamatAsli" rows="3" required></textarea>
+								<textarea class="form-control" name="alamat_asli" id="AlamatAsli" rows="3"></textarea>
 							</div>
 						</div>						
 					</div>
 				</div>
-				
+
 				<div class="card text-white bg-dark mb-3 ml-3 mr-3">
 					<div class="card-header">Informasi Pendidikan</div>
 					<div class="card-body row">
@@ -280,7 +421,7 @@
 							</div>
 							<div class="form-group col-md-5">
 								<label for="Universitas"> &nbsp;</label>
-								<input type="hidden" class="form-control" name="universitas" id="Universitas"/>
+								<input type="hidden" class="form-control" id="Universitas"/>
 							</div> 
 						</div>
 						
@@ -299,14 +440,14 @@
 							</div>
 							<div class="form-group col-md-5">
 								<label for="Jurusan"> &nbsp;</label>
-								<input type="hidden" class="form-control" name="jurusan" id="Jurusan"/>
+								<input type="hidden" class="form-control" id="Jurusan"/>
 							</div> 
 						</div>
 
 						<div class="col-md-12 row ml-1">
 							<div class="form-group col-md-2">
 								<label for="Jenjang">Jenjang</label>
-								<select class="custom-select " name="jenjang" id="Jenjang">
+								<select class="custom-select " id="Jenjang">
 									<option value="">Silahkan Pilih</option>
 									<?php
 										foreach($jenjangList as $rows){
@@ -318,17 +459,18 @@
 
 							<div class="form-group col-md-1">
 								<label for="IPK">IPK</label>
-								<input class="form-control" type="text" name="ipk" id="IPK">
+								<input class="form-control" type="text" id="IPK">
+								<span class="form-text text-muted">*ex: 4.00</span>
 							</div>
 
 							<div class="form-group col-md-2">
 								<label for="TahunLulus">Tahun Lulus</label>
-								<input class="form-control datepicker_tahun col-md-5" type="text" name="tahun_lulus" id="TahunLulus">
+								<input class="form-control datepicker_tahun col-md-5" type="text" id="TahunLulus">
 							</div>
 
 							<div class="form-group col-md-3">
 								<label for="NoIjazah">No Ijazah</label>
-								<input class="form-control col-md-12" type="text" name="tahun_lulus" id="NoIjazah">
+								<input class="form-control col-md-12" type="text" id="NoIjazah">
 							</div>
 							<div class="form-group col-md-2">
 								<label for="btnTambahPendidikan"> &nbsp; </label>
@@ -351,31 +493,11 @@
 									<th scope="col" class="text-center" style="width:5%">Action</th>
 								</tr>						
 							</thead>
-							<tbody id="isiPendidikan">
-								<!-- <tr>
-									<td>tes</td>
-									<td>test1</td>
-									<td>test</td>
-									<td>test</td>
-									<td>testes</td>
-									<td>est</td>
-									<td class="text-center">
-										<a type="button" class="fa fa-trash-alt fa-lg text-danger"></a>
-									</td>
-								</tr>
-								<tr>
-									<td>tes</td>
-									<td>test1</td>
-									<td>test</td>
-									<td>test</td>
-									<td>testes</td>
-									<td>est</td>
-								</tr> -->
-							</tbody>
+							<tbody id="isiPendidikan"></tbody>
 						</table>
 					</div>
 				</div>
-							
+
 				<div class="card text-white bg-dark mb-3 ml-3 mr-3">
 					<div class="card-header">Riwayat Pekerjaan</div>
 					<div class="form-group col-md-5 ml-3">
@@ -389,32 +511,33 @@
 							<label class="custom-control-label" for="StatusPengalaman2">Berpengalaman</label>
 						</div>
 					</div>
-					<div class="card-body row">
+					<div class="card-body row" id="IsiPengalaman" style="display:none;">
 						<div class="col-md-4">
 							<h5 class="card-title ml-3">Pengalaman terakhir</h5>
 							<div class="form-group col-md-12">
 								<label for="Perusahaan">Perusahaan</label>
-								<input class="form-control" type="text" id="Perusahaan">
+								<input class="form-control" type="text" id="Perusahaan" onChange="createPengalaman()">
 							</div>
 
 							<div class="form-group col-md-12">
 								<label for="PosisiJabatan">Posisi atau Jabatan</label>
-								<input class="form-control" type="text" id="PosisiJabatan">
+								<input class="form-control" type="text" id="PosisiJabatan" onChange="createPengalaman()">
 							</div>
 
 							<div class="form-group col-md-12">								
 								<div class="row">
 									<div class="col">
 										<label for="Periode">Awal Periode Kerja</label>
-										<input class="form-control" type="date" id="AwalPeriodeKerja">
+										<input class="form-control datepicker_periode" type="text" id="AwalPeriodeKerja" onChange="createPengalaman()">
 									</div>
 									<div class="col">
 										<label for="Periode">Akhir Periode Kerja</label>
-										<input class="form-control" type="date" id="AkhirPeriodeKerja">
+										<input class="form-control datepicker_periode" type="text" id="AkhirPeriodeKerja" onChange="createPengalaman()">
 									</div>
 								
 								</div>
 							</div>
+							<input type="hidden" name="pengalaman_terakhir" id="PengalamanTerakhir"> 
 						</div>
 						<div class="col-md-8">
 							<h5 class="card-title ml-3">Pengalaman Lainnya</h5>
@@ -425,26 +548,31 @@
 							</div>
 						</div>
 					</div>
-				</div>					
-				
+				</div>
+
 				<div class="card text-white bg-dark mb-3 ml-3 mr-3">
 					<div class="card-header">Upload Dokumen</div>
 					<div class="card-body">
-						<div class="form-group col-md-8">
-							<input class="custom-file-input" type="file" name="cv_url" id="CV" required>
-							<label class="custom-file-label" for="CV" id="CVFilename">Upload CV</label>
-							<small class="form-text text-danger" id="ErrorCV"></small>	
+						<div class="form-group col-md-8">	
+							<input class="custom-file-input" type="file" id="CV">
+							<label class="custom-file-label" for="CV" id="CVFilename">Upload CV</label>							
+							<span class="form-text text-danger font-weight-bold" id="ErrorCV"></span>							
 							<span class="form-text text-white">
-								*CV dalam format .pdf dengan ukuran <= 2 MB serta dilengkapi dengan <b>Transkrip Nilai</b> dan <b>Ijazah</b>
+								*CV dalam format <b>.pdf</b> dengan ukuran <b><= 2 MB</b> serta dilengkapi dengan <b>Transkrip Nilai</b> dan <b>Ijazah</b>
 							</span>	
+							<input type="hidden" name="cv_url" id="CVUrl"/>
 						</div>
 
 						<div class="form-group col-md-5">
-							<input class="custom-file-input" type="file" name="foto" id="Foto" required>
+							<input class="custom-file-input" type="file" id="Foto">
 							<label class="custom-file-label" for="Foto" id="FotoFilename">Upload Foto</label>
 							<span id="ErrorFoto" class="text-danger font-weight-bold"></span>
+							<span class="form-text text-white">
+								*Foto dalam format <b>.jpg</b> atau <b>.png</b> dengan ukuran <b><= 1 MB</b>
+							</span>	
 						</div>
-
+						<img id="ImageUploaded" height="130" width="90" src="" alt=""/>
+						<input type="hidden" name="foto_url" id="FotoUrl"/>
 					</div>
 				</div>
 				
@@ -463,9 +591,14 @@
 						<label class="custom-control-label" for="customRadioInline3">Teman</label>
 					</div>
 				</div>
+
+				<div class="form-group col-md-12 ml-2" style="padding-left:40%;">
+					<?= $captcha ?>
+				</div>					
+				
 			</div>
 			<div class="card-footer text-muted text-right">
-				<button type="submit" class="btn btn-primary">Simpan</button>
+				<button type="button" class="btn btn-primary" id="submitForm">Simpan</button>
 				<button type="reset" class="btn btn-danger">Batal</a>
 			</div>
 		</div>
