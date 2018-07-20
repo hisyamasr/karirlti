@@ -84,9 +84,14 @@ class DataPelamar_model extends CI_Model{
         $this->db->select('MAX(id) as lastID');
         $this->db->from('data_pelamar');
         $query = $this->db->get();
-        $lastID = $query->result();
 
-        return $lastID[0]->lastID;
+        if($query->num_rows() > 0){
+            $lastID = $query->result();
+            return $lastID[0]->lastID;
+        }else{
+            return 0;
+        }
+        
     }
 
     private function create_noreg($lastID, $kode_posisi){
