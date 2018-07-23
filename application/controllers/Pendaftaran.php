@@ -151,7 +151,7 @@ class Pendaftaran extends CI_Controller {
 	public function upload_foto(){
 		#region upload foto
 		$config['upload_path']  = './assets/documents/foto';
-		$config['allowed_types']= 'jpg|png';
+		$config['allowed_types']= 'jpg|png|jpeg';
 		$config['max_size']     = 1024;
 		$config['file_name']	= "Foto-".$this->input->post('no_ktp');
 		$config['overwrite'] = true;
