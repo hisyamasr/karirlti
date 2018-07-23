@@ -247,4 +247,20 @@ class DataPelamar_model extends CI_Model{
 			return false;
 		}
     }
+	
+	public function get_all_pelamar_by_pendidikan()
+    {
+        $this->db->select('data_pelamar.*, data_pendidikan.*');
+        $this->db->from('data_pelamar');
+        $this->db->join('data_pendidikan', 'data_pelamar.id = data_pendidikan.data_pelamar_id');
+		$this->db->order_by('data_pelamar.id', 'ASC');
+        $query = $this->db->get();
+
+        $result_array = $query->result_array();
+        if($result_array === false){
+            return false;
+        }else{
+            return $result_array;
+        }
+    }
 }
