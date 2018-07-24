@@ -27,7 +27,16 @@
                 <div class="sidebar-nav navbar-collapse" >
                     <ul class="nav" id="side-menu">
                         <li>
-                            <a href="<?php echo base_url(); ?>DataPelamar"><i class="fa fa-dashboard fa-fw"></i> Data Rekrutmen</a>
+                            <a href="<?php echo base_url(); ?>DataPelamar"><i class="fa fa-dashboard fa-fw"></i> Data Rekrutmenr<span class="fa arrow"></a>
+							<ul class="nav nav-second-level">
+                                <li>
+                                    <a href="<?php echo base_url(); ?>DataPelamar">Data Pelamar</a>
+                                </li>
+								<li>
+                                    <a href="<?php echo base_url(); ?>DataPelamar/list_by_pendidikan">Pelamar By Pendidikan</a>
+                                </li>
+								
+                            </ul>
                         </li>
                         <li>
                             <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> Data Master<span class="fa arrow"></span></a>

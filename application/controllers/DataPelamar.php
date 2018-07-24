@@ -31,18 +31,51 @@ class DataPelamar extends CI_Controller
 		{
 			// set the flash data error message if there is one
 			$data['message'] = $message;
-
+			$datpendidikan = array();
 			//list the users
 			$data['pelamar'] = $this->DataPelamar_model->get_all_pelamar();
+			$no = 1;
 			foreach($data['pelamar'] as $pel){
-				$data['pengalaman'] = $this->DataPelamar_model->get_all_pengalaman($pel['id']);
-				$data['pendidikan'] = $this->DataPelamar_model->get_all_pendidikan($pel['id']);
-				$data['sertifikasi'] = $this->DataPelamar_model->get_all_sertifikasi($pel['id']);
+				//$data['pengalaman'] = $this->DataPelamar_model->get_all_pengalaman($pel['id']);
+				$pendidikan= $this->DataPelamar_model->get_all_pendidikan($pel['id']);
+				
+				//$data['sertifikasi'] = $this->DataPelamar_model->get_all_sertifikasi($pel['id']);
+				array_push($datpendidikan, [ $no, $pendidikan]);
+				$no++;
 			}
-			
+
+			$data['pendidikan'] = $datpendidikan;
 			$this->load->view('admin/header');
 			$this->load->view('admin/nav');
 			$this->load->view('admin/pelamar/main', $data);
+			$this->load->view('admin/footer');
+		}
+	}
+	
+	public function list_by_pendidikan($message=null)
+	{
+		if (!$this->ion_auth->logged_in())
+		{
+			// redirect them to the login page
+			redirect('auth/login', 'refresh');
+		}
+		/* else if (!$this->ion_auth->is_admin()) // remove this elseif if you want to enable this for non-admins
+		{
+			// redirect them to the home page because they must be an administrator to view this
+			return show_error('You must be an administrator to view this page.');
+		} */
+		else
+		{
+			// set the flash data error message if there is one
+			$data['message'] = $message;
+			$datpendidikan = array();
+			//list the users
+			$data['pelamar'] = $this->DataPelamar_model->get_all_pelamar_by_pendidikan();
+			
+			$data['pendidikan'] = $datpendidikan;
+			$this->load->view('admin/header');
+			$this->load->view('admin/nav');
+			$this->load->view('admin/pelamar/list_pelamar', $data);
 			$this->load->view('admin/footer');
 		}
 	}

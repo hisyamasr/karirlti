@@ -46,7 +46,8 @@
         });
 		
 		$('#dataTables-pelamar').DataTable({
-			scrollX: true
+			scrollX: true,
+			responsive: true
 		});
 		
 		$('#example').DataTable( {  
@@ -59,7 +60,9 @@
                 titleAttr: 'Excel'
             },
 			 ]  ,
-			 scrollX: true
+			 scrollX: true,
+			 iDisplayLength: 50,
+			responsive: true
 		});  
 		
 		$('#datetimepicker1').datetimepicker({

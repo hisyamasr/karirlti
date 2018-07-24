@@ -46,7 +46,7 @@ class DataPelamar_model extends CI_Model{
 		$this->db->order_by('data_pendidikan.id', 'ASC');
         $query = $this->db->get();
 
-        $result_array = $query->result_array();
+        $result_array = $query->result();
         if($result_array === false){
             return false;
         }else{
@@ -84,9 +84,14 @@ class DataPelamar_model extends CI_Model{
         $this->db->select('MAX(id) as lastID');
         $this->db->from('data_pelamar');
         $query = $this->db->get();
-        $lastID = $query->result();
 
-        return $lastID[0]->lastID;
+        if($query->num_rows() > 0){
+            $lastID = $query->result();
+            return $lastID[0]->lastID;
+        }else{
+            return 0;
+        }
+        
     }
 
     private function create_noreg($lastID, $kode_posisi){
@@ -201,7 +206,12 @@ class DataPelamar_model extends CI_Model{
         $this->load->library('email');
         $this->load->library('encryption');
 
-		$config['mailtype'] = "html";
+        $config['mailtype'] = "html";
+        // $config['protocol'] = "smtp";		
+		// $config['smtp_host'] = 'mail.dishubkabbdg.web.id';
+		// $config['smtp_user'] = 'admin@dishubkabbdg.web.id';
+		// $config['smtp_pass'] = 'Dishub2018';
+		// $config['smtp_port'] = '587';
         
         $explode = explode("-", $dataPelamar['tanggal_lahir']);
 		$encodeParam = urlencode($this->encryption->encrypt($dataPelamar["no_registrasi"].";".$dataPelamar["no_ktp"]));
@@ -213,7 +223,7 @@ class DataPelamar_model extends CI_Model{
         $message .='<tr><th scope="row" style="width:35%; text-align:left;">Nama</th><td>:</td><td style="text-align:left;">'.$dataPelamar['nama'].'</td></tr>';
         $message .='<tr><th scope="row" style="width:35%; text-align:left;">Tempat, Tanggal lahir</th><td>:</td><td style="text-align:left;">'.$dataPelamar['tempat_lahir'].', '.$explode[2]."/".$explode[1]."/".$explode[0].'</td></tr>';
         $message .='</tbody></table></div>';		
-        $message .='<div><a href="http://karir.len-telko.co.id/konfirmasi?r='.$encodeParam.'"
+        $message .='<div><a href="'.base_url().'konfirmasi?r='.$encodeParam.'"
                     style="display: inline-block; font-weight: 400; text-align: center; white-space: nowrap; vertical-align: middle;border: 1px solid transparent;
                         padding: 0.375rem 0.75rem;font-size: 1rem;line-height: 1.5;border-radius: 0.25rem;
                         transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
@@ -225,6 +235,7 @@ class DataPelamar_model extends CI_Model{
 		$this->email->initialize($config);
 		//$this->email->clear();
         $this->email->from('rekrutmen@len-telko.co.id', 'Rekrutmen PT. Len Telekomunikasi Indonesia (LTI)');
+        // $this->email->from('admin@dishubkabbdg.web.id', 'Rekrutmen PT. Len Telekomunikasi Indonesia (LTI)');
         $this->email->to($dataPelamar['email']);
 
         $this->email->subject('[Konfirmasi] - Rekrutmen PT. Len Telekomunikasi Indonesia (LTI)');
@@ -235,5 +246,21 @@ class DataPelamar_model extends CI_Model{
 		}else{
 			return false;
 		}
+    }
+	
+	public function get_all_pelamar_by_pendidikan()
+    {
+        $this->db->select('data_pelamar.*, data_pendidikan.*');
+        $this->db->from('data_pelamar');
+        $this->db->join('data_pendidikan', 'data_pelamar.id = data_pendidikan.data_pelamar_id');
+		$this->db->order_by('data_pelamar.id', 'ASC');
+        $query = $this->db->get();
+
+        $result_array = $query->result_array();
+        if($result_array === false){
+            return false;
+        }else{
+            return $result_array;
+        }
     }
 }
