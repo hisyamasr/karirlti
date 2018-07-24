@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>	
+<head>
+	<link href="<?php echo base_url();?>assets/images/favicon.png" rel="shortcut icon" type="image/x-icon" />	
 	<link rel="stylesheet" type="text/css" href="<?php echo base_url();?>assets/css/bootstrap/bootstrap.css"/>
 	<link rel="stylesheet" type="text/css" href="<?php echo base_url();?>assets/css/datepicker/bootstrap-datepicker3.css"/>	
 	<link rel="stylesheet" type="text/css" href="<?php echo base_url();?>assets/css/jquery-ui.min.css"/>
