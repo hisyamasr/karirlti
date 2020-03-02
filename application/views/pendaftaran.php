@@ -1,4 +1,4 @@
-<head>
+<head><meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 	<title>Form Pendaftaran</title>
 </head>
 <?= $script_captcha ?>
@@ -592,9 +592,9 @@
 					</div>
 				</div>
 
-				<div class="form-group col-md-12 ml-2" style="padding-left:40%;">
+				<<div class="form-group col-md-12 ml-2" style="padding-left:40%;">
 					<?= $captcha ?>
-				</div>					
+				</div>
 				
 			</div>
 			<div class="card-footer text-muted text-right">

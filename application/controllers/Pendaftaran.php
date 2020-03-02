@@ -5,7 +5,7 @@ class Pendaftaran extends CI_Controller {
 	public function __construct()
 	{
 		parent::__construct();
-		//$this->load->database();
+		$this->load->database();
 		$this->load->library(array('Recaptcha'));
 		$this->load->helper(array('url', 'language'));
 		$this->load->helper(array('form', 'url'));
@@ -313,4 +313,3 @@ class Pendaftaran extends CI_Controller {
 		echo json_encode($data = [ 'status' => $response['success'], 'errorList' => $response ]);
 	}
 }
-?>

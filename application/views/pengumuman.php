@@ -1,43 +1,43 @@
-	<head>
-	<title>Rekrutment PT LTI</title>
+	<head><meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<title>Rekrutment PT LTI</title>
 	</head>
 	<style type="text/css">
 
-	::selection { background-color: #E13300; color: white; }
-	::-moz-selection { background-color: #E13300; color: white; }
-	h1 {
-		color: #444;
-		background-color: transparent;
-		border-bottom: 1px solid #D0D0D0;
-		font-size: 19px;
-		font-weight: normal;
-		margin: 0 0 14px 0;
-		padding: 14px 15px 10px 15px;
-	}
+		::selection { background-color: #E13300; color: white; }
+		::-moz-selection { background-color: #E13300; color: white; }
+		h1 {
+			color: #444;
+			background-color: transparent;
+			border-bottom: 1px solid #D0D0D0;
+			font-size: 19px;
+			font-weight: normal;
+			margin: 0 0 14px 0;
+			padding: 14px 15px 10px 15px;
+		}
 
-	code {
-		font-family: Consolas, Monaco, Courier New, Courier, monospace;
-		font-size: 12px;
-		background-color: #f9f9f9;
-		border: 1px solid #D0D0D0;
-		color: #002166;
-		display: block;
-		margin: 14px 0 14px 0;
-		padding: 12px 10px 12px 10px;
-	}
+		code {
+			font-family: Consolas, Monaco, Courier New, Courier, monospace;
+			font-size: 12px;
+			background-color: #f9f9f9;
+			border: 1px solid #D0D0D0;
+			color: #002166;
+			display: block;
+			margin: 14px 0 14px 0;
+			padding: 12px 10px 12px 10px;
+		}
 
-	#body {
-		margin: 0 15px 0 15px;
-	}
+		#body {
+			margin: 0 15px 0 15px;
+		}
 
-	p.footerbox {
-		text-align: right;
-		font-size: 11px;
-		border-top: 1px solid #D0D0D0;
-		line-height: 32px;
-		padding: 0 10px 0 10px;
-		margin: 20px 0 0 0;
-	}
+		p.footerbox {
+			text-align: right;
+			font-size: 11px;
+			border-top: 1px solid #D0D0D0;
+			line-height: 32px;
+			padding: 0 10px 0 10px;
+			margin: 20px 0 0 0;
+		}
 	</style>
 	<script>
 		$(document).ready(function(){
@@ -69,46 +69,177 @@
 	</script>
 	<div id="container">
 		<h1>Selamat Datang di halaman Rekrutmen PT. Len Telekomunikasi Indonesia</h1>
-		<div id="body">
-			<code>PERSYARATAN UMUM <br>
-				<ol>
-					<li>Warga Negara Indonesia (WNI) sehat jasmani dan rohani</li>
-					<li>Memiliki kreativitas, integritas tinggi secara personal</li>
-					<li>Mandiri dan memiliki semangat bekerja keras serta pantang menyerah</li>
-					<li>Memiliki kemampuan berbahasa Inggris secara lisan dan tulisan</li>
-					<li>Memiliki kemampuan sangat baik dalam penulisan, komunikasi verbal, dan penggunaan komputer (Windows, MS Office)</li>
-					<li>Indeks Prestasi Kumulatif (IPK) minimal 3.00.</li>
-					<li>Umur maksimal : 35 (tiga puluh lima) tahun.</li>
-				</ol>
-			</code>
 
-			<code>PERSYARATAN KHUSUS STAF BAGIAN SDM (KODE LAMARAN : SDM) <br>
-			<ol>
-				<li>Pendidikan minimal S1 jurusan Manajemen/ Teknik Industri</li>
-				<li>Pengalaman minimal 2 tahun di bidang SDM</li>
-				<li>Menguasai aplikasi umum komputer (Windows, MS Office dll)</li>
-				<li>Menguasai konsep Pengembangan SDM</li>
-				<li>Disiplin, jujur dan memiliki militansi kuat dalam bekerja</li>
-				<li>Mempunyai pemahanan atas Undang-Undang Ketenagakerjaan, Peraturan BPJS dan aturan lainnya mengenai SDM</li>
-				<li>Memiliki keahlian analisa kontrak dari segi Hukum</li>
-			</ol>
-			</code>
+<h6 style="text-align: center;"><strong>- PKWT (PEKERJA WAKTU TERTENTU) -</strong></h6>
+<ol>
+    <li><strong>Pemasaran</strong><br>
+        Sales executive bertanggung jawab atas end-to-end proses penjualan dari prospek calon pelanggan, closing deal,
+        kontrak
+        sampai memastikan proses penagihan berjalan dan mendapatkan revenue</li>
+</ol>
+<ul>
+    <li style="list-style-type: none;">
+        <ul>
+            <li><strong><u>Deskripsi Pekerjaan:</u></strong><br />
+                <ol>
+                    <li>Melakukan penjualan sesuai target yang telah di tetapkan</li>
+                    <li>Membuat laporan dan presentasi progres penjualan mingguan dan bulanan</li>
+                    <li>Membuat hubungan baik dengan pelanggan dan senantiasa memastikan kepuasan pelanggan atas layanan
+                    </li>
+                    <li>Membuat Laporan Biaya pengeluaran untuk aktifitas sales dan marketing</li>
+                    <li>Berkoordinasi dengan tim internal atau eksternal untuk aktivasi layanan baru dengan pelanggan
+                    </li>
+                    <li>Berperilaku positif dan aktif untuk mencapai target pendapatan</li>
+                    <li>Bertanggung jawab atas tagihan ke stakeholders</li>
+                    <li>memberikan masukan untuk continous improvement</li>
+                </ol>
+            </li>
+            <li><strong>Kualifikasi :</strong></li>
+            <ol>
+                <li>Umur Maximal 35 Tahun</li>
+                <li>Pendidikan Minimal S1 Manajemen/ Pemasaran/ Ekonomi/ Komunikasi/ Bisnis/ Teknik</li>
+                <li>Pengalaman 1-2 tahun dibidang telekomunikasi sebagai Sales</li>
+                <li>Berpengalaman di bidang Penjualan, pemasaran dan manajemen</li>
+                <li>Bisa berkomunikasi dan negosiasi dengan baik</li>
+                <li>Memiliki pengetahuan di bidang telekomunikasi</li>
+            </ol>
+        </ul>
+    </li>
+</ul>
+<hr />
+<br>
+<ol start="2">
+    <li><strong>Telekomunikasi</strong><br>
+        Staf SLA memiliki tanggung jawab atas terdelivernya layanan yang disepakati dengan pelanggan dan menjaga
+        hubungan baik dengan pelanggan</li>
+</ol>
+<ul>
+    <li style="list-style-type: none;">
+        <ul>
+            <li><span style="text-decoration: underline;"><strong>Deskripsi Pekerjaan</strong></span>
+                <ol>
+                    <li>Membuat Laporan SLA setiap bulan atau dengan waktu yang telah ditetapkan</li>
+                    <li>Melakukan rekonsiliasi dan presentasiprogres pencapaian SLA</li>
+                    <li>Bertanggung jawab atas ketepatan BA Rekonsiliasi SLA dengan Pelanggan</li>
+                    <li>Memastikan layanan terdeliver sesuai yang telah disepakati dan mengerti business outcome atas
+                        pelanggan</li>
+                    <li>Berkoordinasi dengan tim internal atas keluhan pelanggan yang disampaikan saat rekonsiliasi dan
+                        memastikan keluhan tersebut dapat segera diselesaikan</li>
+                    <li>Memastikan tools untuk membuat laporan SLA berjalan sesuai dan dapat dipercaya oleh pelanggan
+                    </li>
+                    <li>Memastikan ketepatan waktu atas tagihan</li>
+                    <li>Memberikan masukan untuk continous improvement</li>
+                </ol>
+            </li>
+        </ul>
+    </li>
+</ul>
+<ul>
+    <li style="list-style-type: none;">
+        <ul>
+            <li><strong>Kualifikasi :</strong><br />
+                <ol>
+                    <li>Umur Maximal 35 Tahun</li>
+                    <li>Pendidikan S1 Teknik Telekomunikasi / Teknik Industri</li>
+                    <li>Pengalaman 1-2 tahun di bidang Telekomunikasi</li>
+                    <li>Dapat membuat Laporan dengan baik</li>
+                    <li>Dapat mengoperasikan office (word, Excel, Presentasi)</li>
+                    <li>Bisa berkomunikasi dengan baik</li>
+                </ol>
+                <hr />
+            </li>
+        </ul>
+    </li>
+</ul>
+<br>
+<ol start="3">
+    <li><strong>Administrasi</strong><br>
+        Staf Admin memiliki tanggung jawab untuk support operasional dari divisi Bisnis dan Jaminan Jaringan</li>
+</ol>
+<ul>
+    <li style="list-style-type: none;">
+        <ul>
+            <li><span style="text-decoration: underline;"><strong>Deskripsi Pekerjaan</strong></span>
+                <ol>
+                    <li>Membuat rekapitulasi dan laporan biaya pengeluaran divisi BJJ</li>
+                    <li>Melakukan organisasi dan arsip semua Dokumen/Surat/Data divisi BJJ</li>
+                    <li>Memastikan proses reimburse dari person il BJJ berjalan sesuai SOP perusahaan</li>
+                    <li>Melakukan entri data perusahaan</li>
+                    <li>Membuat agenda meeting dan memastikan ruangan meeting tersedia</li>
+                    <li>Mengelola anggaran biaya rutin bulanan divisi BJJ</li>
+                </ol>
+            </li>
+        </ul>
+    </li>
+</ul>
+<ul>
+    <li style="list-style-type: none;">
+        <ul>
+            <li><strong>Kualifikasi :</strong><br />
+                <ol>
+                    <li>Umur Maximal 28 Tahun</li>
+                    <li>Pendidikan Minimum D3 Komunikasi/ Ekonomi/ Manajemen</li>
+                    <li>Pengalaman 1-2 tahun di bidang admin perusahaan Telekomunikasi</li>
+                    <li>Dapat membuat laporan dengan baik</li>
+                    <li>Dapat mengoperasikan office (word, excel)</li>
+                    <li>Bisa mengorganisasikan file dan dokumen dengan rapi</li>
+                </ol>
+                <hr />
+            </li>
+        </ul>
+    </li>
+</ul>
+<br>
+<ol start="4">
+    <li><strong>Legal Perusahaan</strong><br>
+        Legal Komersial memiliki tanggung jawab memastikan legalitas komersil baik dengan pelanggan dan stakeholder
+        telah
+        memenuhi aturan yang berlaku</li>
+</ol>
+<ul>
+    <li style="list-style-type: none;">
+        <ul>
+            <li><span style="text-decoration: underline;"><strong>Deskripsi Pekerjaan</strong></span>
+                <ol>
+                    <li>Membuat dan memonitor pelaksanaan perjanjian/kontrak</li>
+                    <li>Melakukan review perjanjian kontrak baru dan atau yang sedang berjalan</li>
+                    <li>Memastikan semua kontrak terkait komersial telah memenuhi aturan berlaku (compliance)</li>
+                    <li>Memberikan saran dan pendapat dari sisi legal atas kegiatan komersial</li>
+                </ol>
+            </li>
+        </ul>
+    </li>
+</ul>
+<ul>
+    <li style="list-style-type: none;">
+        <ul>
+            <li><strong>Kualifikasi :</strong><br />
+                <ol>
+                    <li>Pendidikan S1 Hukum</li>
+                    <li>Pengalaman 2 tahun sebagai Legal Perusahaan</li>
+                    <li>Mengerti Kontrak, Regulasi, Perizinan,</li>
+                    <li>Bisa berkomunikasi dan mempresentasikan dengan baik</li>
+                    <li>Memiliki pengetahuan dibidang Legal di Industri Telekomunikasi lebih diutamakan</li>
+                </ol>
+                <hr />
+            </li>
+        </ul>
+    </li>
+</ul>
+<p>Apply Now : <a href="http://karir.len-telko.co.id/" target="_blank"
+        rel="noopener noreferrer">http://karir.len-telko.co.id/</a></p>
+<p>&nbsp;</p>
+<p>
+    <!-- /wp:html -->
+</p>
+		<div id="body" align="center" >
+			<!-- jika pdf -->
+			<!-- <embed class="embed-responsive embed-responsive-16by9" type="application/pdf" src="<?php echo base_url('assets/hisyambsa-karir_periode_2.pdf') ?>" height="1500" > -->
+				<!--<img class="img-fluid" src="<?php echo base_url('assets/daftar_rekrutmen.jpg') ?>" alt="daftar_rekrutmen">-->
+				
+			</div>
+			<p class="footerbox">
+				<a class="btn btn-primary" style="margin-top:10px; margin-bottom:10px;" href="auth/periode_4">Apply Now</a>
+			</p>
 
-			<code>PERSYARATAN KHUSUS STAF BAGIAN AKUNTANSI (KODE LAMARAN : AKT) <br>
-				<ol>
-					<li>Pendidikan minimal D3 jurusan Ekonomi Akuntansi</li>
-					<li>Pengalaman minimal 2 tahun di bidang Akuntansi</li>
-					<li>Menguasai aplikasi umum komputer (Windows, MS Office dll)</li>
-					<li>Menguasai konsep Standar Akuntansi (SAK)</li>
-					<li>Memiliki keahlian di bidang analisis laporan keuangan perusahaan (project & manufacture based)</li>
-					<li>Mampu membuat laporan keuangan</li>
-					<li>Jujur dan memiliki militansi kuat dalam bekerja</li>
-				</ol>
-			</code>
 		</div>
-		
-		<p class="footerbox">
-			<a class="btn btn-primary" style="margin-top:10px; margin-bottom:10px;" href="pendaftaran">Apply Now</a>
-		</p>
-
-	</div>

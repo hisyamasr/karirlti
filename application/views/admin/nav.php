@@ -10,13 +10,14 @@
                     <span class="icon-bar"></span>
                 </button>
                 <img src="assets/images/cropped-LTI-2.png" width="150" height="56" class="d-inline-block align-top" alt="">
+                
             </div>
             <!-- /.navbar-header -->
 
             <ul class="nav navbar-top-links navbar-right">
+                <?php echo 'database : '.$this->session->userdata('database'); ?>
                 <li class="dropdown">
                     <a href="<?php echo base_url();?>auth/logout"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
-                    
                     <!-- /.dropdown-user -->
                 </li>
                 <!-- /.dropdown -->
@@ -27,7 +28,7 @@
                 <div class="sidebar-nav navbar-collapse" >
                     <ul class="nav" id="side-menu">
                         <li>
-                            <a href="<?php echo base_url(); ?>DataPelamar"><i class="fa fa-dashboard fa-fw"></i> Data Rekrutmenr<span class="fa arrow"></a>
+                            <a href="<?php echo base_url(); ?>DataPelamar"><i class="fa fa-dashboard fa-fw"></i> Data Rekrutmen<span class="fa arrow"></a>
 							<ul class="nav nav-second-level">
                                 <li>
                                     <a href="<?php echo base_url(); ?>DataPelamar">Data Pelamar</a>
@@ -59,6 +60,24 @@
                             </ul>
                             <!-- /.nav-second-level -->
                         </li>
+                                            <li>
+                        <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> Arsip<span class="fa arrow"></span></a>
+                        <ul class="nav nav-second-level">
+                            <li>
+                                <a href="<?php echo base_url(); ?>auth/periode_1">Periode-1-2018</a>
+                            </li>
+                            <li>
+                                <a href="<?php echo base_url(); ?>auth/periode_2">Periode-2-2019</a>
+                            </li>
+                            <li>
+                                <a href="<?php echo base_url(); ?>auth/periode_3">Periode-3-2019</a>
+                            </li>
+                                                        <li>
+                                <a href="<?php echo base_url(); ?>auth/periode_4">Periode-4-2020</a>
+                            </li>
+                        </ul>
+                        <!-- /.nav-third-level -->
+                    </li>
                         
                     </ul>
                 </div>

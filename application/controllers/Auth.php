@@ -61,6 +61,42 @@ class Auth extends CI_Controller
 			$this->load->view('admin/footer');
 		}
 	}
+	
+		public function periode_1()
+	{
+		$array = array(
+			'database' => 'lentelko_karir_periode_1'
+		);	
+		$this->session->set_userdata( $array );
+		$cek = $this->session->all_userdata();
+		redirect('auth', 'refresh');
+	}
+	public function periode_2()
+	{
+		$array = array(
+			'database' => 'lentelko_karir_periode_2'
+		);	
+		$this->session->set_userdata( $array );
+		redirect('auth', 'refresh');
+	}
+	public function periode_3()
+	{
+		$array = array(
+			'database' => 'lentelko_karir_periode_3'
+		);	
+		$this->session->set_userdata( $array );
+		$this->load->helper('url');
+		redirect('auth', 'refresh');
+	}
+		public function periode_4()
+	{
+		$array = array(
+			'database' => 'lentelko_karir_periode_4'
+		);	
+		$this->session->set_userdata( $array );
+		$this->load->helper('url');
+		redirect('pendaftaran', 'refresh');
+	}
 
 	/**
 	 * Log the user in

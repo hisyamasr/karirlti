@@ -4,7 +4,23 @@ class Posisi_model extends CI_Model{
 
 	public function __construct()
     {
-        $this->load->database();
+$this->session->userdata('database') == 'lentelko_karir_periode_3';
+        
+                if (is_null($this->session->userdata('database'))) {
+            $array = array(
+                'database' => 'lentelko_karir_periode_3'
+            );  
+            $this->session->set_userdata( $array );
+        }
+        $database = $this->session->userdata('database');
+        $db['hostname'] = 'localhost';
+        $db['username'] = 'lentelko_karir';
+        $db['password'] = 'Rahasia123!@#';
+        $db['database'] = $database;
+        $db['dbdriver'] = 'mysqli';
+
+        $this->load->database($db, FALSE, TRUE);
+        //$this->load->database();
     }
 	
 	public function get_all_posisi()
@@ -29,7 +45,7 @@ class Posisi_model extends CI_Model{
         $this->db->where('isActive', true);
 		$this->db->order_by('setup_posisi.id', 'ASC');
         $query = $this->db->get();
-
+        
         $result = $query->result();
         if($result === false){
             return false;

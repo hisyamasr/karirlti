@@ -1,0 +1,50 @@
+0000000000000000000000000000000000000000 9fa02c3088b57c8bdb4c0c151132cfe4c7f89013 lentelkoco <lentelkoco@admin.domain.com> 1531705660 -0400	clone: from https://github.com/andiyuliandi26/karirlti.git
+9fa02c3088b57c8bdb4c0c151132cfe4c7f89013 9fa02c3088b57c8bdb4c0c151132cfe4c7f89013 lentelkoco <lentelkoco@admin.domain.com> 1531705985 -0400	checkout: moving from master to master
+9fa02c3088b57c8bdb4c0c151132cfe4c7f89013 52df3b7a227c9f5c36c2efa8f684c8f8f756e168 lentelkoco <lentelkoco@admin.domain.com> 1531705986 -0400	pull --ff-only --recurse-submodules: Fast-forward
+52df3b7a227c9f5c36c2efa8f684c8f8f756e168 03eae0d5467e9fe3e5e66f3ba45923c447816b34 lentelkoco <lentelkoco@admin.domain.com> 1531820412 -0400	checkout: moving from master to dev
+03eae0d5467e9fe3e5e66f3ba45923c447816b34 03eae0d5467e9fe3e5e66f3ba45923c447816b34 lentelkoco <lentelkoco@admin.domain.com> 1531823375 -0400	checkout: moving from dev to dev
+03eae0d5467e9fe3e5e66f3ba45923c447816b34 96845edc38cb8ee4aec751371d4da4cd7f8f82e0 lentelkoco <lentelkoco@admin.domain.com> 1531823376 -0400	pull --ff-only --recurse-submodules: Fast-forward
+96845edc38cb8ee4aec751371d4da4cd7f8f82e0 96845edc38cb8ee4aec751371d4da4cd7f8f82e0 lentelkoco <lentelkoco@admin.domain.com> 1531883475 -0400	checkout: moving from dev to dev
+96845edc38cb8ee4aec751371d4da4cd7f8f82e0 96845edc38cb8ee4aec751371d4da4cd7f8f82e0 lentelkoco <lentelkoco@admin.domain.com> 1531883516 -0400	checkout: moving from dev to dev
+96845edc38cb8ee4aec751371d4da4cd7f8f82e0 27f53812f7e6fcf5cbbe325865c2cf6bdf12928d lentelkoco <lentelkoco@admin.domain.com> 1531883517 -0400	pull --ff-only --recurse-submodules: Fast-forward
+27f53812f7e6fcf5cbbe325865c2cf6bdf12928d 27f53812f7e6fcf5cbbe325865c2cf6bdf12928d lentelkoco <lentelkoco@admin.domain.com> 1531886991 -0400	checkout: moving from dev to dev
+27f53812f7e6fcf5cbbe325865c2cf6bdf12928d 2a82d9d8a6f021cc604b9d47ccd32ff360a3643a lentelkoco <lentelkoco@admin.domain.com> 1531886992 -0400	pull --ff-only --recurse-submodules: Fast-forward
+2a82d9d8a6f021cc604b9d47ccd32ff360a3643a 2a82d9d8a6f021cc604b9d47ccd32ff360a3643a lentelkoco <lentelkoco@admin.domain.com> 1531887270 -0400	checkout: moving from dev to dev
+2a82d9d8a6f021cc604b9d47ccd32ff360a3643a a32f115b3e0e86d797f602f4d86bb959d964471e lentelkoco <lentelkoco@admin.domain.com> 1531887271 -0400	pull --ff-only --recurse-submodules: Fast-forward
+a32f115b3e0e86d797f602f4d86bb959d964471e a32f115b3e0e86d797f602f4d86bb959d964471e lentelkoco <lentelkoco@admin.domain.com> 1531890311 -0400	checkout: moving from dev to dev
+a32f115b3e0e86d797f602f4d86bb959d964471e 26f0c21e7326fd7b4835fe96ddfd29c0218f131f lentelkoco <lentelkoco@admin.domain.com> 1531890312 -0400	pull --ff-only --recurse-submodules: Fast-forward
+26f0c21e7326fd7b4835fe96ddfd29c0218f131f 26f0c21e7326fd7b4835fe96ddfd29c0218f131f lentelkoco <lentelkoco@admin.domain.com> 1531890486 -0400	checkout: moving from dev to dev
+26f0c21e7326fd7b4835fe96ddfd29c0218f131f 8568bee44bf653a3c8cf8643ffec2582233afd0d lentelkoco <lentelkoco@admin.domain.com> 1531890487 -0400	pull --ff-only --recurse-submodules: Fast-forward
+8568bee44bf653a3c8cf8643ffec2582233afd0d 8568bee44bf653a3c8cf8643ffec2582233afd0d lentelkoco <lentelkoco@admin.domain.com> 1531906140 -0400	checkout: moving from dev to dev
+8568bee44bf653a3c8cf8643ffec2582233afd0d 8568bee44bf653a3c8cf8643ffec2582233afd0d lentelkoco <lentelkoco@admin.domain.com> 1531906768 -0400	checkout: moving from dev to dev
+8568bee44bf653a3c8cf8643ffec2582233afd0d 8568bee44bf653a3c8cf8643ffec2582233afd0d lentelkoco <lentelkoco@admin.domain.com> 1531906983 -0400	checkout: moving from dev to dev
+8568bee44bf653a3c8cf8643ffec2582233afd0d 768825608c778a4be6f0336b1b8e02bbc139f1bc lentelkoco <lentelkoco@admin.domain.com> 1531906984 -0400	pull --ff-only --recurse-submodules: Fast-forward
+768825608c778a4be6f0336b1b8e02bbc139f1bc 768825608c778a4be6f0336b1b8e02bbc139f1bc lentelkoco <lentelkoco@admin.domain.com> 1531908022 -0400	checkout: moving from dev to dev
+768825608c778a4be6f0336b1b8e02bbc139f1bc 129ebf3d11f74f7222650508504c360f4973925d lentelkoco <lentelkoco@admin.domain.com> 1531908023 -0400	pull --ff-only --recurse-submodules: Fast-forward
+129ebf3d11f74f7222650508504c360f4973925d 129ebf3d11f74f7222650508504c360f4973925d lentelkoco <lentelkoco@admin.domain.com> 1531908115 -0400	checkout: moving from dev to dev
+129ebf3d11f74f7222650508504c360f4973925d 129ebf3d11f74f7222650508504c360f4973925d lentelkoco <lentelkoco@admin.domain.com> 1531908154 -0400	checkout: moving from dev to dev
+129ebf3d11f74f7222650508504c360f4973925d 793a3bfc4ed7487fff15e91e1dfd153994844a7b lentelkoco <lentelkoco@admin.domain.com> 1531908155 -0400	pull --ff-only --recurse-submodules: Fast-forward
+793a3bfc4ed7487fff15e91e1dfd153994844a7b 793a3bfc4ed7487fff15e91e1dfd153994844a7b lentelkoco <lentelkoco@admin.domain.com> 1531908873 -0400	checkout: moving from dev to dev
+793a3bfc4ed7487fff15e91e1dfd153994844a7b d9d6f09c87307cf3167845ec024d06c4d9275ba7 lentelkoco <lentelkoco@admin.domain.com> 1531908874 -0400	pull --ff-only --recurse-submodules: Fast-forward
+d9d6f09c87307cf3167845ec024d06c4d9275ba7 d9d6f09c87307cf3167845ec024d06c4d9275ba7 lentelkoco <lentelkoco@admin.domain.com> 1531909418 -0400	checkout: moving from dev to dev
+d9d6f09c87307cf3167845ec024d06c4d9275ba7 dc690ced3ab3e730ea362e621513bfd10005c407 lentelkoco <lentelkoco@admin.domain.com> 1531909419 -0400	pull --ff-only --recurse-submodules: Fast-forward
+dc690ced3ab3e730ea362e621513bfd10005c407 dc690ced3ab3e730ea362e621513bfd10005c407 lentelkoco <lentelkoco@admin.domain.com> 1531921935 -0400	checkout: moving from dev to dev
+dc690ced3ab3e730ea362e621513bfd10005c407 9abf2d92bf128c7100e2f296db2e637c8c1933ec lentelkoco <lentelkoco@admin.domain.com> 1531921936 -0400	pull --ff-only --recurse-submodules: Fast-forward
+9abf2d92bf128c7100e2f296db2e637c8c1933ec 9abf2d92bf128c7100e2f296db2e637c8c1933ec lentelkoco <lentelkoco@admin.domain.com> 1531922486 -0400	checkout: moving from dev to dev
+9abf2d92bf128c7100e2f296db2e637c8c1933ec 9abf2d92bf128c7100e2f296db2e637c8c1933ec lentelkoco <lentelkoco@admin.domain.com> 1531922834 -0400	checkout: moving from dev to dev
+9abf2d92bf128c7100e2f296db2e637c8c1933ec 9c9a983986337b2ac42d30b86ceaf4d2fcbf328e lentelkoco <lentelkoco@admin.domain.com> 1531922835 -0400	pull --ff-only --recurse-submodules: Fast-forward
+9c9a983986337b2ac42d30b86ceaf4d2fcbf328e 9c9a983986337b2ac42d30b86ceaf4d2fcbf328e lentelkoco <lentelkoco@admin.domain.com> 1531924797 -0400	checkout: moving from dev to dev
+9c9a983986337b2ac42d30b86ceaf4d2fcbf328e 6d337cf21074089d76daed6eac5d4c528e3538e9 lentelkoco <lentelkoco@admin.domain.com> 1531924798 -0400	pull --ff-only --recurse-submodules: Fast-forward
+6d337cf21074089d76daed6eac5d4c528e3538e9 6d337cf21074089d76daed6eac5d4c528e3538e9 lentelkoco <lentelkoco@admin.domain.com> 1531970845 -0400	checkout: moving from dev to dev
+6d337cf21074089d76daed6eac5d4c528e3538e9 65ce3418392f005ed674664292dc848e0a597c97 lentelkoco <lentelkoco@admin.domain.com> 1531970846 -0400	pull --ff-only --recurse-submodules: Fast-forward
+65ce3418392f005ed674664292dc848e0a597c97 65ce3418392f005ed674664292dc848e0a597c97 lentelkoco <lentelkoco@admin.domain.com> 1531988065 -0400	checkout: moving from dev to dev
+65ce3418392f005ed674664292dc848e0a597c97 12596b1a158fce9861932b004ebf4bdab2b7d7a2 lentelkoco <lentelkoco@admin.domain.com> 1531988066 -0400	pull --ff-only --recurse-submodules: Fast-forward
+12596b1a158fce9861932b004ebf4bdab2b7d7a2 12596b1a158fce9861932b004ebf4bdab2b7d7a2 lentelkoco <lentelkoco@admin.domain.com> 1532070258 -0400	checkout: moving from dev to dev
+12596b1a158fce9861932b004ebf4bdab2b7d7a2 78444f30ac0816f05cf5e84404f21f8bce30b72f lentelkoco <lentelkoco@admin.domain.com> 1532070259 -0400	pull --ff-only --recurse-submodules: Fast-forward
+78444f30ac0816f05cf5e84404f21f8bce30b72f 78444f30ac0816f05cf5e84404f21f8bce30b72f lentelkoco <lentelkoco@admin.domain.com> 1532080556 -0400	checkout: moving from dev to dev
+78444f30ac0816f05cf5e84404f21f8bce30b72f 22beb4d3f2339936387d7fe3b14f8e6c4bbd2162 lentelkoco <lentelkoco@admin.domain.com> 1532080557 -0400	pull --ff-only --recurse-submodules: Fast-forward
+22beb4d3f2339936387d7fe3b14f8e6c4bbd2162 22beb4d3f2339936387d7fe3b14f8e6c4bbd2162 lentelkoco <lentelkoco@admin.domain.com> 1532340800 -0400	checkout: moving from dev to dev
+22beb4d3f2339936387d7fe3b14f8e6c4bbd2162 bce3a73a8ae63ffee22fe743d8cf1cfd64892baf lentelkoco <lentelkoco@admin.domain.com> 1532340801 -0400	pull --ff-only --recurse-submodules: Fast-forward
+bce3a73a8ae63ffee22fe743d8cf1cfd64892baf bce3a73a8ae63ffee22fe743d8cf1cfd64892baf lentelkoco <lentelkoco@admin.domain.com> 1532340835 -0400	checkout: moving from dev to dev
+bce3a73a8ae63ffee22fe743d8cf1cfd64892baf bce3a73a8ae63ffee22fe743d8cf1cfd64892baf lentelkoco <lentelkoco@admin.domain.com> 1532396823 -0400	checkout: moving from dev to dev
+bce3a73a8ae63ffee22fe743d8cf1cfd64892baf 66ef4da7406911757b73b340411670ee52444008 lentelkoco <lentelkoco@admin.domain.com> 1532396824 -0400	pull --ff-only --recurse-submodules: Fast-forward
